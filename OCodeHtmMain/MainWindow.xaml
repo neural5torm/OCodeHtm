@@ -1,0 +1,8 @@
+﻿<Window x:Class="OCodeHtmMain.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Height="350" Width="525" Icon="/OCodeHtmMain;component/Images/synapse_16_crop.bmp">
+    <Grid Background="Black">
+        <Image HorizontalAlignment="Center" Name="image1" Stretch="Uniform" VerticalAlignment="Center" Source="/OCodeHtmMain;component/Images/synapse.bmp" Opacity="0.8" StretchDirection="Both" FlowDirection="RightToLeft" Margin="30,0,50,0" />
+        <Button Content="Start OCodeHTM" Height="26" HorizontalAlignment="Center" Margin="0" Name="button1" VerticalAlignment="Center" Width="134" Click="button1_Click" />
+    </Grid>
+</Window>
