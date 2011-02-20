@@ -1,11 +1,25 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OCodeHtmDemo", "OCodeHtmMain\OCodeHtmDemo.csproj", "{954B827A-32D7-4067-BA6D-3D2F2EB46EE5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OCodeHtm Demo", "OCodeHtmMain\OCodeHtm Demo.csproj", "{954B827A-32D7-4067-BA6D-3D2F2EB46EE5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OCodeHtm", "OCodeHtm\OCodeHtm.csproj", "{3855B0A7-9FBA-4103-9B4C-62805D5D2F83}"
 EndProject
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "UmlModel", "UmlModel\UmlModel.modelproj", "{C98913DD-5E51-4965-A471-653D466FC8F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OCodeHtm UnitTests", "OCodeHTM UnitTests\OCodeHtm UnitTests.csproj", "{955DB3E4-66AC-4474-87C7-AEDF9ACB42CA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{54E05998-E912-4D44-A64B-A167A48D7936}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		OCodeHtm.vsmdi = OCodeHtm.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = OCodeHtm.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x86 = Debug|x86
@@ -27,6 +41,18 @@ Global
 		{3855B0A7-9FBA-4103-9B4C-62805D5D2F83}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3855B0A7-9FBA-4103-9B4C-62805D5D2F83}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3855B0A7-9FBA-4103-9B4C-62805D5D2F83}.Release|x86.ActiveCfg = Release|Any CPU
+		{C98913DD-5E51-4965-A471-653D466FC8F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C98913DD-5E51-4965-A471-653D466FC8F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C98913DD-5E51-4965-A471-653D466FC8F2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C98913DD-5E51-4965-A471-653D466FC8F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C98913DD-5E51-4965-A471-653D466FC8F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C98913DD-5E51-4965-A471-653D466FC8F2}.Release|x86.ActiveCfg = Release|Any CPU
+		{955DB3E4-66AC-4474-87C7-AEDF9ACB42CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{955DB3E4-66AC-4474-87C7-AEDF9ACB42CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{955DB3E4-66AC-4474-87C7-AEDF9ACB42CA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{955DB3E4-66AC-4474-87C7-AEDF9ACB42CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{955DB3E4-66AC-4474-87C7-AEDF9ACB42CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{955DB3E4-66AC-4474-87C7-AEDF9ACB42CA}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
