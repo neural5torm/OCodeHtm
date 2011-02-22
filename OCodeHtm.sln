@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests + UML", "Tests + UML", "{67C2635A-C636-4EDA-A3B9-8B53C9A3DB17}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = OCodeHtm.vsmdi
@@ -56,5 +58,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{54E05998-E912-4D44-A64B-A167A48D7936} = {67C2635A-C636-4EDA-A3B9-8B53C9A3DB17}
+		{955DB3E4-66AC-4474-87C7-AEDF9ACB42CA} = {67C2635A-C636-4EDA-A3B9-8B53C9A3DB17}
+		{C98913DD-5E51-4965-A471-653D466FC8F2} = {67C2635A-C636-4EDA-A3B9-8B53C9A3DB17}
 	EndGlobalSection
 EndGlobal

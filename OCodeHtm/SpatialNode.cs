@@ -9,8 +9,14 @@ namespace CnrsUniProv.OCodeHtm
         where TInput : class
         where TOutput : class
     {
-        public double MaxSqDistance { get; private set; }
+        public uint[] ChildNodeArrayDims { get; private set; }
+        
+        public double MaxSquaredDistance { get; private set; }
         public uint MaxOutputSize { get; private set; }
+
+        public NodeMode Mode { get; protected set; }
+        public bool IsLearning { get { return Mode == NodeMode.Learning; } }
+        
 
         // TODOlater change double back to uint?
         //public HashSet<TInput> Coincidences { get; protected set; }
@@ -18,9 +24,13 @@ namespace CnrsUniProv.OCodeHtm
 
 
         
-        public SpatialNode(double maxDistance, uint maxOutputSize)
+        public SpatialNode(uint[] childNodeArrayDims, double maxSquaredDistance, uint maxOutputSize)
         {
-            MaxSqDistance = maxDistance * maxDistance;
+            Mode = NodeMode.Learning;
+
+            ChildNodeArrayDims = childNodeArrayDims;
+
+            MaxSquaredDistance = maxSquaredDistance;
             MaxOutputSize = maxOutputSize;
 
             CoincidencesFrequencies = new Dictionary<TInput, double>();
@@ -32,7 +42,14 @@ namespace CnrsUniProv.OCodeHtm
         protected abstract TInput FindClosestCoincidence(TInput input, out TInput canonicalInput);
 
         public abstract TOutput Infer(TInput input);
+
+        public abstract TOutput TimeBasedInfer(TInput input);
     }
 
+
+    public enum NodeMode
+    {
+        Learning, FlashInference, TimeBasedInference
+    }
 
 }

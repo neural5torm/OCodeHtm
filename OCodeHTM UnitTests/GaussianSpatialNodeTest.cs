@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using CnrsUniProv.OCodeHtm;
 using MathNet.Numerics.LinearAlgebra.Double;
+using CnrsUniProv.OCodeHtm.Exceptions;
 
 
 namespace OCodeHTM_UnitTests
@@ -152,6 +153,84 @@ namespace OCodeHTM_UnitTests
             Assert.AreEqual(diff2, m2 - m1);
             Assert.AreEqual(diff1, m1 - m2);
 
+        }
+
+        [TestMethod]
+        public void ThrowExceptionIfLearningAfterInferenceMode()
+        {
+            var node = new GaussianSpatialNode();
+            var mat = new SparseMatrix(4);
+            var learnAfterInferFails = false;
+            var learnAfterTBInferFails = false;
+
+            node.Infer(mat);
+            try
+            {
+                node.Learn(mat);
+            }
+            catch (HtmRuleException e)
+            {
+                learnAfterInferFails = true;
+                Debug.WriteLine(e.Message);
+            }
+            node.TimeBasedInfer(mat);
+            try
+            {
+                node.Learn(mat);
+            }
+            catch (HtmRuleException e)
+            {
+                learnAfterTBInferFails = true;
+                Debug.WriteLine(e.Message);
+            }
+
+            Assert.IsTrue(learnAfterInferFails);
+            Assert.IsTrue(learnAfterTBInferFails);
+        }
+
+        [TestMethod]
+        public void DontLearnBlankInputs()
+        {
+            var node = new GaussianSpatialNode();
+            
+            node.Learn(new SparseMatrix(4));
+
+            Assert.AreEqual(0, node.CoincidencesFrequencies.Count);
+        }
+
+        [TestMethod]
+        public void ThrowHtmRuleExceptionWhenLearningSizeDifferingInputs()
+        {
+            var node = new GaussianSpatialNode(1.0);
+            node.Learn(new SparseMatrix(5, 5, 3.0));
+
+            try
+            {
+                node.Learn(new SparseMatrix(4, 4, 2.0));
+                Assert.Inconclusive("Should have fired an exception instead");
+            }
+            catch (Exception e)
+            {
+                
+                Debug.WriteLine(e.Message);
+                Assert.AreEqual(typeof(HtmRuleException), e.GetType());
+            }
+
+            
+        }
+
+        [TestMethod]
+        public void OtherTests()
+        {
+            var m = new SparseVector(2, 1);
+            var m2 = new SparseVector(2, 2);
+            var row = m.ToArray().Concat(m2.ToArray()).ToArray();
+
+            var m4 = new SparseMatrix(2, row.Length);
+            m4.SetRow(0, row);
+            m4.SetRow(1, row);
+            
+            //Assert.AreEqual(new double[,] {{ 1, 1, 2, 2 }, { 1, 1, 2, 2 }}, m4.ToArray());
         }
     }
 }

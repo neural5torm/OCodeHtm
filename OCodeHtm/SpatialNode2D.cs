@@ -9,8 +9,8 @@ namespace CnrsUniProv.OCodeHtm
 {
     public abstract class SpatialNode2D : SpatialNode<SparseMatrix, SparseVector> 
     {
-        public SpatialNode2D(double maxDistance, uint maxOutputSize)
-            : base(maxDistance, maxOutputSize)
+        public SpatialNode2D(uint[] childNodeArrayDims, double maxSquaredDistance, uint maxOutputSize)
+            : base(childNodeArrayDims, maxSquaredDistance, maxOutputSize)
         { }
 
     }
