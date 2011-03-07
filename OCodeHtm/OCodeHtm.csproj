@@ -31,10 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MathNet.Numerics, Version=2010.11.26.814, Culture=neutral, PublicKeyToken=cd8b63ad3d691a37, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\MathNet.Numerics.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,11 +40,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BitmapPictureSensor.cs" />
+    <Compile Include="HtmLayer2D.cs" />
+    <Compile Include="ILearningInferring.cs" />
+    <Compile Include="ProductMatchClassifierNode.cs" />
+    <Compile Include="SpatialLayer.cs" />
+    <Compile Include="Temp.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Exceptions\HtmRuleException.cs" />
+    <Compile Include="HtmLayer.cs" />
+    <Compile Include="HtmNetwork.cs" />
     <Compile Include="SpatialNode2D.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpatialNode.cs" />
-    <Compile Include="GaussianSpatialNode.cs" />
+    <Compile Include="SpatialNodeGaussian.cs" />
+    <Compile Include="TemporalLayer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Numerics\Numerics.csproj">
+      <Project>{B7CAE5F4-A23F-4438-B5BE-41226618B695}</Project>
+      <Name>Numerics</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

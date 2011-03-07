@@ -13,7 +13,7 @@ using CnrsUniProv.OCodeHtm.Exceptions;
 namespace OCodeHTM_UnitTests
 {
     [TestClass]
-    public class GaussianSpatialNodeTest 
+    public class SpatialNodeGaussianTest 
     {
         
         [TestMethod]
@@ -21,7 +21,7 @@ namespace OCodeHTM_UnitTests
         {
             // Arrange
             double maxDistance = 0.0;
-            GaussianSpatialNode node = new GaussianSpatialNode(maxDistance);
+            SpatialNodeGaussian node = new SpatialNodeGaussian(maxDistance);
             int nbInputs = 1000;
             int width = 4;
             int height = 4;
@@ -41,7 +41,7 @@ namespace OCodeHTM_UnitTests
         {
             // Arrange
             double maxDistance = 0.0;
-            GaussianSpatialNode node = new GaussianSpatialNode(maxDistance);
+            SpatialNodeGaussian node = new SpatialNodeGaussian(maxDistance, 0, 1);
             int nbInputs = 2;
             int width = 4;
             int height = 4;
@@ -61,7 +61,7 @@ namespace OCodeHTM_UnitTests
         {
             // Arrange
             double maxDistance = 10000.0;
-            GaussianSpatialNode node = new GaussianSpatialNode(maxDistance);
+            SpatialNodeGaussian node = new SpatialNodeGaussian(maxDistance);
             int nbInputs = 100;
             int width = 4;
             int height = 4;
@@ -82,7 +82,7 @@ namespace OCodeHTM_UnitTests
         {
             // Arrange
             double maxDistance = 1.0;
-            GaussianSpatialNode node = new GaussianSpatialNode(maxDistance);
+            SpatialNodeGaussian node = new SpatialNodeGaussian(maxDistance);
 
             var matrices = new List<SparseMatrix>();
             matrices.Add(new SparseMatrix(new double[,] { { 3.0, 2.0, 1.0, 0.0 } }));
@@ -107,7 +107,7 @@ namespace OCodeHTM_UnitTests
         {
             // Arrange
             double maxDistance = 0.999;
-            GaussianSpatialNode node = new GaussianSpatialNode(maxDistance);
+            SpatialNodeGaussian node = new SpatialNodeGaussian(maxDistance);
 
             var matrices = new List<SparseMatrix>();
             matrices.Add(new SparseMatrix(new double[,] { { 3.0, 2.0, 1.0, 0.0 } }));
@@ -127,41 +127,41 @@ namespace OCodeHTM_UnitTests
         }
 
         [TestMethod]
-        public void SparseMatrixAddsCorrectlyToZeroComponents()
+        public void Several5By5InputsYieldOneCoincidenceWithMaxDistance5()
         {
-            var m1 = new SparseMatrix(1, 3);
-            var m2 = new SparseMatrix(new double[,] { { 0, 1, 1 } });
+            var node = new SpatialNodeGaussian(5);
+            var ones = new SparseMatrix(5, 5, 1.0);
+            var twos = new SparseMatrix(5, 5, 2.0);
+           
+            node.Learn(ones);
+            node.Learn(twos);
 
-            var sum1 = m1 + m2;
-            var sum2 = m2 + m1;
-
-            Assert.AreEqual(m2, sum2);
-            Assert.AreEqual(m2, sum1);
-
+            Assert.AreEqual(1, node.CoincidencesFrequencies.Count);
         }
 
         [TestMethod]
-        public void SparseMatrixSubtractsCorrectlyFromZeroComponents()
+        public void Several5By5InputsYieldSeveralCoincidenceWithMaxDistance4_999()
         {
+            var node = new SpatialNodeGaussian(4.999);
+            var ones = new SparseMatrix(5, 5, 1.0);
+            var twos = new SparseMatrix(5, 5, 2.0);
 
-            var m1 = new SparseMatrix(new double[,] { { 1, 0, 0, 1 }, { 1, 1, 0, 1 } });
-            var m2 = new SparseMatrix(new double[,] { { 1, 1, 1, 0 }, { 1, 0, 0, 1 } });
+            node.Learn(ones);
+            node.Learn(twos);
 
-            var diff1 = new SparseMatrix(new double[,] { { 0, -1, -1, 1 }, { 0, 1, 0, 0 } });
-            var diff2 = new SparseMatrix(new double[,] { { 0, 1, 1, -1 }, { 0, -1, 0, 0 } });
-
-            Assert.AreEqual(diff2, m2 - m1);
-            Assert.AreEqual(diff1, m1 - m2);
-
+            Assert.AreNotEqual(1, node.CoincidencesFrequencies.Count);
+            Assert.AreEqual(2, node.CoincidencesFrequencies.Count);
         }
-
+      
         [TestMethod]
-        public void ThrowExceptionIfLearningAfterInferenceMode()
+        public void ErrorWhenLearningAfterInferenceMode()
         {
-            var node = new GaussianSpatialNode();
-            var mat = new SparseMatrix(4);
+            var node = new SpatialNodeGaussian();
+            var mat = new SparseMatrix(4, 4, 4.0);
             var learnAfterInferFails = false;
             var learnAfterTBInferFails = false;
+            node.Learn(mat);
+
 
             node.Infer(mat);
             try
@@ -173,7 +173,8 @@ namespace OCodeHTM_UnitTests
                 learnAfterInferFails = true;
                 Debug.WriteLine(e.Message);
             }
-            node.TimeBasedInfer(mat);
+
+            node.TimeInfer(mat);
             try
             {
                 node.Learn(mat);
@@ -184,6 +185,7 @@ namespace OCodeHTM_UnitTests
                 Debug.WriteLine(e.Message);
             }
 
+
             Assert.IsTrue(learnAfterInferFails);
             Assert.IsTrue(learnAfterTBInferFails);
         }
@@ -191,7 +193,7 @@ namespace OCodeHTM_UnitTests
         [TestMethod]
         public void DontLearnBlankInputs()
         {
-            var node = new GaussianSpatialNode();
+            var node = new SpatialNodeGaussian();
             
             node.Learn(new SparseMatrix(4));
 
@@ -199,38 +201,66 @@ namespace OCodeHTM_UnitTests
         }
 
         [TestMethod]
-        public void ThrowHtmRuleExceptionWhenLearningSizeDifferingInputs()
+        public void ErrorWhenLearningVaryingSizeInputs()
         {
-            var node = new GaussianSpatialNode(1.0);
+            var node = new SpatialNodeGaussian();
             node.Learn(new SparseMatrix(5, 5, 3.0));
 
             try
             {
                 node.Learn(new SparseMatrix(4, 4, 2.0));
-                Assert.Inconclusive("Should have fired an exception instead");
+                Assert.Inconclusive("Should have fired an exception");
             }
             catch (Exception e)
             {
                 
                 Debug.WriteLine(e.Message);
-                Assert.AreEqual(typeof(HtmRuleException), e.GetType());
+                Assert.IsInstanceOfType(e, typeof(HtmRuleException));
             }
-
-            
         }
 
         [TestMethod]
-        public void OtherTests()
+        public void InferEmptyVectorIfNoCoincidencesLearned()
         {
-            var m = new SparseVector(2, 1);
-            var m2 = new SparseVector(2, 2);
-            var row = m.ToArray().Concat(m2.ToArray()).ToArray();
+            var node = new SpatialNodeGaussian(1.0);
 
-            var m4 = new SparseMatrix(2, row.Length);
-            m4.SetRow(0, row);
-            m4.SetRow(1, row);
+            var output = node.Infer(new SparseMatrix(5, 5, 2.0));
+
+            Assert.AreEqual(new SparseVector(1), output);
+
+            output = node.TimeInfer(new SparseMatrix(5, 5, 2.0));
+
+            Assert.AreEqual(new SparseVector(1), output);
+        }
+
+        [TestMethod]
+        public void InferCorrectlyOnIdenticalMatricesWithMaxDistance0()
+        {
+            var node = new SpatialNodeGaussian();
+            var ones = new SparseMatrix(4, 5, 1.0);
+            var twos = new SparseMatrix(4, 5, 2.0);
+            var expectedLower = Math.Exp(-(ones.RowCount * ones.ColumnCount) / (2 * node.SquaredSigma)) - 0.0001;
+            var expectedUpper = Math.Exp(-(ones.RowCount * ones.ColumnCount) / (2 * node.SquaredSigma)) + 0.0001;
+            node.Learn(ones);
+            node.Learn(twos);
+
+            var output = node.Infer(ones);
+
+            Assert.IsTrue(output[0] == 1.0 && output[1] > expectedLower && output[1] < expectedUpper);
+        }
+
+        [TestMethod]
+        public void StopLearningWhenMaxOutputSizeReached()
+        {
+            int max = 1;
+            var node = new SpatialNodeGaussian(0.0, 0.0, (uint)max);
+            var ones = SparseMatrix.Identity(5);
+            var twos = SparseMatrix.Identity(5) * 2.0;
             
-            //Assert.AreEqual(new double[,] {{ 1, 1, 2, 2 }, { 1, 1, 2, 2 }}, m4.ToArray());
+            node.Learn(ones);
+            node.Learn(twos);
+
+            Assert.AreEqual(max, node.CoincidencesFrequencies.Count);
         }
     }
 }

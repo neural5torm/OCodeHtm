@@ -19,7 +19,7 @@ namespace OCodeHtmMain
     /// </summary>
     public partial class MainWindow : Window
     {
-        const string TITLE = "OCodeHTM Demo";
+        const string TITLE = "OCodeHTM";
 
         public MainWindow()
         {
