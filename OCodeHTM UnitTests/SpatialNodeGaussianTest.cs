@@ -253,7 +253,7 @@ namespace OCodeHTM_UnitTests
         public void StopLearningWhenMaxOutputSizeReached()
         {
             int max = 1;
-            var node = new SpatialNodeGaussian(0.0, 0.0, (uint)max);
+            var node = new SpatialNodeGaussian(0.0, 0.0, max);
             var ones = SparseMatrix.Identity(5);
             var twos = SparseMatrix.Identity(5) * 2.0;
             

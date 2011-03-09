@@ -12,13 +12,14 @@ using CnrsUniProv.OCodeHtm.Exceptions;
 namespace OCodeHTM_UnitTests
 {
     [TestClass]
-    public class HtmLayer2DTest
+    public class SpatialLayerTest 
     {
-        
+        #region Gaussian Spatial Layer
+
         [TestMethod]
         public void ErrorWhenLearningAfterLayerIsTrained()
         {
-            var layer = new HtmLayer2D(1, 1, 0.0, false, 1000);
+            var layer = new SpatialLayer(SpatialLayerType.Gaussian, 1, 1, 0.0, true, 1000);
 
             layer.Learn(new SparseMatrix(5));
             layer.Infer(new SparseMatrix(5));
@@ -41,7 +42,7 @@ namespace OCodeHTM_UnitTests
             var inputsize = 10;
             var size = (uint)inputsize / 2;
             var overlap = 0.0;
-            var layer = new HtmLayer2D(size, size, overlap, true, 1000);
+            var layer = new SpatialLayer(SpatialLayerType.Gaussian, size, size, overlap, true, 1000);
 
             var list = from i in Enumerable.Range(0, inputsize)
                        select (double)i;
@@ -77,7 +78,7 @@ namespace OCodeHTM_UnitTests
             var inputsize = 10;
             var size = (uint)inputsize / 2;
             var overlap = 0.5;
-            var layer = new HtmLayer2D(size, size, overlap, true, 1000);
+            var layer = new SpatialLayer(SpatialLayerType.Gaussian, size, size, overlap, true, 1000);
 
             var list = from i in Enumerable.Range(0, inputsize)
                        select (double)i;
@@ -113,7 +114,7 @@ namespace OCodeHTM_UnitTests
             var inputsize = 10;
             var size = (uint)inputsize / 2;
             var overlap = 0;
-            var layer = new HtmLayer2D(size, size, overlap, true, 1000);
+            var layer = new SpatialLayer(SpatialLayerType.Gaussian, size, size, overlap, true, 1000);
 
             var list = from i in Enumerable.Range(0, inputsize)
                        select (double)i;
@@ -149,14 +150,13 @@ namespace OCodeHTM_UnitTests
             }
         }
 
-
         [TestMethod]
         public void SeesCorrectSubmatrixWhenTrainingWith0_5Overlap()
         {
             var inputsize = 10;
             var size = (uint)inputsize / 2;
             var overlap = 0.5;
-            var layer = new HtmLayer2D(size, size, overlap, true, 1000);
+            var layer = new SpatialLayer(SpatialLayerType.Gaussian, size, size, overlap, true, 1000);
 
             var list = from i in Enumerable.Range(0, inputsize)
                        select (double)i;
@@ -191,5 +191,63 @@ namespace OCodeHTM_UnitTests
                 }
             }
         }
+
+        [TestMethod]
+        public void CanLearnNewInputs_5By4Layer0Overlap()
+        {
+            uint maxoutputsize = 5;
+            var overlap = 0.0;
+            var clone = false;
+            uint height = 5;
+            uint width = 4;
+
+            var layer = new SpatialLayer(SpatialLayerType.Gaussian, height, width, overlap, clone, maxoutputsize);
+            var input1 = (SparseMatrix) SparseMatrix.Identity(8).Stack(new SparseMatrix(2, 8));
+            var input2 = 2*input1;
+            
+            //
+            layer.Learn(input1);
+            layer.Learn(input2);
+
+            //
+            for (int i = 0; i < height; i++)
+			{
+			    for (int j = 0; j < width; j++)
+			    {
+			        var node = (SpatialNodeGaussian)layer.NodeArray[i, j];
+                    foreach (var coinc in node.CoincidencesFrequencies)
+                        Assert.AreEqual(1, coinc.Value);
+                }
+			}
+            
+
+        }
+
+        [TestMethod]
+        public void CanLearnAndInfer1OnRecognizedSubInputs_5By4Layer0Overlap()
+        {
+            //TODOnow
+        }
+
+        [TestMethod]
+        public void CanLearnAndInfer1OnRecognizedSubInputs_5By4Layer0_5Overlap()
+        {
+
+        }
+
+
+        [TestMethod]
+        public void CanLearnAndInfer1OnRecognizedSubInput_5By4Layer0OverlapWithCloning()
+        {
+            
+        }
+
+        [TestMethod]
+        public void CanLearnAndInfer1OnRecognizedSubInput_5By4Layer0_5OverlapWithCloning()
+        {
+
+        }
+
+        #endregion
     }
 }

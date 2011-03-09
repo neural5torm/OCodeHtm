@@ -12,7 +12,7 @@ namespace CnrsUniProv.OCodeHtm
         public double SquaredSigma { get; private set; }
 
 
-        public SpatialNodeGaussian(double maxDistance = 0, double sigma = 0, uint maxOutputSize = int.MaxValue)
+        public SpatialNodeGaussian(double maxDistance = Default.MaxDistance, double sigma = Default.Sigma, int maxOutputSize = Default.MaxNodeOutputSize)
             : base(maxDistance, maxOutputSize)
         { 
             if (sigma <= 0.0)
@@ -134,6 +134,16 @@ namespace CnrsUniProv.OCodeHtm
             //TODOlater tbi infer
 
             return new SparseVector(1);
+        }
+
+
+
+        public override SpatialNode<SparseMatrix, Vector> GetClone()
+        {
+            var node = new SpatialNodeGaussian();
+            node.SquaredSigma = this.SquaredSigma;
+
+            return node;
         }
     }
 }

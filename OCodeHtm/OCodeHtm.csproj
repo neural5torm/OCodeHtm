@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MathNet.Numerics">
+      <HintPath>..\lib\MathNet.Numerics.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,7 +45,9 @@
   <ItemGroup>
     <Compile Include="BitmapPictureSensor.cs" />
     <Compile Include="HtmLayer2D.cs" />
-    <Compile Include="ILearningInferring.cs" />
+    <Compile Include="Interfaces\ICloneable.cs" />
+    <Compile Include="Interfaces\ILearningInferring.cs" />
+    <Compile Include="Interfaces\INode.cs" />
     <Compile Include="ProductMatchClassifierNode.cs" />
     <Compile Include="SpatialLayer.cs" />
     <Compile Include="Temp.cs" />
@@ -55,12 +60,6 @@
     <Compile Include="SpatialNode.cs" />
     <Compile Include="SpatialNodeGaussian.cs" />
     <Compile Include="TemporalLayer.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Numerics\Numerics.csproj">
-      <Project>{B7CAE5F4-A23F-4438-B5BE-41226618B695}</Project>
-      <Name>Numerics</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

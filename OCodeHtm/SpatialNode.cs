@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CnrsUniProv.OCodeHtm.Exceptions;
+using CnrsUniProv.OCodeHtm.Interfaces;
 
 namespace CnrsUniProv.OCodeHtm
 {
-    public abstract class SpatialNode<TInput, TOutput> : ILearningInferring<TInput, TOutput>
+    public abstract class SpatialNode<TInput, TOutput> : INode<TInput, TOutput>
         where TInput : class
         where TOutput : class
     {
@@ -37,12 +38,12 @@ namespace CnrsUniProv.OCodeHtm
 
 
         
-        public SpatialNode(double maxSquaredDistance, uint maxOutputSize)
+        public SpatialNode(double maxSquaredDistance, int maxOutputSize)
         {
             State = NodeState.Learning;
 
             MaxDistance = maxSquaredDistance;
-            MaxOutputSize = (int)maxOutputSize;
+            MaxOutputSize = maxOutputSize;
 
             CoincidencesFrequencies = new Dictionary<TInput, double>();
         }
@@ -55,7 +56,33 @@ namespace CnrsUniProv.OCodeHtm
         public abstract TOutput Infer(TInput input);
 
         public abstract TOutput TimeInfer(TInput input);
-    }
+
+      
+        public INode<TInput, TOutput> Clone()
+        {
+            var node = GetClone();
+
+            node.MaxDistance = this.MaxDistance;
+            node.MaxOutputSize = this.MaxOutputSize;
+            node.State = this.State;
+
+            node.CoincidencesFrequencies = new Dictionary<TInput, double>();
+            foreach (var coinc in this.CoincidencesFrequencies)
+                node.CoincidencesFrequencies[coinc.Key] = coinc.Value;
+
+            if (this.LearnedCoincidences != null)
+            {
+                node.learnedCoincidences = new TInput[this.LearnedCoincidences.Length];
+                for (int i = 0; i < this.LearnedCoincidences.Length; i++)
+                {
+                    node.learnedCoincidences[i] = this.LearnedCoincidences[i];
+                }
+            }
+            return node;
+        }
+         
+        public abstract SpatialNode<TInput, TOutput> GetClone();
+   }
 
 
 }

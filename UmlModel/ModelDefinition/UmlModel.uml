@@ -454,6 +454,44 @@
             </relationshipOwnedElementsInternal>
           </association>
         </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="b69f117d-e695-4f3a-b3db-f9cf1f7fdd18"
+            name="Sigma"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="eb090254-7698-44e3-bcfe-d374d99d5754"
+                LastKnownName="double"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="cbd236b9-ae1b-4da5-b94f-2b4aff6f212f"
+            name="MaxDistance"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="eb090254-7698-44e3-bcfe-d374d99d5754"
+                LastKnownName="double"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -915,23 +953,20 @@
               LastKnownLocation="UmlModel.uml" />
           </generalization>
         </generalsInternal>
+        <ownedAttributesInternal>
+          <property
+            Id="578beb11-5624-4308-9907-f13a4e3f46a7"
+            name="SquaredSigma"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
         <ownedOperationsInternal>
-          <operation
-            Id="fc737f88-e9ae-465e-8675-2f6a3fab46ff"
-            name="Learn"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="false"
-            concurrency="Sequential"
-            isQuery="false" />
-          <operation
-            Id="5a3fe4c8-a4d3-4476-ac14-e9ba27a87fa8"
-            name="Infer"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="false"
-            concurrency="Sequential"
-            isQuery="false" />
           <operation
             Id="cacdee00-1e23-4c91-928f-075a06f906b3"
             name="FindClosestCoincidence"
@@ -975,22 +1010,6 @@
           </generalization>
         </generalsInternal>
         <ownedOperationsInternal>
-          <operation
-            Id="c4644008-904b-4388-83fe-c98d1f2be27e"
-            name="Learn"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="false"
-            concurrency="Sequential"
-            isQuery="false" />
-          <operation
-            Id="19d339a4-ae07-466e-81f2-afcafe1f0da7"
-            name="Infer"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="false"
-            concurrency="Sequential"
-            isQuery="false" />
           <operation
             Id="9699c319-7389-4ea1-9365-85c812b08122"
             name="FindClosestCoincidence"
@@ -1395,6 +1414,15 @@
         isAbstract="true"
         isLeaf="false"
         isActiveClass="false">
+        <suppliersInternal>
+          <interfaceRealization
+            Id="d3168be3-8d19-41c3-a145-3122ab0b55c9">
+            <interfaceMoniker
+              Id="c3eed003-b2f1-4819-ac50-09b7ca05d513"
+              LastKnownName="INode"
+              LastKnownLocation="UmlModel.uml" />
+          </interfaceRealization>
+        </suppliersInternal>
         <targetEnds>
           <association
             Id="d5cac5fc-e232-4aef-9e7f-030f3eaaf9ef"
@@ -1600,27 +1628,27 @@
             concurrency="Sequential"
             isQuery="false" />
           <operation
-            Id="3c45f7fa-54c6-412b-a793-5311ef3409f5"
-            name="Infer"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="true"
-            concurrency="Sequential"
-            isQuery="false" />
-          <operation
-            Id="5d465607-3133-4484-8cce-648de130dfc7"
-            name="Learn"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="true"
-            concurrency="Sequential"
-            isQuery="false" />
-          <operation
             Id="537ab225-7363-4ab8-834c-6bdd79475d7c"
             name="TimeInfer"
             isLeaf="false"
             isStatic="false"
             isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="f14318cf-00dc-4781-8234-0469d80859fb"
+            name="Learn"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="03b6dfc4-fd61-4b32-85f1-eab5551be4d2"
+            name="Infer"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
             concurrency="Sequential"
             isQuery="false" />
         </ownedOperationsInternal>
@@ -1633,6 +1661,15 @@
         isAbstract="true"
         isLeaf="false"
         isActiveClass="false">
+        <suppliersInternal>
+          <interfaceRealization
+            Id="a7030999-c9c4-46d5-a1de-ae425e279b9e">
+            <interfaceMoniker
+              Id="7621e322-6fe0-404d-be68-ab79656414de"
+              LastKnownName="ILearningInferring&lt;TInput, TOutput&gt;"
+              LastKnownLocation="UmlModel.uml" />
+          </interfaceRealization>
+        </suppliersInternal>
         <ownedAttributesInternal>
           <property
             Id="46cb7e42-805d-4453-a304-093f2e3f9427"
@@ -1933,6 +1970,65 @@
       <undefinedType
         Id="94e70e2a-dd5f-4537-bf68-45a093a20dbb"
         name="{ None, Zero, SameValues }" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="7621e322-6fe0-404d-be68-ab79656414de"
+        name="ILearningInferring&lt;TInput, TOutput&gt;"
+        isAbstract="false"
+        isLeaf="false">
+        <ownedOperations>
+          <operation
+            Id="effb401c-6235-4ca9-b008-8dbe9d46752e"
+            name="Learn"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="439ac9eb-03df-4cd8-b297-50f9b8e8742c"
+            name="Infer"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperations>
+      </Interface>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="c3eed003-b2f1-4819-ac50-09b7ca05d513"
+        name="INode"
+        isAbstract="false"
+        isLeaf="false">
+        <generalsInternal>
+          <generalization
+            Id="10252dd6-1b32-4ca3-aee2-57ff441f040f"
+            isSubstitutable="false">
+            <interfaceMoniker
+              Id="7621e322-6fe0-404d-be68-ab79656414de"
+              LastKnownName="ILearningInferring&lt;TInput, TOutput&gt;"
+              LastKnownLocation="UmlModel.uml" />
+          </generalization>
+          <generalization
+            Id="12d120b7-c218-4773-b041-3d7c153db6bf"
+            isSubstitutable="false">
+            <interfaceMoniker
+              Id="16e618f3-afcd-47ae-a220-261e5d6daf56"
+              LastKnownName="ICloneable"
+              LastKnownLocation="UmlModel.uml" />
+          </generalization>
+        </generalsInternal>
+      </Interface>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="16e618f3-afcd-47ae-a220-261e5d6daf56"
+        name="ICloneable"
+        isAbstract="false"
+        isLeaf="false" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType

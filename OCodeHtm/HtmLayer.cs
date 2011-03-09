@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using CnrsUniProv.OCodeHtm.Interfaces;
 
 namespace CnrsUniProv.OCodeHtm
 {
@@ -13,7 +14,7 @@ namespace CnrsUniProv.OCodeHtm
         public LayerState State { get; protected set; }
 
         
-        public ILearningInferring<TInput, TOutput> ClonedNode { get; protected set; }
+        public INode<TInput, TOutput> ClonedNode { get; protected set; }
 
 
         public HtmLayer(double overlap, bool clone, uint maxOutputSize)

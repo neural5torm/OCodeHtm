@@ -41,5 +41,15 @@ namespace OCodeHTM_UnitTests
 
         }
 
+
+        [TestMethod]
+        public void SparseMatrixSubMatrixMethodWorks()
+        {
+            var matrix = new SparseMatrix(10, 10, 1.0);
+            var sub = matrix.SubMatrix(8, 2, 0, 2);
+
+            Assert.AreEqual(2, sub.RowCount);
+            Assert.AreEqual(2, sub.ColumnCount);
+        }
     }
 }
