@@ -12,11 +12,11 @@ namespace CnrsUniProv.OCodeHtm
         public double SquaredSigma { get; private set; }
 
 
-        public SpatialNodeGaussian(double maxDistance = Default.MaxDistance, double sigma = Default.Sigma, int maxOutputSize = Default.MaxNodeOutputSize)
+        public SpatialNodeGaussian(double maxDistance = Default.MaxDistance, double sigma = Default.NoSigma, int maxOutputSize = Default.MaxNodeOutputSize)
             : base(maxDistance, maxOutputSize)
         { 
-            if (sigma <= 0.0)
-                SquaredSigma = (maxDistance == 0 ? 1 : maxDistance);
+            if (sigma == Default.NoSigma || sigma < 0.0)
+                SquaredSigma = (maxDistance == 0 ? Default.SquaredSigma : maxDistance);
             else
                 SquaredSigma = sigma * sigma;
         }

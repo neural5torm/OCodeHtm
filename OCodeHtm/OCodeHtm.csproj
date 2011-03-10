@@ -49,6 +49,7 @@
     <Compile Include="Interfaces\ILearningInferring.cs" />
     <Compile Include="Interfaces\INode.cs" />
     <Compile Include="ProductMatchClassifierNode.cs" />
+    <Compile Include="Sensor.cs" />
     <Compile Include="SpatialLayer.cs" />
     <Compile Include="Temp.cs" />
     <Compile Include="Constants.cs" />

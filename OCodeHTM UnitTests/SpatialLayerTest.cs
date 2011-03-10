@@ -218,34 +218,180 @@ namespace OCodeHTM_UnitTests
                     foreach (var coinc in node.CoincidencesFrequencies)
                         Assert.AreEqual(1, coinc.Value);
                 }
-			}
-            
-
+			}            
         }
 
         [TestMethod]
         public void CanLearnAndInfer1OnRecognizedSubInputs_5By4Layer0Overlap()
         {
-            //TODOnow
+            uint maxoutputsize = 5;
+            var overlap = 0.0;
+            var clone = false;
+            uint layerheight = 5;
+            uint layerwidth = 4;
+            int inputtolayerratio = 2;
+            
+            var layer = new SpatialLayer(SpatialLayerType.Gaussian, layerheight, layerwidth, overlap, clone, maxoutputsize);
+            var input1 = new SparseMatrix((int)layerheight * inputtolayerratio, (int)layerwidth * inputtolayerratio, 1.0);
+            var input2 = 2 * input1;
+            
+            
+            //
+            layer.Learn(input1);
+            layer.Learn(input2);
+
+            var infer2 = layer.Infer(input2);
+            var infer1 = layer.Infer(input1);
+            var input3 = (SparseMatrix)new SparseMatrix((int)layerwidth * inputtolayerratio, (int)layerwidth * inputtolayerratio, 1.0)
+                .Stack(new SparseMatrix((int)(layerheight - layerwidth) * inputtolayerratio, (int)layerwidth * inputtolayerratio, 3.0));
+            var infer3 = layer.Infer(input3);
+
+            //
+            foreach (var infer in new SparseMatrix[] { infer1, infer2, infer3 })
+            {
+                for (int row = 0; row < layerheight; row++)
+                {
+                    for (int col = 0; col < layerwidth * layer.MaxNodeOutputSize; col += layer.MaxNodeOutputSize)
+                    {
+                        var subInput = infer.SubMatrix(row, 1, col, layer.MaxNodeOutputSize);
+                        if (infer.Equals(infer3) && row >= layerheight - 1 && row < layerheight)
+                            for (int i = 0; i < subInput.ColumnCount; i++)
+                                Assert.IsTrue(subInput[0, i] < 0.1);
+                        else                       
+                            Assert.IsTrue(subInput[0, 0] == 1.0 || subInput[0, 1] == 1.0);                                 
+                    }
+                }
+            }
         }
 
         [TestMethod]
         public void CanLearnAndInfer1OnRecognizedSubInputs_5By4Layer0_5Overlap()
         {
+            uint maxoutputsize = 5;
+            var overlap = 0.5;
+            var clone = false;
+            uint layerheight = 5;
+            uint layerwidth = 4;
+            int inputtolayerratio = 2;
 
+            var layer = new SpatialLayer(SpatialLayerType.Gaussian, layerheight, layerwidth, overlap, clone, maxoutputsize);
+            var input1 = new SparseMatrix((int)layerheight * inputtolayerratio, (int)layerwidth * inputtolayerratio, 1.0);
+            var input2 = 2 * input1;
+
+
+            //
+            layer.Learn(input1);
+            layer.Learn(input2);
+
+            var infer2 = layer.Infer(input2);
+            var infer1 = layer.Infer(input1);
+            var input3 = (SparseMatrix)new SparseMatrix((int)layerwidth * inputtolayerratio, (int)layerwidth * inputtolayerratio, 1.0)
+                .Stack(new SparseMatrix((int)(layerheight - layerwidth) * inputtolayerratio, (int)layerwidth * inputtolayerratio, 3.0));
+            var infer3 = layer.Infer(input3);
+
+            //
+            foreach (var infer in new SparseMatrix[] { infer1, infer2, infer3 })
+            {
+                for (int row = 0; row < layerheight; row++)
+                {
+                    for (int col = 0; col < layerwidth * layer.MaxNodeOutputSize; col += layer.MaxNodeOutputSize)
+                    {
+                        var subInput = infer.SubMatrix(row, 1, col, layer.MaxNodeOutputSize);
+                        if (infer.Equals(infer3) && row >= layerheight - 2 && row < layerheight)
+                            for (int i = 0; i < subInput.ColumnCount; i++)
+                                Assert.IsTrue(subInput[0, i] < 0.1);
+                        else
+                            Assert.IsTrue(subInput[0, 0] == 1.0 || subInput[0, 1] == 1.0);
+                    }
+                }
+            }
         }
 
 
         [TestMethod]
         public void CanLearnAndInfer1OnRecognizedSubInput_5By4Layer0OverlapWithCloning()
         {
-            
+            uint maxoutputsize = 5;
+            var overlap = 0.0;
+            var clone = false;
+            uint layerheight = 5;
+            uint layerwidth = 4;
+            int inputtolayerratio = 2;
+
+            var layer = new SpatialLayer(SpatialLayerType.Gaussian, layerheight, layerwidth, overlap, clone, maxoutputsize);
+            var input1 = new SparseMatrix((int)layerheight * inputtolayerratio, (int)layerwidth * inputtolayerratio, 1.0);
+            var input2 = 2 * input1;
+
+
+            //
+            layer.Learn(input1);
+            layer.Learn(input2);
+
+            var infer2 = layer.Infer(input2);
+            var infer1 = layer.Infer(input1);
+            var input3 = (SparseMatrix)new SparseMatrix((int)layerwidth * inputtolayerratio, (int)layerwidth * inputtolayerratio, 1.0)
+                .Stack(new SparseMatrix((int)(layerheight - layerwidth) * inputtolayerratio, (int)layerwidth * inputtolayerratio, 3.0));
+            var infer3 = layer.Infer(input3);
+
+            //
+            foreach (var infer in new SparseMatrix[] { infer1, infer2, infer3 })
+            {
+                for (int row = 0; row < layerheight; row++)
+                {
+                    for (int col = 0; col < layerwidth * layer.MaxNodeOutputSize; col += layer.MaxNodeOutputSize)
+                    {
+                        var subInput = infer.SubMatrix(row, 1, col, layer.MaxNodeOutputSize);
+                        if (infer.Equals(infer3) && row >= layerheight - 1 && row < layerheight)
+                            for (int i = 0; i < subInput.ColumnCount; i++)
+                                Assert.IsTrue(subInput[0, i] < 0.1);
+                        else
+                            Assert.IsTrue(subInput[0, 0] == 1.0 || subInput[0, 1] == 1.0);
+                    }
+                }
+            }
         }
 
         [TestMethod]
         public void CanLearnAndInfer1OnRecognizedSubInput_5By4Layer0_5OverlapWithCloning()
         {
+            uint maxoutputsize = 5;
+            var overlap = 0.5;
+            var clone = false;
+            uint layerheight = 5;
+            uint layerwidth = 4;
+            int inputtolayerratio = 2;
 
+            var layer = new SpatialLayer(SpatialLayerType.Gaussian, layerheight, layerwidth, overlap, clone, maxoutputsize);
+            var input1 = new SparseMatrix((int)layerheight * inputtolayerratio, (int)layerwidth * inputtolayerratio, 1.0);
+            var input2 = 2 * input1;
+
+
+            //
+            layer.Learn(input1);
+            layer.Learn(input2);
+
+            var infer2 = layer.Infer(input2);
+            var infer1 = layer.Infer(input1);
+            var input3 = (SparseMatrix)new SparseMatrix((int)layerwidth * inputtolayerratio, (int)layerwidth * inputtolayerratio, 1.0)
+                .Stack(new SparseMatrix((int)(layerheight - layerwidth) * inputtolayerratio, (int)layerwidth * inputtolayerratio, 3.0));
+            var infer3 = layer.Infer(input3);
+
+            //
+            foreach (var infer in new SparseMatrix[] { infer1, infer2, infer3 })
+            {
+                for (int row = 0; row < layerheight; row++)
+                {
+                    for (int col = 0; col < layerwidth * layer.MaxNodeOutputSize; col += layer.MaxNodeOutputSize)
+                    {
+                        var subInput = infer.SubMatrix(row, 1, col, layer.MaxNodeOutputSize);
+                        if (infer.Equals(infer3) && row >= layerheight - 2 && row < layerheight)
+                            for (int i = 0; i < subInput.ColumnCount; i++)
+                                Assert.IsTrue(subInput[0, i] < 0.1);
+                        else
+                            Assert.IsTrue(subInput[0, 0] == 1.0 || subInput[0, 1] == 1.0);
+                    }
+                }
+            }
         }
 
         #endregion

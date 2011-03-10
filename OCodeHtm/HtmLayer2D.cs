@@ -71,7 +71,7 @@ namespace CnrsUniProv.OCodeHtm
         {
             // In clone mode, clone the trained node when inferring for the first time (right after training)
             if (State == LayerState.Learning && IsTrainedNodeCloned)
-                CloneTrainedNode();
+                CloneTrainedNodeToArray();
 
             State = LayerState.Trained;
 
@@ -93,14 +93,17 @@ namespace CnrsUniProv.OCodeHtm
             {
                 Parallel.For(0, Width, (col) =>
                 {
-                    output.SetSubMatrix(row, 1, col * MaxNodeOutputSize, outputs[row, col].ColumnCount, outputs[row, col]);
+                    lock (output)
+                    {
+                        output.SetSubMatrix(row, 1, col * MaxNodeOutputSize, outputs[row, col].ColumnCount, outputs[row, col]);
+                    }
                 });
             });
             return output;
         }
 
-
-        protected abstract void CloneTrainedNode();
+        // TODOlater get rid of clone method, use unique "cloned" node as n by m virtual (read-only) inferring nodes?
+        protected abstract void CloneTrainedNodeToArray();
 
         public SparseMatrix GetSubMatrixForNodeAt(int nodeRow, int nodeColumn, SparseMatrix input)
         {

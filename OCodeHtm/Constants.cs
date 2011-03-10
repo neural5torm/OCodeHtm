@@ -24,6 +24,7 @@ namespace CnrsUniProv.OCodeHtm
     {
         public const int MaxNodeOutputSize = 1000;
         public const double MaxDistance = 0.0;
-        public const double Sigma = 1.0;
+        public const double NoSigma = 0.0;
+        public const double SquaredSigma = 0.1;
     }
 }

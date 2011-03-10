@@ -10,6 +10,34 @@
             <elementDefinition Id="3dc1d3b1-d8b5-46bd-85b8-17f27d4033eb" />
           </interfaceRealization>
         </suppliersInternal>
+        <targetEnds>
+          <association Id="4e140629-6ac2-4488-b1b2-59d47bf5c24e" isDerived="false" sourceEndRoleName="" targetEndRoleName="Filters" isLeaf="false" isAbstract="false">
+            <interfaceMoniker Id="9c7ecd57-2c44-438f-89dc-785e488b58bc" LastKnownName="IFilter" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="660e9437-b381-464f-9105-84d0747446e6" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="e922c3b6-550b-4a3a-9957-7b0e53145ec9" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="6dec4e7a-f864-4a93-a0e7-b0088485b0e6" name="Filters" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString Id="939751c5-d0a1-4915-ab01-b6f499db42b5" name="Lower" value="n">
+                      <elementDefinition Id="cf7cf5fb-ff76-4bca-b19b-419dbfbc6017" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="5b9efaf0-3349-4ce3-8132-2cf648438776" name="Upper" value="n">
+                      <elementDefinition Id="2d0b7d9b-8dba-4010-ae2d-22b33ca4ec00" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="8905c0e6-0edf-4f7e-88b9-fc692c4375fa" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="c66dc5cf-33eb-4e43-8b51-4ff74c57f39e" />
+          </association>
+        </targetEnds>
         <ownedAttributesInternal>
           <property Id="55734e3c-7b2a-4553-8bfa-a9a4a8e2c0b4" name="Height" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="b42fb229-aed9-4100-b663-6f0e24ef9aa2" />
@@ -80,8 +108,8 @@
       <Interface Id="9a23ec09-45de-47e3-86cd-752b8d5d4edd" name="ISensor&lt;TOutput&gt;" isAbstract="false" isLeaf="false">
         <elementDefinition Id="094582cb-0c41-4843-a282-f561671472f3" />
         <targetEnds>
-          <association Id="16aa9714-8e43-4d56-b214-e47e089a2e5e" isDerived="false" sourceEndRoleName="ISensorLayer" targetEndRoleName="HtmNetwork" isLeaf="false" isAbstract="false">
-            <classMoniker Id="47a738f2-037e-444a-a388-afe33897467d" LastKnownName="HtmNetwork" />
+          <association Id="16aa9714-8e43-4d56-b214-e47e089a2e5e" isDerived="false" sourceEndRoleName="ISensorLayer" targetEndRoleName="" isLeaf="false" isAbstract="false">
+            <classMoniker Id="47a738f2-037e-444a-a388-afe33897467d" LastKnownName="HtmNetwork&lt;TInput&gt;" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd Id="82fa4372-d8b3-41aa-8434-ef0d4238dde7" name="ISensorLayer" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
@@ -99,7 +127,7 @@
                 </memberEnd>
               </associationHasOwnedEnds>
               <associationHasOwnedEnds>
-                <memberEnd Id="12af42f5-f939-4789-8ea6-cac80ff235a8" name="HtmNetwork" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                <memberEnd Id="12af42f5-f939-4789-8ea6-cac80ff235a8" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
                   <elementDefinition Id="6392122f-2a87-4f13-b39a-a607b711aac4" />
                 </memberEnd>
               </associationHasOwnedEnds>
@@ -110,11 +138,11 @@
       </Interface>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
-      <Interface Id="29b755d9-ec43-4e0c-b7c6-a2bc12cdfad3" name="IClassifierLayer" isAbstract="false" isLeaf="false">
+      <Interface Id="29b755d9-ec43-4e0c-b7c6-a2bc12cdfad3" name="IClassifierLayer&lt;TInput&gt;" isAbstract="false" isLeaf="false">
         <elementDefinition Id="55195bd3-7287-4283-b157-c30a5c7ae0e5" />
         <targetEnds>
           <association Id="05148ec3-eba0-4263-867d-05e0a9601477" isDerived="false" sourceEndRoleName="IClassifierLayer" targetEndRoleName="" isLeaf="false" isAbstract="false">
-            <classMoniker Id="47a738f2-037e-444a-a388-afe33897467d" LastKnownName="HtmNetwork" />
+            <classMoniker Id="47a738f2-037e-444a-a388-afe33897467d" LastKnownName="HtmNetwork&lt;TInput&gt;" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd Id="2bc5f343-d308-4a33-8cbd-55993698bd82" name="IClassifierLayer" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
@@ -151,34 +179,6 @@
             <elementDefinition Id="6a960622-a391-4acb-aac5-edc2270a3b3f" />
           </generalization>
         </generalsInternal>
-        <targetEnds>
-          <association Id="fbf7abe7-81b1-4a8d-8c1e-d7ea3b16a7cf" isDerived="false" sourceEndRoleName="SpatialLayer" targetEndRoleName="" isLeaf="false" isAbstract="false">
-            <classMoniker Id="47a738f2-037e-444a-a388-afe33897467d" LastKnownName="HtmNetwork" />
-            <relationshipOwnedElementsInternal>
-              <associationHasOwnedEnds>
-                <memberEnd Id="c4e8f689-494a-42bd-bbab-112f9101ac62" name="SpatialLayer" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
-                  <lowerValueInternal>
-                    <literalString Id="efc0c5b2-0f08-4b71-9ba4-94c3f330a3a3" name="Lower" value="n">
-                      <elementDefinition Id="4db3d684-7323-42b3-959e-62523c8e9338" />
-                    </literalString>
-                  </lowerValueInternal>
-                  <upperValueInternal>
-                    <literalString Id="97a072e2-a79b-4621-b89e-6722889c7c3a" name="Upper" value="n">
-                      <elementDefinition Id="9ad151d7-71cc-4f0c-89b9-73d2e311b11f" />
-                    </literalString>
-                  </upperValueInternal>
-                  <elementDefinition Id="0aea8272-ca57-48cd-8bee-34e26687152e" />
-                </memberEnd>
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd Id="ad20ff8d-a49d-4764-9f98-69d65f36330e" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
-                  <elementDefinition Id="a9ab6424-4fbf-4f33-9aed-532cec278bc9" />
-                </memberEnd>
-              </associationHasOwnedEnds>
-            </relationshipOwnedElementsInternal>
-            <elementDefinition Id="37857778-026f-4a07-8a3d-da7f92b84628" />
-          </association>
-        </targetEnds>
         <ownedAttributesInternal>
           <property Id="5be25547-9904-4726-8aba-32872daa234a" name="Sigma" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="b69f117d-e695-4f3a-b3db-f9cf1f7fdd18" />
@@ -196,7 +196,7 @@
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
-      <class Id="47a738f2-037e-444a-a388-afe33897467d" name="HtmNetwork" isAbstract="false" isLeaf="false" isActiveClass="false">
+      <class Id="47a738f2-037e-444a-a388-afe33897467d" name="HtmNetwork&lt;TInput&gt;" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="88f5f517-6ead-4564-93d1-64ee0751580f" />
         <ownedAttributesInternal>
           <property Id="e72e6dc8-f310-49b2-b766-93c8301e8cfa" name="Layers" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
@@ -227,7 +227,7 @@
         <elementDefinition Id="68b4a6e3-7a65-47ff-9e06-b6e0caaaa3f5" />
         <suppliersInternal>
           <interfaceRealization Id="1b9692b6-48b5-42cc-9ee6-298259397df6">
-            <interfaceMoniker Id="29b755d9-ec43-4e0c-b7c6-a2bc12cdfad3" LastKnownName="IClassifierLayer" />
+            <interfaceMoniker Id="29b755d9-ec43-4e0c-b7c6-a2bc12cdfad3" LastKnownName="IClassifierLayer&lt;TInput&gt;" />
             <elementDefinition Id="ed52f4f0-fb92-453d-85c6-f96a72a118fd" />
           </interfaceRealization>
         </suppliersInternal>
@@ -316,6 +316,12 @@
     <logicalClassDesignerModelHasTypes>
       <class Id="28b966e2-d2be-4c13-a797-3a1353a47982" name="TemporalNode" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="bdd35d1d-afae-4718-9d97-88c2e8ef3785" />
+        <suppliersInternal>
+          <interfaceRealization Id="b0ea450d-b33c-431d-9829-d4a0d7bc7a4e">
+            <interfaceMoniker Id="f7d20b5c-16e5-4b8d-9b51-8392ce7f893c" LastKnownName="INode" />
+            <elementDefinition Id="a0ab26a0-f483-473a-b625-ccf5e6e633aa" />
+          </interfaceRealization>
+        </suppliersInternal>
         <ownedAttributesInternal>
           <property Id="aa28eeb8-f9f2-44c6-ba61-66c3aad7b476" name="DetectBlanks" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="5822e8f6-a513-44be-9b40-c7797eedc74b" />
@@ -324,6 +330,27 @@
             </type_NamedElement>
           </property>
         </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation Id="63238099-51e1-45ed-a5d3-bfce564643ea" name="Learn" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="6e7b71b2-2d6f-4797-9682-10dbe99ff954" />
+          </operation>
+          <operation Id="47369d14-5182-4dbe-a1f5-d3a31725708c" name="Infer" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="23a42a25-889f-44cf-944f-9f9da94779f8" />
+          </operation>
+          <operation Id="4f448d90-e384-4fdd-a237-903374ba3711" name="Clone" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="ce07d52a-c2fd-4033-8dd6-00f34fdbaf95" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="09a87d9d-b75e-41ee-add8-86675ccf1902" direction="Return" isUnique="false">
+                  <elementDefinition Id="6723328a-10a3-45ea-9d8e-d8067778f5a7" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="5f58e21d-c899-4cba-8185-c707a2c2d83d" LastKnownName="T" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
@@ -398,32 +425,6 @@
               </associationHasOwnedEnds>
             </relationshipOwnedElementsInternal>
             <elementDefinition Id="c1c518e8-c44d-4dde-9a4e-6070fe3e8775" />
-          </association>
-          <association Id="ed42c2c9-9942-4c89-8f54-fa9f8f4a7aba" isDerived="false" sourceEndRoleName="TemporalLayer" targetEndRoleName="" isLeaf="false" isAbstract="false">
-            <classMoniker Id="47a738f2-037e-444a-a388-afe33897467d" LastKnownName="HtmNetwork" />
-            <relationshipOwnedElementsInternal>
-              <associationHasOwnedEnds>
-                <memberEnd Id="da8156a5-46c6-4b0c-ad70-c2be6cb1b34d" name="TemporalLayer" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
-                  <lowerValueInternal>
-                    <literalString Id="a1909ce4-35e7-47d4-b66a-4ade925565ca" name="Lower" value="n">
-                      <elementDefinition Id="51864557-2711-4540-9a7b-24fb2db198de" />
-                    </literalString>
-                  </lowerValueInternal>
-                  <upperValueInternal>
-                    <literalString Id="1f45179e-a155-49a1-9376-893f545f4d38" name="Upper" value="n">
-                      <elementDefinition Id="10e37e7d-e38a-4bb8-8daf-c167d32fbeb6" />
-                    </literalString>
-                  </upperValueInternal>
-                  <elementDefinition Id="869b227f-6b31-49ea-a040-913370660759" />
-                </memberEnd>
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd Id="0e464c91-92d4-4084-87d7-cce04f915922" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
-                  <elementDefinition Id="5fa8f38a-4af6-41e3-b016-177fffbdf515" />
-                </memberEnd>
-              </associationHasOwnedEnds>
-            </relationshipOwnedElementsInternal>
-            <elementDefinition Id="44ed7147-420a-47e6-a01a-60d4cdb6b158" />
           </association>
         </targetEnds>
       </class>
@@ -554,37 +555,32 @@
           <operation Id="2c097175-087b-4ae0-8c3c-8bbb5d7baf40" name="Infer" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="03b6dfc4-fd61-4b32-85f1-eab5551be4d2" />
           </operation>
+          <operation Id="90d6909b-fd6d-4bb2-a9b6-ca04b7db852d" name="Clone" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="e5381ac7-9b9a-4f01-af23-f9f969f7e579" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="7c590c15-078c-4057-90eb-52b9e02be66c" direction="Return" isUnique="false">
+                  <elementDefinition Id="b7c1953a-fe18-4df4-bdf0-586550d70b67" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="5f58e21d-c899-4cba-8185-c707a2c2d83d" LastKnownName="T" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
         </ownedOperationsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
       <class Id="5b2632ff-3ae4-4ef5-bc00-de46419502dd" name="HtmLayer2D" isAbstract="true" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="4a13eb1b-dd3a-4f5a-9481-14978fca944b" />
-        <suppliersInternal>
-          <interfaceRealization Id="bd3b9d79-7a32-4896-ae18-c7fd22247f14">
-            <interfaceMoniker Id="78b09e1e-6dcb-463f-9819-9c22c6336b5d" LastKnownName="ILearningInferring&lt;TInput, TOutput&gt;" />
-            <elementDefinition Id="a7030999-c9c4-46d5-a1de-ae425e279b9e" />
-          </interfaceRealization>
-        </suppliersInternal>
+        <generalsInternal>
+          <generalization Id="f52215b2-9c77-484e-877d-b499aef33c13" isSubstitutable="false">
+            <classMoniker Id="cfea7cf9-d37d-4262-be33-f63a8aa1525a" LastKnownName="HtmLayer&lt;TInput, TOutput&gt;" />
+            <elementDefinition Id="02b3aac7-f60f-4f9b-a714-2bcb6d689a7b" />
+          </generalization>
+        </generalsInternal>
         <ownedAttributesInternal>
-          <property Id="e0e30c45-6715-42c4-9dc5-020fdbf442d6" name="CloneTrainedNode" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-            <elementDefinition Id="46cb7e42-805d-4453-a304-093f2e3f9427" />
-            <type_NamedElement>
-              <referencedTypeMoniker Id="6f7981be-afb4-407b-bf68-bc829d374f81" LastKnownName="bool" />
-            </type_NamedElement>
-          </property>
-          <property Id="b83a9c23-4d07-447f-9d6e-41e4ace391aa" name="State" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-            <elementDefinition Id="286ba9d1-5158-42ba-aaee-d4615595914e" />
-            <type_NamedElement>
-              <referencedTypeMoniker Id="eeaf4330-5935-4998-8ee1-ca2a08d57399" LastKnownName="{ Untrained, Trained }" />
-            </type_NamedElement>
-          </property>
-          <property Id="2b6923ed-c47d-47a5-9839-087be68b282d" name="LowerLayerOverlapRatio" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-            <elementDefinition Id="bc657c4e-bb97-4771-b7a1-76f8c2b55b2d" />
-            <type_NamedElement>
-              <referencedTypeMoniker Id="728c2358-b097-44b8-8542-7541795b361b" LastKnownName="double" />
-            </type_NamedElement>
-          </property>
           <property Id="0ff14d40-4252-4b8d-a2a0-9787baff207e" name="Height" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="94daac1d-baad-4318-8ff2-60ee944e9afe" />
             <type_NamedElement>
@@ -597,27 +593,69 @@
               <referencedTypeMoniker Id="1cde3771-d7cb-4806-a0e2-08eb92a37d33" LastKnownName="uint" />
             </type_NamedElement>
           </property>
-          <property Id="85fb6238-0b82-482f-8e18-7e9e3013f3c6" name="MaxNodeOutputSize" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-            <elementDefinition Id="ac7000b3-f370-4ab9-85a4-ad04523f9626" />
+          <property Id="2daafe3c-785f-4947-a430-0d042829bdae" name="NodeArray" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <lowerValueInternal>
+              <literalString Id="68ce2c17-96d8-46d4-82cd-968903f39b15" name="Lower" value=",">
+                <elementDefinition Id="dca396b3-e109-4f11-b9c1-5a09b9a9dd13" />
+              </literalString>
+            </lowerValueInternal>
+            <upperValueInternal>
+              <literalString Id="75b7e36a-5b7c-4e79-a460-6a2276737721" name="Upper" value=",">
+                <elementDefinition Id="ceb5cd92-f0e2-419f-b5b8-98714383c88d" />
+              </literalString>
+            </upperValueInternal>
+            <elementDefinition Id="446b1b93-7492-4dcd-8aba-e7d9eebfdf3b" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="7dd99c06-80ca-4b87-89f8-51e547c47940" LastKnownName="INode" />
+            </type_NamedElement>
           </property>
         </ownedAttributesInternal>
         <ownedOperationsInternal>
-          <operation Id="85a3c300-03e0-4c60-b0fe-f9897d4eb2ca" name="Learn" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
-            <elementDefinition Id="a0c07dd9-3ff7-451e-a123-b1500cb799f2" />
+          <operation Id="53811ad0-6730-4d37-a902-d0df127e061a" name="CreateNodes" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="9f4c319f-c042-4590-8cd1-98b9c775d6f9" />
           </operation>
-          <operation Id="2f70586b-f43e-4c21-927d-aaef4fd19fe9" name="Infer" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
-            <elementDefinition Id="a21f3442-36bc-41a1-827e-6b10c359c873" />
+          <operation Id="2041317f-e636-479f-ac52-697b14b23282" name="Learn" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="9a4fe2ea-f8b7-407d-9daf-75ef050761e3" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="58718b78-6930-4acd-acc4-908c890ede08" name="input" direction="In" isUnique="false">
+                  <elementDefinition Id="a99efba5-3bae-4f65-8f2a-987b97309f30" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="b2995b09-7e51-4df9-905b-2526117c54a0" LastKnownName="SparseMatrix" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="0300f4ab-4344-449f-bdd4-f604d4044c22" name="Infer" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="19712cd5-ad6d-4e21-81b1-4c7beec1b74e" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="7adbe783-228c-4a00-8def-cd11506b77a9" name="input" direction="In" isUnique="false">
+                  <elementDefinition Id="8cc61dd7-0f35-40ae-a86f-1e726b3772e6" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="b2995b09-7e51-4df9-905b-2526117c54a0" LastKnownName="SparseMatrix" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="4a2c4d64-50a5-4a4f-8e61-b6a32b28be93" direction="Return" isUnique="false">
+                  <elementDefinition Id="1f55e91c-7701-45b3-9d9b-edc59026284c" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="b2995b09-7e51-4df9-905b-2526117c54a0" LastKnownName="SparseMatrix" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="aeb5e657-967c-4541-a816-dc9a4f350e32" name="CloneTrainedNode" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="edb84087-3382-4b94-957e-1949abe787b2" />
           </operation>
         </ownedOperationsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
     <packageHasNamedElement>
       <referencedType Id="17369a56-3da5-46d6-8dbd-1ed3305169e3" name="bool" isAbstract="false" isLeaf="false" cachedFullName="bool">
-        <elementDefinition Id="1e54acf1-0d02-4896-a606-2e388056f9d4" />
-      </referencedType>
-    </packageHasNamedElement>
-    <packageHasNamedElement>
-      <referencedType Id="6f7981be-afb4-407b-bf68-bc829d374f81" name="bool" isAbstract="false" isLeaf="false" cachedFullName="bool">
         <elementDefinition Id="1e54acf1-0d02-4896-a606-2e388056f9d4" />
       </referencedType>
     </packageHasNamedElement>
@@ -693,11 +731,6 @@
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <referencedType Id="eeaf4330-5935-4998-8ee1-ca2a08d57399" name="{ Untrained, Trained }" isAbstract="false" isLeaf="false" cachedFullName="{ Untrained, Trained }">
-        <elementDefinition Id="7ff4fcf0-9ce3-49da-9fa2-2335304791c6" />
-      </referencedType>
-    </packageHasNamedElement>
-    <packageHasNamedElement>
       <referencedType Id="0e1f368d-20f2-457c-9ccc-49a7c1777ef8" name="uint" isAbstract="false" isLeaf="false" cachedFullName="uint">
         <elementDefinition Id="26efc07f-bc02-403c-8b86-3e0a2232dd19" />
       </referencedType>
@@ -710,11 +743,6 @@
     <packageHasNamedElement>
       <referencedType Id="bfce746f-bef4-4d3d-908f-0a9603acaf0c" name="{ None, Zero, SameValues }" isAbstract="false" isLeaf="false" cachedFullName="{ None, Zero, SameValues }">
         <elementDefinition Id="94e70e2a-dd5f-4537-bf68-45a093a20dbb" />
-      </referencedType>
-    </packageHasNamedElement>
-    <packageHasNamedElement>
-      <referencedType Id="728c2358-b097-44b8-8542-7541795b361b" name="double" isAbstract="false" isLeaf="false" cachedFullName="double">
-        <elementDefinition Id="eb090254-7698-44e3-bcfe-d374d99d5754" />
       </referencedType>
     </packageHasNamedElement>
     <logicalClassDesignerModelHasTypes>
@@ -738,18 +766,148 @@
             <interfaceMoniker Id="78b09e1e-6dcb-463f-9819-9c22c6336b5d" LastKnownName="ILearningInferring&lt;TInput, TOutput&gt;" />
             <elementDefinition Id="10252dd6-1b32-4ca3-aee2-57ff441f040f" />
           </generalization>
-          <generalization Id="d8e94a0d-c236-4e95-bda0-9e831332ebd3" isSubstitutable="false">
-            <interfaceMoniker Id="7777115e-61bd-4695-80a5-e26515dae48c" LastKnownName="ICloneable" />
-            <elementDefinition Id="12d120b7-c218-4773-b041-3d7c153db6bf" />
+          <generalization Id="69f71543-fe19-4ba3-9e06-02c85ba3eed2" isSubstitutable="false">
+            <interfaceMoniker Id="7777115e-61bd-4695-80a5-e26515dae48c" LastKnownName="ICloneable&lt;T&gt;" />
+            <elementDefinition Id="6e4fb161-75b3-423f-b177-36d408902ba4" />
           </generalization>
         </generalsInternal>
       </Interface>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
-      <Interface Id="7777115e-61bd-4695-80a5-e26515dae48c" name="ICloneable" isAbstract="false" isLeaf="false">
+      <Interface Id="7777115e-61bd-4695-80a5-e26515dae48c" name="ICloneable&lt;T&gt;" isAbstract="false" isLeaf="false">
         <elementDefinition Id="16e618f3-afcd-47ae-a220-261e5d6daf56" />
+        <ownedOperations>
+          <operation Id="e88691b5-4133-4253-b9e8-a720d69d2d77" name="Clone" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="3db720f0-dfd5-45d1-8447-45fe4c85f865" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="2cfda4b2-2484-4b6c-bfc7-941982130065" direction="Return" isUnique="false">
+                  <elementDefinition Id="5c3dbb02-9b2b-4422-815c-768c4101fb28" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="5f58e21d-c899-4cba-8185-c707a2c2d83d" LastKnownName="T" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperations>
       </Interface>
     </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="9c7ecd57-2c44-438f-89dc-785e488b58bc" name="IFilter" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="fdb26c52-029b-4aa5-80ef-fe64e6e06d51" />
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="074c101c-525c-4d61-b788-5f4210c7697d" name="GaborFilter" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="81a06600-7f15-4809-a878-42670b186c68" />
+        <suppliersInternal>
+          <interfaceRealization Id="09a5ac37-1596-447a-8f87-eeea19d64a66">
+            <interfaceMoniker Id="9c7ecd57-2c44-438f-89dc-785e488b58bc" LastKnownName="IFilter" />
+            <elementDefinition Id="ac10a62e-b2de-46c2-b8b8-e2dbe9fd65f0" />
+          </interfaceRealization>
+        </suppliersInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="5f58e21d-c899-4cba-8185-c707a2c2d83d" name="T" isAbstract="false" isLeaf="false" cachedFullName="T">
+        <elementDefinition Id="e645a1c5-1ac8-41af-a281-5d0ef879f6e2" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="cfea7cf9-d37d-4262-be33-f63a8aa1525a" name="HtmLayer&lt;TInput, TOutput&gt;" isAbstract="true" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="757cac76-c921-4d71-a338-16089abf0d06" />
+        <suppliersInternal>
+          <interfaceRealization Id="d47ca8be-4fb8-40ca-8db4-e954a9ffba01">
+            <interfaceMoniker Id="78b09e1e-6dcb-463f-9819-9c22c6336b5d" LastKnownName="ILearningInferring&lt;TInput, TOutput&gt;" />
+            <elementDefinition Id="36f41bb7-adb3-4c93-b2ec-e690609f6212" />
+          </interfaceRealization>
+        </suppliersInternal>
+        <targetEnds>
+          <association Id="fd887329-3f03-4711-a9c7-56f2f196ddc6" isDerived="false" sourceEndRoleName="Layers" targetEndRoleName="" isLeaf="false" isAbstract="false">
+            <classMoniker Id="47a738f2-037e-444a-a388-afe33897467d" LastKnownName="HtmNetwork&lt;TInput&gt;" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="fe534e43-0925-4506-9738-8c809179a135" name="Layers" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString Id="18f204d7-06b9-4c30-a747-d4c76fef1051" name="Lower" value="n">
+                      <elementDefinition Id="0f835d19-e3b1-4368-b047-36b6a8927191" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="73a6e026-4de3-49a7-bb7e-16046bfbeb77" name="Upper" value="n">
+                      <elementDefinition Id="eb8958ee-e3ab-4f99-90ff-ca9b2f8ea652" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="2deb76a1-0d09-43ac-9cf5-abdccde262fc" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="57db1c1e-1b42-4ff2-9b70-98663ac0a2f9" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="46c120e1-a37e-4096-bb0c-1a005c55a290" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="3be8b21e-2b68-4b05-a061-0907958d3506" />
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property Id="b1db37aa-e0f6-46a7-8d41-80156e050e88" name="InputOverlapRatio" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="021cddb6-eac3-49c4-8b65-5c8a5b12e959" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="a7b11454-fcba-4f1a-87d3-55fca9bef6d1" LastKnownName="double" />
+            </type_NamedElement>
+          </property>
+          <property Id="a614f286-fb4b-4a00-b1f4-9be9d2e69aaa" name="IsTrainedNodeCloned" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="bcc577df-e545-4b65-ac2a-9e076c45ae4b" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="17369a56-3da5-46d6-8dbd-1ed3305169e3" LastKnownName="bool" />
+            </type_NamedElement>
+          </property>
+          <property Id="e1b5814c-fa45-4e6f-a1c4-de00d077bf0e" name="State" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="17e1da14-aa10-43a0-bef7-bc1dbfa3f412" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="2b6d73d8-d412-4e12-85bc-a42737f30fbc" LastKnownName="{Learning, Trained}" />
+            </type_NamedElement>
+          </property>
+          <property Id="bb68a2c1-e3ba-4c12-9efe-859d1d6341e0" name="MaxNodeOutputSize" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="a1e50a62-ef98-4f72-9089-e031bdae33a7" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="47e2c258-95a9-4780-8876-7b159231da0b" LastKnownName="int" />
+            </type_NamedElement>
+          </property>
+          <property Id="36250c19-abea-4e1e-af22-d4d025be5dca" name="ClonedNode" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="e9892a51-591c-4a6a-b0d1-b77f84375e7a" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="7dd99c06-80ca-4b87-89f8-51e547c47940" LastKnownName="INode" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation Id="234eec66-fc02-42e6-b054-7cd8cf0d8ade" name="Learn" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="1ef193a1-373f-4b42-a74e-d68e10c36d28" />
+          </operation>
+          <operation Id="eebeb694-c359-422f-94ea-fd379780f230" name="Infer" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="b3a60bf7-7dee-4afa-b4df-5b11e3a5af9b" />
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="2b6d73d8-d412-4e12-85bc-a42737f30fbc" name="{Learning, Trained}" isAbstract="false" isLeaf="false" cachedFullName="{Learning, Trained}">
+        <elementDefinition Id="64cd5984-9ad9-4298-8009-ba3b15bfa740" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="7dd99c06-80ca-4b87-89f8-51e547c47940" name="INode" isAbstract="false" isLeaf="false" cachedFullName="UmlModel::INode">
+        <elementDefinition Id="4ebb4e82-8de3-483f-bb96-e3c53ff19e04" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="b2995b09-7e51-4df9-905b-2526117c54a0" name="SparseMatrix" isAbstract="false" isLeaf="false" cachedFullName="SparseMatrix">
+        <elementDefinition Id="43f0311f-1804-4ecc-8852-e5c9ed74dcc0" />
+      </referencedType>
+    </packageHasNamedElement>
   </packagedElements>
   <package Id="54d2adf7-259b-4605-b4d2-a0d6ade258c8" name="UmlModel">
     <elementDefinition Id="87ba7bd6-cdb0-4a42-bf01-7415032f4c02" />

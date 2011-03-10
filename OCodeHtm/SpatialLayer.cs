@@ -19,7 +19,7 @@ namespace CnrsUniProv.OCodeHtm
 
 
         public SpatialLayer(SpatialLayerType type, uint height, uint width, double overlap, bool clone, uint maxOutputSize, 
-                            double sigma = Default.Sigma, double maxDistance = Default.MaxDistance)
+                            double sigma = Default.NoSigma, double maxDistance = Default.MaxDistance)
             : this(type, height, width, overlap, clone, maxOutputSize)
         {
             MaxDistance = maxDistance;
@@ -64,7 +64,7 @@ namespace CnrsUniProv.OCodeHtm
             }
         }
 
-        protected override void CloneTrainedNode()
+        protected override void CloneTrainedNodeToArray()
         {
             NodeArray = new INode<SparseMatrix, Vector>[Height, Width];
             Parallel.For(0, Height, (row) =>
