@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
   dslVersion="1.0.0.0"
   Id="87ba7bd6-cdb0-4a42-bf01-7415032f4c02"
   name="UmlModel" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
@@ -39,7 +39,7 @@
             Id="c66dc5cf-33eb-4e43-8b51-4ff74c57f39e"
             isDerived="false"
             sourceEndRoleName=""
-            targetEndRoleName="Filters"
+            targetEndRoleName="Filters {ordered}"
             isLeaf="false"
             isAbstract="false">
             <interfaceMoniker
@@ -62,7 +62,7 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="8905c0e6-0edf-4f7e-88b9-fc692c4375fa"
-                  name="Filters"
+                  name="Filters {ordered}"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -120,7 +120,7 @@
             isComposite="false" />
           <property
             Id="66f00f6b-8dd6-426a-931e-39ce046e69d5"
-            name="CategoryFile"
+            name="_ForLater_CategoryFile"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -149,7 +149,7 @@
             isComposite="false" />
           <property
             Id="292d32b7-9945-4cfb-8517-0e3955acf04e"
-            name="Exploration"
+            name="ExplorationModes"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -160,14 +160,14 @@
             isComposite="false">
             <type_NamedElement>
               <undefinedTypeMoniker
-                Id="174cef5d-3d39-4944-88d2-bb0f086e5131"
-                LastKnownName="{ RandomSweep, LeftRightSweep, RightLeftSweep, TopDownSweep }"
+                Id="5ad54d94-b12d-4ef9-a25e-c4dc62e13d61"
+                LastKnownName="Array&lt;{ RandomSweep, LeftRightSweep, TopDownSweep }&gt;"
                 LastKnownLocation="UmlModel.uml" />
             </type_NamedElement>
           </property>
           <property
             Id="a729ced2-61c9-4b30-b668-e87a164453b0"
-            name="ExplorationSeed"
+            name="ExplorationRandomizerSeed"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -185,7 +185,7 @@
           </property>
           <property
             Id="c82c7b02-0843-479b-8469-dd9870bafa27"
-            name="ExplorationIterations"
+            name="ExplorationMaxIterations"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -196,14 +196,14 @@
             isComposite="false">
             <type_NamedElement>
               <undefinedTypeMoniker
-                Id="26efc07f-bc02-403c-8b86-3e0a2232dd19"
-                LastKnownName="uint"
+                Id="f5fdf7d5-4c61-4101-941a-a3ee2e86170a"
+                LastKnownName="int"
                 LastKnownLocation="UmlModel.uml" />
             </type_NamedElement>
           </property>
           <property
             Id="4a809884-ee6d-4174-943b-956b202ece87"
-            name="ExplorationScaleFactorMin"
+            name="ExplorationRandomScalingMin"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -221,7 +221,7 @@
           </property>
           <property
             Id="83ffb79b-67c7-4085-9fe9-ddae28952909"
-            name="ExplorationScaleFactorMax"
+            name="ExplorationRandomScalingMax"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -255,6 +255,24 @@
                 LastKnownLocation="UmlModel.uml" />
             </type_NamedElement>
           </property>
+          <property
+            Id="748f5d4d-59b4-4bd8-b961-cd90efd911d2"
+            name="ExplorationRandomStartPosition"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="1e54acf1-0d02-4896-a606-2e388056f9d4"
+                LastKnownName="bool"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
         </ownedAttributesInternal>
         <ownedOperationsInternal>
           <operation
@@ -268,6 +286,15 @@
           <operation
             Id="a0cbe851-842f-492e-bcf2-f62a104d5ba9"
             name="GetTestInputs"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="63d3e47c-67a6-48c1-9583-39779960c4c5"
+            name="TransformAndApplyFilters"
+            visibility="Protected"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -914,7 +941,7 @@
         <ownedAttributesInternal>
           <property
             Id="5822e8f6-a513-44be-9b40-c7797eedc74b"
-            name="DetectBlanks"
+            name="_ForLater_DetectBlanks"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -1023,6 +1050,14 @@
             isAbstract="false"
             concurrency="Sequential"
             isQuery="false" />
+          <operation
+            Id="94e62194-9294-40dc-8eb5-75949b4c9e86"
+            name="_ForLater_TimeInfer"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
         </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
@@ -1035,7 +1070,7 @@
       <class
         Id="17180c10-cb53-415b-92ec-35ca50923c04"
         name="SpatialNodeProduct"
-        isAbstract="false"
+        isAbstract="true"
         isLeaf="false"
         isActiveClass="false">
         <suppliersInternal>
@@ -1061,6 +1096,14 @@
           <operation
             Id="9699c319-7389-4ea1-9365-85c812b08122"
             name="FindClosestCoincidence"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="2899fbb1-007e-4878-b60f-00aeedf43f03"
+            name="_ForLater_TimeInfer"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -1568,9 +1611,9 @@
             isComposite="false" />
           <property
             Id="1bc8d462-af93-4327-ae06-379836d7b936"
-            name="DetectBlanks"
+            name="_ForLater_DetectBlanks"
             isLeaf="false"
-            isStatic="true"
+            isStatic="false"
             isReadOnly="false"
             isUnique="false"
             isDerived="false"
@@ -1586,9 +1629,9 @@
           </property>
           <property
             Id="ed706538-ce92-4b7e-ab59-62ea52bd00ce"
-            name="DetectBlanksMode"
+            name="_ForLater_DetectBlanksMode"
             isLeaf="false"
-            isStatic="true"
+            isStatic="false"
             isReadOnly="false"
             isUnique="false"
             isDerived="false"
@@ -1604,9 +1647,9 @@
           </property>
           <property
             Id="dfdd61da-587c-48bf-8244-5cfaceb3dee4"
-            name="PruningThreshold"
+            name="_ForLater_PruningThreshold"
             isLeaf="false"
-            isStatic="true"
+            isStatic="false"
             isReadOnly="false"
             isUnique="false"
             isDerived="false"
@@ -1705,8 +1748,8 @@
             isComposite="false">
             <type_NamedElement>
               <undefinedTypeMoniker
-                Id="26efc07f-bc02-403c-8b86-3e0a2232dd19"
-                LastKnownName="uint"
+                Id="f5fdf7d5-4c61-4101-941a-a3ee2e86170a"
+                LastKnownName="int"
                 LastKnownLocation="UmlModel.uml" />
             </type_NamedElement>
           </property>
@@ -1723,8 +1766,8 @@
             isComposite="false">
             <type_NamedElement>
               <undefinedTypeMoniker
-                Id="26efc07f-bc02-403c-8b86-3e0a2232dd19"
-                LastKnownName="uint"
+                Id="f5fdf7d5-4c61-4101-941a-a3ee2e86170a"
+                LastKnownName="int"
                 LastKnownLocation="UmlModel.uml" />
             </type_NamedElement>
           </property>
@@ -2122,13 +2165,51 @@
         isActiveClass="false">
         <suppliersInternal>
           <interfaceRealization
-            Id="ac10a62e-b2de-46c2-b8b8-e2dbe9fd65f0">
+            Id="d4c22f11-d27f-4a64-a7e2-f0418cb1291c">
             <interfaceMoniker
               Id="fdb26c52-029b-4aa5-80ef-fe64e6e06d51"
               LastKnownName="IFilter"
               LastKnownLocation="UmlModel.uml" />
           </interfaceRealization>
         </suppliersInternal>
+        <ownedAttributesInternal>
+          <property
+            Id="6140789d-091f-402b-99f6-d38bce3a99cd"
+            name="OutputMode"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="a05d974a-00c8-4ca8-8e2f-1c11caee99c5"
+                LastKnownName="{Concatenated,Interleaved}"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="f675215e-9a67-4783-b5a3-1e0a1baf0ae8"
+            name="NbOrientations"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="f5fdf7d5-4c61-4101-941a-a3ee2e86170a"
+                LastKnownName="int"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -2332,6 +2413,21 @@
       <undefinedType
         Id="43f0311f-1804-4ecc-8852-e5c9ed74dcc0"
         name="SparseMatrix" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="a05d974a-00c8-4ca8-8e2f-1c11caee99c5"
+        name="{Concatenated,Interleaved}" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="c8c92188-6b05-4ccb-aaa2-d1e35dbaa38a"
+        name="{ RandomSweep, LeftRightSweep, TopDownSweep }" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="5ad54d94-b12d-4ef9-a25e-c4dc62e13d61"
+        name="Array&lt;{ RandomSweep, LeftRightSweep, TopDownSweep }&gt;" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType

@@ -17,9 +17,22 @@ namespace CnrsUniProv.OCodeHtm
 
     public enum SpatialLayerType
     {
-        Gaussian,
+        Gaussian, //Product,
     }
 
+    public enum TemporalLayerType
+    {
+        //MaxProp, SumProp, TimeBased
+    }
+
+    public enum SensorExplorationMode
+    {
+        RandomSweep4, RandomSweep8, LeftRightSweep, TopDownSweep,
+    }
+    
+    
+    
+    
     internal static class Default
     {
         public const int MaxNodeOutputSize = 1000;
