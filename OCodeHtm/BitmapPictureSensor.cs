@@ -24,7 +24,7 @@ namespace CnrsUniProv.OCodeHtm
 
         public BitmapPictureSensor(int randomizerSeed = Default.RandomizerSeed, uint maxIterations = Default.NoMaxIterations, uint pathSpeed = Default.PathSpeed, bool useRandomOrigin = Default.PathUseRandomOrigin, //TODOlater use enum {OutsideField,Center,Random} for origins
             params ExplorationPath[] explorationPaths)
-            : base(randomizerSeed, explorationPaths, maxIterations, useRandomOrigin, pathSpeed)
+            : base(randomizerSeed, explorationPaths, maxIterations, pathSpeed, useRandomOrigin)
         {
             // More default values, for good measure:
             InputFilenameFormat = Default.BitmapInputFilenameFormat;
