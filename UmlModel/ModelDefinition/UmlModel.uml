@@ -22,18 +22,19 @@
       <class
         Id="0c8bbcc6-edb3-448e-ab33-36add90ec2c6"
         name="BitmapPictureSensor"
-        isAbstract="false"
+        isAbstract="true"
         isLeaf="false"
         isActiveClass="false">
-        <suppliersInternal>
-          <interfaceRealization
-            Id="3dc1d3b1-d8b5-46bd-85b8-17f27d4033eb">
-            <interfaceMoniker
-              Id="094582cb-0c41-4843-a282-f561671472f3"
-              LastKnownName="ISensor&lt;TOutput&gt;"
+        <generalsInternal>
+          <generalization
+            Id="1bf65506-d37c-4d66-acb6-2dca3b4d2632"
+            isSubstitutable="false">
+            <classMoniker
+              Id="3042a040-a54f-4a88-a631-4ee37efce031"
+              LastKnownName="Sensor"
               LastKnownLocation="UmlModel.uml" />
-          </interfaceRealization>
-        </suppliersInternal>
+          </generalization>
+        </generalsInternal>
         <targetEnds>
           <association
             Id="c66dc5cf-33eb-4e43-8b51-4ff74c57f39e"
@@ -102,138 +103,8 @@
             isComposite="false">
             <type_NamedElement>
               <undefinedTypeMoniker
-                Id="26efc07f-bc02-403c-8b86-3e0a2232dd19"
-                LastKnownName="uint"
-                LastKnownLocation="UmlModel.uml" />
-            </type_NamedElement>
-          </property>
-          <property
-            Id="8a4fd6f8-1736-402a-a945-0d4e6bf24143"
-            name="TrainingFolder"
-            isLeaf="false"
-            isStatic="false"
-            isReadOnly="false"
-            isUnique="false"
-            isDerived="false"
-            isDerivedUnion="false"
-            aggregation="None"
-            isComposite="false" />
-          <property
-            Id="66f00f6b-8dd6-426a-931e-39ce046e69d5"
-            name="_ForLater_CategoryFile"
-            isLeaf="false"
-            isStatic="false"
-            isReadOnly="false"
-            isUnique="false"
-            isDerived="false"
-            isDerivedUnion="false"
-            aggregation="None"
-            isComposite="false">
-            <type_NamedElement>
-              <undefinedTypeMoniker
-                Id="e830efe0-a098-40d0-a8d8-96723ee1f02a"
-                LastKnownName="FileInfo"
-                LastKnownLocation="UmlModel.uml" />
-            </type_NamedElement>
-          </property>
-          <property
-            Id="3587e710-3a26-49c1-86e4-2f1386d22dec"
-            name="TestFolder"
-            isLeaf="false"
-            isStatic="false"
-            isReadOnly="false"
-            isUnique="false"
-            isDerived="false"
-            isDerivedUnion="false"
-            aggregation="None"
-            isComposite="false" />
-          <property
-            Id="292d32b7-9945-4cfb-8517-0e3955acf04e"
-            name="ExplorationModes"
-            isLeaf="false"
-            isStatic="false"
-            isReadOnly="false"
-            isUnique="false"
-            isDerived="false"
-            isDerivedUnion="false"
-            aggregation="None"
-            isComposite="false">
-            <type_NamedElement>
-              <undefinedTypeMoniker
-                Id="5ad54d94-b12d-4ef9-a25e-c4dc62e13d61"
-                LastKnownName="Array&lt;{ RandomSweep, LeftRightSweep, TopDownSweep }&gt;"
-                LastKnownLocation="UmlModel.uml" />
-            </type_NamedElement>
-          </property>
-          <property
-            Id="a729ced2-61c9-4b30-b668-e87a164453b0"
-            name="ExplorationRandomizerSeed"
-            isLeaf="false"
-            isStatic="false"
-            isReadOnly="false"
-            isUnique="false"
-            isDerived="false"
-            isDerivedUnion="false"
-            aggregation="None"
-            isComposite="false">
-            <type_NamedElement>
-              <undefinedTypeMoniker
                 Id="f5fdf7d5-4c61-4101-941a-a3ee2e86170a"
                 LastKnownName="int"
-                LastKnownLocation="UmlModel.uml" />
-            </type_NamedElement>
-          </property>
-          <property
-            Id="c82c7b02-0843-479b-8469-dd9870bafa27"
-            name="ExplorationMaxIterations"
-            isLeaf="false"
-            isStatic="false"
-            isReadOnly="false"
-            isUnique="false"
-            isDerived="false"
-            isDerivedUnion="false"
-            aggregation="None"
-            isComposite="false">
-            <type_NamedElement>
-              <undefinedTypeMoniker
-                Id="f5fdf7d5-4c61-4101-941a-a3ee2e86170a"
-                LastKnownName="int"
-                LastKnownLocation="UmlModel.uml" />
-            </type_NamedElement>
-          </property>
-          <property
-            Id="4a809884-ee6d-4174-943b-956b202ece87"
-            name="ExplorationRandomScalingMin"
-            isLeaf="false"
-            isStatic="false"
-            isReadOnly="false"
-            isUnique="false"
-            isDerived="false"
-            isDerivedUnion="false"
-            aggregation="None"
-            isComposite="false">
-            <type_NamedElement>
-              <undefinedTypeMoniker
-                Id="eb090254-7698-44e3-bcfe-d374d99d5754"
-                LastKnownName="double"
-                LastKnownLocation="UmlModel.uml" />
-            </type_NamedElement>
-          </property>
-          <property
-            Id="83ffb79b-67c7-4085-9fe9-ddae28952909"
-            name="ExplorationRandomScalingMax"
-            isLeaf="false"
-            isStatic="false"
-            isReadOnly="false"
-            isUnique="false"
-            isDerived="false"
-            isDerivedUnion="false"
-            aggregation="None"
-            isComposite="false">
-            <type_NamedElement>
-              <undefinedTypeMoniker
-                Id="eb090254-7698-44e3-bcfe-d374d99d5754"
-                LastKnownName="double"
                 LastKnownLocation="UmlModel.uml" />
             </type_NamedElement>
           </property>
@@ -250,130 +121,13 @@
             isComposite="false">
             <type_NamedElement>
               <undefinedTypeMoniker
-                Id="26efc07f-bc02-403c-8b86-3e0a2232dd19"
-                LastKnownName="uint"
-                LastKnownLocation="UmlModel.uml" />
-            </type_NamedElement>
-          </property>
-          <property
-            Id="748f5d4d-59b4-4bd8-b961-cd90efd911d2"
-            name="ExplorationRandomStartPosition"
-            isLeaf="false"
-            isStatic="false"
-            isReadOnly="false"
-            isUnique="false"
-            isDerived="false"
-            isDerivedUnion="false"
-            aggregation="None"
-            isComposite="false">
-            <type_NamedElement>
-              <undefinedTypeMoniker
-                Id="1e54acf1-0d02-4896-a606-2e388056f9d4"
-                LastKnownName="bool"
+                Id="f5fdf7d5-4c61-4101-941a-a3ee2e86170a"
+                LastKnownName="int"
                 LastKnownLocation="UmlModel.uml" />
             </type_NamedElement>
           </property>
         </ownedAttributesInternal>
-        <ownedOperationsInternal>
-          <operation
-            Id="8fa7ea65-4570-4468-9ebd-6b6c462aaa6c"
-            name="GetTrainingInputs"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="false"
-            concurrency="Sequential"
-            isQuery="false" />
-          <operation
-            Id="a0cbe851-842f-492e-bcf2-f62a104d5ba9"
-            name="GetTestInputs"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="false"
-            concurrency="Sequential"
-            isQuery="false" />
-          <operation
-            Id="63d3e47c-67a6-48c1-9583-39779960c4c5"
-            name="TransformAndApplyFilters"
-            visibility="Protected"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="false"
-            concurrency="Sequential"
-            isQuery="false" />
-        </ownedOperationsInternal>
       </class>
-    </packageHasNamedElement>
-    <packageHasNamedElement>
-      <Interface
-        Id="094582cb-0c41-4843-a282-f561671472f3"
-        name="ISensor&lt;TOutput&gt;"
-        isAbstract="false"
-        isLeaf="false">
-        <generalsInternal>
-          <generalization
-            Id="5b676e6a-7896-4307-bfed-54469303d738"
-            isSubstitutable="false">
-            <interfaceMoniker
-              Id="712b4907-5df5-4c8a-bed5-b099dbe78852"
-              LastKnownName="ILayer"
-              LastKnownLocation="UmlModel.uml" />
-          </generalization>
-        </generalsInternal>
-        <targetEnds>
-          <association
-            Id="f59b6f96-759d-4f0d-a44c-06c108b7b202"
-            isDerived="false"
-            sourceEndRoleName="ISensorLayer"
-            targetEndRoleName=""
-            isLeaf="false"
-            isAbstract="false">
-            <classMoniker
-              Id="88f5f517-6ead-4564-93d1-64ee0751580f"
-              LastKnownName="HtmNetwork&lt;TInput&gt;"
-              LastKnownLocation="UmlModel.uml" />
-            <relationshipOwnedElementsInternal>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="37994260-b343-4e52-970a-3412e5367733"
-                  name="ISensorLayer"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false"
-                  isNavigableOwned="false">
-                  <lowerValueInternal>
-                    <literalString
-                      Id="ad9042cb-d33e-4906-8a48-a235e3b742d6"
-                      name="Lower"
-                      value="n" />
-                  </lowerValueInternal>
-                  <upperValueInternal>
-                    <literalString
-                      Id="bfc7a8dd-4cc1-4eef-8a07-faa68d3f9c76"
-                      name="Upper"
-                      value="n" />
-                  </upperValueInternal>
-                </memberEnd>
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="6392122f-2a87-4f13-b39a-a607b711aac4"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false"
-                  isNavigableOwned="false" />
-              </associationHasOwnedEnds>
-            </relationshipOwnedElementsInternal>
-          </association>
-        </targetEnds>
-      </Interface>
     </packageHasNamedElement>
     <packageHasNamedElement>
       <Interface
@@ -427,7 +181,7 @@
                     <literalString
                       Id="f2e547c9-0518-4535-b5b8-4934cac31aa5"
                       name="Lower"
-                      value="0" />
+                      value="1" />
                   </lowerValueInternal>
                   <upperValueInternal>
                     <literalString
@@ -2428,6 +2182,423 @@
       <undefinedType
         Id="5ad54d94-b12d-4ef9-a25e-c4dc62e13d61"
         name="Array&lt;{ RandomSweep, LeftRightSweep, TopDownSweep }&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="76a713e3-8819-475c-9ac6-37e53d942f36"
+        name="DirectoryInfo" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="fd42b824-c015-417c-8852-5d9ab63409a5"
+        name="List&lt;DirectoryInfo&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="3042a040-a54f-4a88-a631-4ee37efce031"
+        name="Sensor"
+        isAbstract="true"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="808b40e2-bc8e-4ae0-83d5-de1f5bd9bda7"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName=""
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="88f5f517-6ead-4564-93d1-64ee0751580f"
+              LastKnownName="HtmNetwork&lt;TInput&gt;"
+              LastKnownLocation="UmlModel.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="c38cc0c5-8624-4c40-a17e-5218bb39eff3"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="fc538aa9-c9ca-4601-b9ba-fcf1cf815d4a"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="9f2ee219-2109-40ad-b115-e3c463149e64"
+                      name="Upper"
+                      value="1" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="6326bc9c-3bd8-49ae-af35-9e9949e74c00"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="8111a6a7-260e-4312-b463-89def9abe85a"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName=""
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="122e400f-a48c-4841-8bdf-f5345ed6a9c8"
+              LastKnownName="InputIterations"
+              LastKnownLocation="UmlModel.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="326e0b16-4350-48c8-a870-a74a6c8553c8"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Composite"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="6c99e41e-37ae-42a4-ba41-1e7f7ec0147f"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="true">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="6e3f5925-22f5-4164-b8d7-73ad4257b92c"
+                      name="Lower"
+                      value="n" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="3f676735-ffd2-4f84-8459-047e4a581125"
+                      name="Upper"
+                      value="n" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="0767d8c0-be4d-492b-9d3c-96f16ae6400a"
+            name="ExplorationPathMaxIterations"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="f5fdf7d5-4c61-4101-941a-a3ee2e86170a"
+                LastKnownName="int"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="624a6ee3-95fa-4e89-8cf3-88b2214345e7"
+            name="ExplorationPaths"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="c9fbc895-1508-428f-88a6-8e848f5233b8"
+                LastKnownName="List&lt;{ RandomOrientationSweep, LeftRightSweep, TopDownSweep }&gt;"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="ac8aec6a-5f1d-49f2-98e3-9557701f672f"
+            name="ExplorationRandomizerSeed"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="f5fdf7d5-4c61-4101-941a-a3ee2e86170a"
+                LastKnownName="int"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="e8984fc9-bc36-4780-ac01-e717a67bba51"
+            name="ExplorationRandomScalingMax"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="eb090254-7698-44e3-bcfe-d374d99d5754"
+                LastKnownName="double"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="2dd27b7f-69a9-4797-82b0-2a5b08426870"
+            name="ExplorationRandomScalingMin"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="eb090254-7698-44e3-bcfe-d374d99d5754"
+                LastKnownName="double"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="a52fd7d5-55a1-4a37-a830-cc2ecfe7bb3b"
+            name="ExplorationPathUseRandomOrigin"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="1e54acf1-0d02-4896-a606-2e388056f9d4"
+                LastKnownName="bool"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="c690a5e2-bed8-413c-b1b4-8f2de3d6c243"
+            name="TestFolders"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="fd42b824-c015-417c-8852-5d9ab63409a5"
+                LastKnownName="List&lt;DirectoryInfo&gt;"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="536adcdd-0c68-4c47-bf10-40f3fd3a300f"
+            name="TrainingFolder"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="76a713e3-8819-475c-9ac6-37e53d942f36"
+                LastKnownName="DirectoryInfo"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="83f78bd5-6f07-4439-a91a-9e760b7cefe4"
+            name="ExplorationRandomScalingSpeed"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="eb090254-7698-44e3-bcfe-d374d99d5754"
+                LastKnownName="double"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="c68638d6-42c4-4110-80ba-2c24e75d5b38"
+            name="ExplorationPathSpeed"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="f5fdf7d5-4c61-4101-941a-a3ee2e86170a"
+                LastKnownName="int"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="fd7b6141-a3f7-45c5-a3d2-3cee875fde45"
+            name="ExplorationRandomRotationAngleMax"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="eb090254-7698-44e3-bcfe-d374d99d5754"
+                LastKnownName="double"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="46c124c1-ec2f-4dec-913e-10e75478065e"
+            name="ExplorationRandomRotationSpeed"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="eb090254-7698-44e3-bcfe-d374d99d5754"
+                LastKnownName="double"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="351629ce-6fee-48f9-b095-adb566054b76"
+            name="InputFilenameFormat"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="4114563f-dd5c-41a7-acb7-b441622c0e7d"
+                LastKnownName="string"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="c5be3b79-214e-4ffc-8c3c-b85a9dd3e2c2"
+            name="CategoryFolderPattern"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="848cf53c-0df7-4838-af8e-ee89b5a0ce54"
+                LastKnownName="Regex"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="beb4afc9-f0bf-4f97-95b1-9897e96e855a"
+            name="GetTestInputs"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="c4c4dfec-a18c-4678-8bbf-e16fd305aeb4"
+            name="GetTrainingInputs"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="c9fbc895-1508-428f-88a6-8e848f5233b8"
+        name="List&lt;{ RandomOrientationSweep, LeftRightSweep, TopDownSweep }&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="122e400f-a48c-4841-8bdf-f5345ed6a9c8"
+        name="InputIterations"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="4114563f-dd5c-41a7-acb7-b441622c0e7d"
+        name="string" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="848cf53c-0df7-4838-af8e-ee89b5a0ce54"
+        name="Regex" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType

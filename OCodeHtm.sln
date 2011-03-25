@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OCodeHtm", "OCodeHtm\OCodeH
 EndProject
 Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "UmlModel", "UmlModel\UmlModel.modelproj", "{C98913DD-5E51-4965-A471-653D466FC8F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OCodeHtm UnitTests", "OCodeHTM UnitTests\OCodeHtm UnitTests.csproj", "{955DB3E4-66AC-4474-87C7-AEDF9ACB42CA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OCodeHtm Tests", "OCodeHTM UnitTests\OCodeHtm Tests.csproj", "{955DB3E4-66AC-4474-87C7-AEDF9ACB42CA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{54E05998-E912-4D44-A64B-A167A48D7936}"
 	ProjectSection(SolutionItems) = preProject
@@ -16,7 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests + UML", "Tests + UML", "{67C2635A-C636-4EDA-A3B9-8B53C9A3DB17}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Model (Tests+UML)", "Model (Tests+UML)", "{67C2635A-C636-4EDA-A3B9-8B53C9A3DB17}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Numerics", "Numerics\Numerics.csproj", "{B7CAE5F4-A23F-4438-B5BE-41226618B695}"
 EndProject
