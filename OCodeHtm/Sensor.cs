@@ -29,6 +29,7 @@ namespace CnrsUniProv.OCodeHtm
 
             public IEnumerator<TOutput> GetEnumerator()
             {
+                //TODOnow
                 yield return default(TOutput);
             }
 
@@ -37,6 +38,72 @@ namespace CnrsUniProv.OCodeHtm
                 return GetEnumerator();
             }
         }
+        public class Inputs : IEnumerable<InputIterations>
+        {
+            private Sensor<TOutput> Sensor { get; set; }
+            private bool UseTransformations { get; set; }
+
+            private List<DirectoryInfo> TestFolders { get; set; }
+            private DirectoryInfo TrainingFolder { get; set; }
+            private Regex CategoryFolderPattern { get; set; }
+
+            public bool IsTest
+            {
+                get { return TestFolders != null; }
+            }
+
+
+            public Inputs(Sensor<TOutput> sensor, bool useTransformations, List<DirectoryInfo> testFolders)
+            {
+                Sensor = sensor;
+                UseTransformations = useTransformations;
+                
+                TestFolders = testFolders;
+                TrainingFolder = null;
+                CategoryFolderPattern = sensor.CategoryFolderPattern;
+            }
+            public Inputs(Sensor<TOutput> sensor, bool useTransformations, DirectoryInfo trainingFolder)
+            {
+                Sensor = sensor;
+                UseTransformations = useTransformations;
+
+                TrainingFolder = trainingFolder;
+                TestFolders = null;
+                CategoryFolderPattern = sensor.CategoryFolderPattern;
+            }
+
+
+            public IEnumerator<InputIterations> GetEnumerator()
+            {
+                if (IsTest)
+                {
+                    foreach (var testFolder in TestFolders)
+                    {
+                        foreach (var catFolder in testFolder.EnumerateDirectories())
+                        {
+                            foreach (var file in catFolder.GetFiles(Sensor.InputFilenameFormat))
+                                yield return new InputIterations(Sensor, file, UseTransformations, GetCategoryFromFolder(catFolder));
+                        }
+                    }
+                }
+                else
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+            {
+                return GetEnumerator();
+            }
+
+
+
+            private string GetCategoryFromFolder(DirectoryInfo dir)
+            {
+                return CategoryFolderPattern.Match(dir.Name).Groups["cat"].Value;
+            }
+        }
+
 
         public int ExplorationRandomizerSeed { get; private set; }
         private Random randomizer;
@@ -106,24 +173,19 @@ namespace CnrsUniProv.OCodeHtm
             // Default null objects:
             TestFolders = new List<DirectoryInfo>(); 
             InputFilenameFormat = Default.InputFilenameFormat;
+            SetCategoryFolderPattern();
         }
 
 
-        public IEnumerator<TOutput> GetTrainingInputs(bool useTransformations = Default.UseTransformationsForTraining)
+        public Inputs GetTrainingInputs(bool useTransformations = Default.UseTransformationsForTraining)
         {
-            //TODO
-
-            return null;
+            //TODOnow test (with/without transformations/filters)
+            return new Inputs(this, useTransformations, TrainingFolder);
         }
 
-        public IEnumerator<IEnumerable<TOutput>> GetTestInputs(bool useTransformations = Default.DontUseTransformationsForTesting)
+        public Inputs GetTestInputs(bool useTransformations = Default.DontUseTransformationsForTesting)
         {
-            foreach (var catFolder in TrainingFolder.EnumerateDirectories())
-            {
-                foreach (var file in catFolder.GetFiles(InputFilenameFormat))
-                    yield return new InputIterations(this, file, useTransformations, GetCategoryFromFolder(catFolder));
-            }
-            //TODOnow test in BitmapSensorTest
+            return new Inputs(this, useTransformations, TestFolders);
         }
 
 
@@ -139,10 +201,7 @@ namespace CnrsUniProv.OCodeHtm
         {
             CategoryFolderPattern = new Regex(pattern);
         }
-        public string GetCategoryFromFolder(DirectoryInfo dir)
-        {
-            return CategoryFolderPattern.Match(dir.Name).Groups["cat"].Value;
-        }
+        
 
         private void ResetRandomizer()
         {

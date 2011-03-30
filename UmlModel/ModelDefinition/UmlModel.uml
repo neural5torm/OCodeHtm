@@ -22,7 +22,7 @@
       <class
         Id="0c8bbcc6-edb3-448e-ab33-36add90ec2c6"
         name="BitmapPictureSensor"
-        isAbstract="true"
+        isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
         <generalsInternal>
@@ -137,78 +137,6 @@
         isLeaf="false" />
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <Interface
-        Id="55195bd3-7287-4283-b157-c30a5c7ae0e5"
-        name="IClassifierLayer&lt;TInput&gt;"
-        isAbstract="false"
-        isLeaf="false">
-        <generalsInternal>
-          <generalization
-            Id="42adb983-ab02-4530-912b-567dc7fb4e0b"
-            isSubstitutable="false">
-            <interfaceMoniker
-              Id="712b4907-5df5-4c8a-bed5-b099dbe78852"
-              LastKnownName="ILayer"
-              LastKnownLocation="UmlModel.uml" />
-          </generalization>
-        </generalsInternal>
-        <targetEnds>
-          <association
-            Id="c60bbce6-3433-433e-ab4f-f0177a4c2466"
-            isDerived="false"
-            sourceEndRoleName="IClassifierLayer"
-            targetEndRoleName=""
-            isLeaf="false"
-            isAbstract="false">
-            <classMoniker
-              Id="88f5f517-6ead-4564-93d1-64ee0751580f"
-              LastKnownName="HtmNetwork&lt;TInput&gt;"
-              LastKnownLocation="UmlModel.uml" />
-            <relationshipOwnedElementsInternal>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="a501842f-2f32-4d04-a0ca-6aaafebdfa6f"
-                  name="IClassifierLayer"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false"
-                  isNavigableOwned="false">
-                  <lowerValueInternal>
-                    <literalString
-                      Id="f2e547c9-0518-4535-b5b8-4934cac31aa5"
-                      name="Lower"
-                      value="1" />
-                  </lowerValueInternal>
-                  <upperValueInternal>
-                    <literalString
-                      Id="ef12c464-3eeb-4f9a-bec5-92bee1c03ea8"
-                      name="Upper"
-                      value="1" />
-                  </upperValueInternal>
-                </memberEnd>
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="71e7227f-5921-4095-acdc-a4ae0a7c0143"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false"
-                  isNavigableOwned="false" />
-              </associationHasOwnedEnds>
-            </relationshipOwnedElementsInternal>
-          </association>
-        </targetEnds>
-      </Interface>
-    </packageHasNamedElement>
-    <packageHasNamedElement>
       <class
         Id="5a39418a-d8f2-4b63-b262-28208cd00f89"
         name="SpatialLayer"
@@ -321,7 +249,7 @@
             isQuery="false" />
           <operation
             Id="de7efaf2-ccbd-4ee8-95c1-9188b2badeb5"
-            name="AddSensor"
+            name="SetSensor"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -329,7 +257,7 @@
             isQuery="false" />
           <operation
             Id="95549892-18ce-437d-ac2d-a8ca3c376f40"
-            name="AddClassifier"
+            name="SetTopNode"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -339,183 +267,9 @@
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <class
-        Id="68b4a6e3-7a65-47ff-9e06-b6e0caaaa3f5"
-        name="ClassifierLayer"
-        isAbstract="false"
-        isLeaf="false"
-        isActiveClass="false">
-        <suppliersInternal>
-          <interfaceRealization
-            Id="ed52f4f0-fb92-453d-85c6-f96a72a118fd">
-            <interfaceMoniker
-              Id="55195bd3-7287-4283-b157-c30a5c7ae0e5"
-              LastKnownName="IClassifierLayer&lt;TInput&gt;"
-              LastKnownLocation="UmlModel.uml" />
-          </interfaceRealization>
-        </suppliersInternal>
-      </class>
-    </packageHasNamedElement>
-    <packageHasNamedElement>
       <undefinedType
         Id="53fe0537-25dc-49ba-b677-3cfb4f1b0169"
         name="{ Training, Inference }" />
-    </packageHasNamedElement>
-    <packageHasNamedElement>
-      <Interface
-        Id="8c5dd8a4-ca0b-4337-a82f-9c5960561351"
-        name="IClassifierNode"
-        isAbstract="false"
-        isLeaf="false">
-        <targetEnds>
-          <association
-            Id="3fa6eb1b-5b28-4b98-b9f6-474814d372b0"
-            isDerived="false"
-            sourceEndRoleName="IClassifierNode"
-            targetEndRoleName="ClassifierLayer"
-            isLeaf="false"
-            isAbstract="false">
-            <classMoniker
-              Id="68b4a6e3-7a65-47ff-9e06-b6e0caaaa3f5"
-              LastKnownName="ClassifierLayer"
-              LastKnownLocation="UmlModel.uml" />
-            <relationshipOwnedElementsInternal>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="37328c79-0d83-414a-a1ab-37658a1ba065"
-                  name="IClassifierNode"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false"
-                  isNavigableOwned="false">
-                  <lowerValueInternal>
-                    <literalString
-                      Id="44ff458f-432b-496f-a0a0-30b055dee579"
-                      name="Lower"
-                      value="n" />
-                  </lowerValueInternal>
-                  <upperValueInternal>
-                    <literalString
-                      Id="9b9ee432-7e94-4a9f-9136-4aaaefd7bf1d"
-                      name="Upper"
-                      value="n" />
-                  </upperValueInternal>
-                </memberEnd>
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="0457d558-d089-45dd-a9a1-3e317a514056"
-                  name="ClassifierLayer"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false"
-                  isNavigableOwned="false" />
-              </associationHasOwnedEnds>
-            </relationshipOwnedElementsInternal>
-          </association>
-          <association
-            Id="390e25fb-a835-499f-aa48-a4cc8b4b8858"
-            isDerived="false"
-            sourceEndRoleName=""
-            targetEndRoleName=""
-            isLeaf="false"
-            isAbstract="false">
-            <classMoniker
-              Id="065026be-4f5c-4e0d-b497-5622c8e7d543"
-              LastKnownName="OutputWriter&lt;TOutput&gt;"
-              LastKnownLocation="UmlModel.uml" />
-            <relationshipOwnedElementsInternal>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="7c7b237d-a164-4377-bf8b-998c999dcdeb"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false"
-                  isNavigableOwned="false" />
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="4607d650-f466-4b84-80d7-9b37cbce0409"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false"
-                  isNavigableOwned="false">
-                  <lowerValueInternal>
-                    <literalString
-                      Id="e27db771-a9b1-4136-9300-c2668779f4e8"
-                      name="Lower"
-                      value="n" />
-                  </lowerValueInternal>
-                  <upperValueInternal>
-                    <literalString
-                      Id="9a82538e-10e6-438e-98e5-4c7143ce19d6"
-                      name="Upper"
-                      value="n" />
-                  </upperValueInternal>
-                </memberEnd>
-              </associationHasOwnedEnds>
-            </relationshipOwnedElementsInternal>
-          </association>
-        </targetEnds>
-        <ownedOperations>
-          <operation
-            Id="19c0da07-db71-4a2f-9b11-cc7bed9118a2"
-            name="Learn"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="true"
-            concurrency="Sequential"
-            isQuery="false" />
-          <operation
-            Id="6476962f-cbc6-4cf3-9af3-6ea616a0be52"
-            name="Infer"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="true"
-            concurrency="Sequential"
-            isQuery="false" />
-          <operation
-            Id="bda827b2-fdc3-4774-9e06-345f336e983d"
-            name="SendOutput"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="true"
-            concurrency="Sequential"
-            isQuery="false">
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter
-                  Id="4a4c2160-86f9-485d-8b5e-3820198e79e9"
-                  direction="Return"
-                  isUnique="false">
-                  <type_NamedElement>
-                    <undefinedTypeMoniker
-                      Id="ef4b9c3f-6f2c-4da5-9f22-9f846cdd7863"
-                      LastKnownName="event"
-                      LastKnownLocation="UmlModel.uml" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
-        </ownedOperations>
-      </Interface>
     </packageHasNamedElement>
     <packageHasNamedElement>
       <Interface
@@ -1147,15 +901,16 @@
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
-        <suppliersInternal>
-          <interfaceRealization
-            Id="2c49b74e-24f8-4654-a4d7-87e066d5b60a">
-            <interfaceMoniker
-              Id="8c5dd8a4-ca0b-4337-a82f-9c5960561351"
-              LastKnownName="IClassifierNode"
+        <generalsInternal>
+          <generalization
+            Id="47601e71-b0fe-4de3-aa43-c2ce1651b589"
+            isSubstitutable="false">
+            <classMoniker
+              Id="c9c2b723-6e1a-4b77-a929-dd1c4b258f50"
+              LastKnownName="ClassifierNode"
               LastKnownLocation="UmlModel.uml" />
-          </interfaceRealization>
-        </suppliersInternal>
+          </generalization>
+        </generalsInternal>
         <ownedOperationsInternal>
           <operation
             Id="012e0acd-8ac5-4b76-b0e2-23466a76f7e9"
@@ -1174,8 +929,8 @@
             concurrency="Sequential"
             isQuery="false" />
           <operation
-            Id="3a02744e-8bd1-4525-a554-066d6fb13ad2"
-            name="SendOutput"
+            Id="bcb612d9-950b-4f98-addb-4367e4b92b10"
+            name="GetInstanceName"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -1184,19 +939,27 @@
             <ownedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="195d6f89-eb8c-4b6c-8655-548a7d1441d9"
+                  Id="d1de10e6-acb1-4333-8264-25222e32703f"
                   direction="Return"
                   isUnique="false">
                   <type_NamedElement>
                     <undefinedTypeMoniker
-                      Id="ef4b9c3f-6f2c-4da5-9f22-9f846cdd7863"
-                      LastKnownName="event"
+                      Id="4114563f-dd5c-41a7-acb7-b441622c0e7d"
+                      LastKnownName="string"
                       LastKnownLocation="UmlModel.uml" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
+          <operation
+            Id="dfb05bdf-dd36-4356-93e3-532cbab18d2a"
+            name="NotifyWriters"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
         </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
@@ -1692,10 +1455,19 @@
     <packageHasNamedElement>
       <class
         Id="065026be-4f5c-4e0d-b497-5622c8e7d543"
-        name="OutputWriter&lt;TOutput&gt;"
+        name="FileWriter&lt;TOutput&gt;"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
+        <suppliersInternal>
+          <interfaceRealization
+            Id="4c1948ab-c09a-4e56-a5ff-104e21bfe991">
+            <interfaceMoniker
+              Id="4e0c5d43-0969-4ad5-962a-e6e63dc1b8a3"
+              LastKnownName="IWriter"
+              LastKnownLocation="UmlModel.uml" />
+          </interfaceRealization>
+        </suppliersInternal>
         <ownedAttributesInternal>
           <property
             Id="018379cf-ae5e-4e9d-9c31-45ef3a00e9a3"
@@ -1718,7 +1490,31 @@
         </ownedAttributesInternal>
         <ownedOperationsInternal>
           <operation
-            Id="81771e66-f3df-45ac-b9ee-7fcd92f716a9"
+            Id="4fec7fe9-e62c-4de9-9262-ac86dea1f939"
+            name="OutputToString"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="7c583ded-3bba-45c9-9d8e-01fbec686936"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="78947c0c-f0e7-41be-a3f4-ca504b92a9b7"
+                      LastKnownName="delegate&lt;TOutput&gt;"
+                      LastKnownLocation="UmlModel.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="96f235de-fa48-495f-b283-4dce7a2bd4ce"
             name="Write"
             isLeaf="false"
             isStatic="false"
@@ -1728,27 +1524,20 @@
             <ownedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="372fe146-a11c-427c-b12c-232dab121a83"
-                  direction="Return"
-                  isUnique="false">
-                  <type_NamedElement>
-                    <undefinedTypeMoniker
-                      Id="3ff8610f-0ab1-4e2e-b7ee-0ec4e54b0105"
-                      LastKnownName="delegate"
-                      LastKnownLocation="UmlModel.uml" />
-                  </type_NamedElement>
-                </parameter>
+                  Id="cc8908b7-1e45-4b6b-bdb9-b6c0e323430c"
+                  name="message"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="2286d12d-13e5-4471-9021-c52b9cddb46c"
+                  name="from"
+                  direction="In"
+                  isUnique="false" />
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
-          <operation
-            Id="4fec7fe9-e62c-4de9-9262-ac86dea1f939"
-            name="OutputToString"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="false"
-            concurrency="Sequential"
-            isQuery="false" />
         </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
@@ -2253,7 +2042,7 @@
             </relationshipOwnedElementsInternal>
           </association>
           <association
-            Id="8111a6a7-260e-4312-b463-89def9abe85a"
+            Id="8720a8a8-5e43-445c-bd5a-a10746f21eef"
             isDerived="false"
             sourceEndRoleName=""
             targetEndRoleName=""
@@ -2261,40 +2050,41 @@
             isAbstract="false">
             <classMoniker
               Id="122e400f-a48c-4841-8bdf-f5345ed6a9c8"
-              LastKnownName="InputIterations"
+              LastKnownName="Inputs"
               LastKnownLocation="UmlModel.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd
-                  Id="326e0b16-4350-48c8-a870-a74a6c8553c8"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="Composite"
-                  isComposite="false"
-                  isNavigableOwned="false" />
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="6c99e41e-37ae-42a4-ba41-1e7f7ec0147f"
+                  Id="c3dd9653-bbb1-42e3-88fa-66e143f5ad3e"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
                   isDerived="false"
                   isDerivedUnion="false"
                   aggregation="None"
-                  isComposite="true">
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="6e100633-0f23-45f5-9029-a03014a64824"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
                   <lowerValueInternal>
                     <literalString
-                      Id="6e3f5925-22f5-4164-b8d7-73ad4257b92c"
+                      Id="3e895fa8-4a12-4fab-a9ed-a68263e6f866"
                       name="Lower"
                       value="n" />
                   </lowerValueInternal>
                   <upperValueInternal>
                     <literalString
-                      Id="3f676735-ffd2-4f84-8459-047e4a581125"
+                      Id="eabe1a6a-c807-4a69-953c-7f01ddbdb9ea"
                       name="Upper"
                       value="n" />
                   </upperValueInternal>
@@ -2585,10 +2375,63 @@
     <packageHasNamedElement>
       <class
         Id="122e400f-a48c-4841-8bdf-f5345ed6a9c8"
-        name="InputIterations"
+        name="Inputs"
         isAbstract="false"
         isLeaf="false"
-        isActiveClass="false" />
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="de60759e-7229-4e16-9465-e45d497f18f4"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName=""
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="3558c67f-8730-4a91-829d-6c1203acb63c"
+              LastKnownName="InputIterations"
+              LastKnownLocation="UmlModel.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="35a94eb6-18ea-4824-9a77-02e953fef13a"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="4ac28bad-74b2-4724-88e5-082c1f892a1a"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="e73f69b7-eacf-448b-849c-6c7051c03185"
+                      name="Lower"
+                      value="n" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="c49dd9d9-1e25-426a-96fe-b071a1cf12c8"
+                      name="Upper"
+                      value="n" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
       <undefinedType
@@ -2599,6 +2442,319 @@
       <undefinedType
         Id="848cf53c-0df7-4838-af8e-ee89b5a0ce54"
         name="Regex" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="5a9d0f32-51d2-4123-892a-44673442d5ab"
+        name="IWritable"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="0b2a99b9-f489-4ea8-b226-5412adffac0d"
+            isDerived="false"
+            sourceEndRoleName="Observable"
+            targetEndRoleName="Observer"
+            isLeaf="false"
+            isAbstract="false">
+            <interfaceMoniker
+              Id="4e0c5d43-0969-4ad5-962a-e6e63dc1b8a3"
+              LastKnownName="IWriter"
+              LastKnownLocation="UmlModel.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="d946d4a1-9570-4e49-879d-3144b8d78ddc"
+                  name="Observable"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="d6387389-843a-4430-a1c9-2a55fbb7012f"
+                      name="Lower"
+                      value="n" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="c91dd820-e3cf-48b1-9373-fa2161f7d526"
+                      name="Upper"
+                      value="n" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="31b8baa7-84a5-4f59-ac65-7d8ac21e65d8"
+                  name="Observer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributes>
+          <property
+            Id="afe52076-cc06-4348-931d-dc0a93fbbf15"
+            name="Writers"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="f7f0a750-0a01-40a1-92ab-5265d5d93c43"
+                LastKnownName="List&lt;IWriter&gt;"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributes>
+        <ownedOperations>
+          <operation
+            Id="895081bc-345d-461b-b71b-1055f1db6912"
+            name="GetInstanceName"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="77e872cc-a6b3-4a2a-b705-e38014115717"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="4114563f-dd5c-41a7-acb7-b441622c0e7d"
+                      LastKnownName="string"
+                      LastKnownLocation="UmlModel.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="2a7dc51c-33ba-4dc2-9c25-8c1b1c288690"
+            name="NotifyWriters"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperations>
+      </Interface>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="59c63212-14b4-4baf-b512-1218be695e6e"
+        name="IWriter" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="4e0c5d43-0969-4ad5-962a-e6e63dc1b8a3"
+        name="IWriter"
+        isAbstract="false"
+        isLeaf="false">
+        <ownedOperations>
+          <operation
+            Id="abdc74f5-f8c5-4543-a223-94bef3fcc5bb"
+            name="Write"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="7b15589d-ca27-4f84-8afa-108caf7174db"
+                  name="message"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="e33e64e0-4016-4e45-8e67-2bf1e668d25d"
+                  name="from"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="f7f0a750-0a01-40a1-92ab-5265d5d93c43"
+        name="List&lt;IWriter&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="78947c0c-f0e7-41be-a3f4-ca504b92a9b7"
+        name="delegate&lt;TOutput&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="c9c2b723-6e1a-4b77-a929-dd1c4b258f50"
+        name="ClassifierNode"
+        isAbstract="true"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <interfaceRealization
+            Id="8fa6799d-0fca-487e-8937-23300b573b03">
+            <interfaceMoniker
+              Id="5a9d0f32-51d2-4123-892a-44673442d5ab"
+              LastKnownName="IWritable"
+              LastKnownLocation="UmlModel.uml" />
+          </interfaceRealization>
+          <interfaceRealization
+            Id="897bc716-95fd-4a35-8c51-a38ed7551737">
+            <interfaceMoniker
+              Id="c3eed003-b2f1-4819-ac50-09b7ca05d513"
+              LastKnownName="INode"
+              LastKnownLocation="UmlModel.uml" />
+          </interfaceRealization>
+        </suppliersInternal>
+        <targetEnds>
+          <association
+            Id="79796b73-778a-467c-9c77-cc0e6306e0b3"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName=""
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="88f5f517-6ead-4564-93d1-64ee0751580f"
+              LastKnownName="HtmNetwork&lt;TInput&gt;"
+              LastKnownLocation="UmlModel.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="94f58788-1b3a-4937-b66f-c19b2041e1cd"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="e272c021-b745-4617-9e8d-dff5e680a6e8"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedOperationsInternal>
+          <operation
+            Id="825381cd-2565-4a80-a931-3db5c62bbe1e"
+            name="GetInstanceName"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="302018ee-d583-4b68-9c95-22db5268f54c"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="4114563f-dd5c-41a7-acb7-b441622c0e7d"
+                      LastKnownName="string"
+                      LastKnownLocation="UmlModel.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="0c525937-20e7-4132-9ecd-b26987da5b54"
+            name="NotifyWriters"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="29bca39f-e78c-4b14-9c09-6acfee2470da"
+            name="Learn"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="fde8274a-1ae2-4195-b0e0-e9bfe47df171"
+            name="Infer"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="4df7f904-7ea2-4710-8ede-50a9ce860363"
+            name="Clone"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="0cec58c8-3563-4785-9438-899327692761"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="e645a1c5-1ac8-41af-a281-5d0ef879f6e2"
+                      LastKnownName="T"
+                      LastKnownLocation="UmlModel.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="3558c67f-8730-4a91-829d-6c1203acb63c"
+        name="InputIterations"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType
