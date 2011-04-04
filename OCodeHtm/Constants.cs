@@ -23,14 +23,24 @@ namespace CnrsUniProv.OCodeHtm
 
     public enum TemporalLayerType
     {
-        //MaxProp, //SumProp, //TimeBased //TODO
+        //MaxProp, //SumProp, //TimeBased //TODOlater
     }
 
     public enum ExplorationPath
     {
-        RandomSweep4Axes, LeftRightSweep, TopDownSweep,
+        //2D:
+        RandomSweep4Axes, //LeftToRightSweep, TopToBottomSweep, //TODOlater
+        
+        //1D:
+        //BeginningToEndSweep, EndToBeginningSweep,
+        
+        //3D?
     }
-    
+
+    public enum TrainingOrder
+    {
+        Random, Normal, Reverse, RandomAll
+    }
     
     
     
@@ -48,10 +58,13 @@ namespace CnrsUniProv.OCodeHtm
         public const string InputFilenameFormat = "*";
         public const string BitmapInputFilenameFormat = "*.bmp";
 
+        public const int AutomaticSize = 0;
+
         public const int RandomizerSeed = 0;
         public const int NoRandomizerSeed = -1;
 
-        public const ExplorationPath Path = ExplorationPath.RandomSweep4Axes;
+        public const int SinglePresentation = 1;
+
         public const bool PathUseRandomOrigin = true;
         public const int NoMaxIterations = int.MaxValue;
         public const int PathSpeed = 1;

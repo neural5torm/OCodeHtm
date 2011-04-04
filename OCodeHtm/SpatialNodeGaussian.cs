@@ -23,16 +23,20 @@ namespace CnrsUniProv.OCodeHtm
 
 
 
-
+        /// <summary>
+        /// Learn the current input.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <exception cref="HtmRuleException"></exception>
         public override void Learn(SparseMatrix input)
         {
-            // Limitation due to HTM v1.x design
+            // Limitation due to HTM v1.x design (cannot learn after inference without modifying ouput vector structure)
             if (!IsLearning)
                 // TODOlater allow learning after training when using FixedMaxSize nodes
                 throw new HtmRuleException("Cannot learn after any other mode than learning", this);
 
             // Ignore blank input 
-            //TODOlater treat any input with identical values for *all* components as blank?
+            //TODOlater? treat any input with identical values for *all* components as blank?
             //TODOlater use DetectBlanks/DetectBlanksMode properties
             if (input.NonZerosCount == 0)
             { return; }
@@ -40,7 +44,7 @@ namespace CnrsUniProv.OCodeHtm
             // Check matrix size
             if (CoincidencesFrequencies.Count > 0 &&
                 (CoincidencesFrequencies.Keys.First().RowCount != input.RowCount || CoincidencesFrequencies.Keys.First().ColumnCount != input.ColumnCount))
-                throw new HtmRuleException("Cannot learn differently-sized inputs", this);
+                throw new HtmRuleException("Cannot learn varying sized inputs", this);
 
             SparseMatrix existingCoincidence = FindClosestCoincidence(input);
 

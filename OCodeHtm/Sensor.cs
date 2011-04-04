@@ -9,7 +9,7 @@ namespace CnrsUniProv.OCodeHtm
 {
     public abstract class Sensor<TOutput> 
     {
-        public class InputIterations : IEnumerable<TOutput>
+        public class ExplorationIterations : IEnumerable<TOutput>
         {
             public Sensor<TOutput> Sensor { get; private set; }
             
@@ -18,7 +18,7 @@ namespace CnrsUniProv.OCodeHtm
             public string CategoryName { get; private set; }
 
 
-            public InputIterations(Sensor<TOutput> sensor, FileInfo file, bool useTransformations, string category)
+            public ExplorationIterations(Sensor<TOutput> sensor, FileInfo file, bool useTransformations, string category)
             {
                 Sensor = sensor;
                 UseTransformations = useTransformations;
@@ -27,18 +27,20 @@ namespace CnrsUniProv.OCodeHtm
                 CategoryName = category;
             }
 
+
             public IEnumerator<TOutput> GetEnumerator()
             {
-                //TODOnow
-                yield return default(TOutput);
-            }
+                Sensor.SetCurrentInputFile(CurrentFile);
 
+                return Sensor.GetEnumerator(UseTransformations);
+            }
             System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
             {
                 return GetEnumerator();
             }
         }
-        public class Inputs : IEnumerable<InputIterations>
+
+        public class Inputs : IEnumerable<ExplorationIterations>
         {
             private Sensor<TOutput> Sensor { get; set; }
             private bool UseTransformations { get; set; }
@@ -73,30 +75,84 @@ namespace CnrsUniProv.OCodeHtm
             }
 
 
-            public IEnumerator<InputIterations> GetEnumerator()
+            public IEnumerator<ExplorationIterations> GetEnumerator()
             {
                 if (IsTest)
                 {
+                    // Browsing test sets
                     foreach (var testFolder in TestFolders)
                     {
+                        // Browsing category folders
                         foreach (var catFolder in testFolder.EnumerateDirectories())
                         {
+                            // Browsing input files in each category
                             foreach (var file in catFolder.GetFiles(Sensor.InputFilenameFormat))
-                                yield return new InputIterations(Sensor, file, UseTransformations, GetCategoryFromFolder(catFolder));
+                                yield return new ExplorationIterations(Sensor, file, UseTransformations, GetCategoryFromFolder(catFolder));
                         }
                     }
                 }
-                else
+                else // Training
                 {
-                    throw new NotImplementedException();
+                    // Ordering category folders in training set
+                    var orderedCatFolders = TrainingFolder.EnumerateDirectories();
+
+                    switch (Sensor.TrainingOrder)
+                    {
+                        case TrainingOrder.Normal:
+                            orderedCatFolders = orderedCatFolders.OrderBy((dir) => dir.Name);
+                            break;
+                        case TrainingOrder.Random:
+                            orderedCatFolders = orderedCatFolders.OrderBy((dir) => Sensor.RandomGenerator.Next());
+                            break;
+                        case TrainingOrder.Reverse:
+                            orderedCatFolders = orderedCatFolders.OrderByDescending((dir) => dir.Name);
+                            break;
+                        default:
+                            break;
+                    }
+
+                    IEnumerable<DirectoryInfo> catFolders = orderedCatFolders.ToList();
+                    if (Sensor.TrainingPresentationsPerInput > Default.SinglePresentation)
+                    {
+                        for (int times = 0; times < Sensor.TrainingPresentationsPerInput - 1; times++)
+                            catFolders = catFolders.Concat(orderedCatFolders);
+                    }
+
+                    if (Sensor.TrainingOrder == TrainingOrder.RandomAll)
+                        catFolders = catFolders.OrderBy((dir) => Sensor.RandomGenerator.Next());
+
+
+                    // Browsing ordered category folders
+                    foreach (var catFolder in catFolders)
+                    {
+                        // Ordering input files in each category
+                        IEnumerable<FileInfo> inputFiles = catFolder.GetFiles(Sensor.InputFilenameFormat);
+                        switch (Sensor.TrainingOrder)
+                        {
+                            case TrainingOrder.Normal:
+                                inputFiles = inputFiles.OrderBy((file) => file.Name);
+                                break;
+                            case TrainingOrder.Reverse:
+                                inputFiles = inputFiles.OrderByDescending((file) => file.Name);
+                                break;
+                            case TrainingOrder.Random:
+                            case TrainingOrder.RandomAll:
+                                inputFiles = inputFiles.OrderBy((file) => Sensor.RandomGenerator.Next());
+                                break;
+                            default:
+                                break;
+                        }
+
+                        // Browsing ordered input files
+                        foreach (var file in inputFiles)
+                            yield return new ExplorationIterations(Sensor, file, UseTransformations, GetCategoryFromFolder(catFolder));
+                    }
                 }
             }
             System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
             {
                 return GetEnumerator();
             }
-
-
 
             private string GetCategoryFromFolder(DirectoryInfo dir)
             {
@@ -105,16 +161,17 @@ namespace CnrsUniProv.OCodeHtm
         }
 
 
-        public int ExplorationRandomizerSeed { get; private set; }
-        private Random randomizer;
-        private Random Randomizer
+
+        public int ExplorationRandomSeed { get; private set; }
+        private Random randomGenerator;
+        protected Random RandomGenerator
         {
             get
             {
-                if (randomizer == null)
-                    randomizer = ExplorationRandomizerSeed >= 0 ? new Random(ExplorationRandomizerSeed) : new Random();
+                if (randomGenerator == null)
+                    randomGenerator = ExplorationRandomSeed >= 0 ? new Random(ExplorationRandomSeed) : new Random();
 
-                return randomizer;
+                return randomGenerator;
             }
         }
 
@@ -139,9 +196,12 @@ namespace CnrsUniProv.OCodeHtm
         /// Determines change of scale between two consecutive iterations, based on (ScalingMax - ScalingMin) range.
         /// Value between 0.0 and 1.0.
         /// </summary>
-        public double ExplorationScalingSpeed { get; set; } 
+        public double ExplorationScalingSpeed { get; set; }
 
+        public int TrainingPresentationsPerInput { get; private set; }
+        public TrainingOrder TrainingOrder { get; private set; }
 
+        // TODO make List of DirectoryInfo TrainingFolders
         public DirectoryInfo TrainingFolder { get; private set; }
         public List<DirectoryInfo> TestFolders { get; private set; }
 
@@ -151,24 +211,28 @@ namespace CnrsUniProv.OCodeHtm
 
 
 
-        public Sensor(int randomizerSeed, ExplorationPath[] explorationModes, uint maxIterations, uint pathSpeed, bool useRandomOrigin,
+        public Sensor(int randomizerSeed, int trainingPresentations, TrainingOrder trainingOrder,
+            ExplorationPath[] explorationModes, uint maxIterations, uint pathSpeed, bool useRandomOrigin,
             double rotationAngleMaxDegrees = Default.NoRandomRotationAngle, double rotationSpeed = Default.NoRandomRotationSpeed,
             double scalingMin = Default.NoRandomScalingFactor, double scalingMax = Default.NoRandomScalingFactor, double scalingSpeed = Default.NoRandomScalingSpeed)
         {
-            ExplorationRandomizerSeed = randomizerSeed;
-            
+            ExplorationRandomSeed = randomizerSeed;
+
+            TrainingPresentationsPerInput = trainingPresentations;
+            TrainingOrder = trainingOrder;
+
             ExplorationPaths = explorationModes.ToList();
             ExplorationPathMaxIterations = (int)maxIterations;
             ExplorationPathUseRandomOrigin = useRandomOrigin;
             ExplorationPathSpeed = (int)pathSpeed;
 
-            //TODOlater use rotation and scaling transformations
-            ExplorationRandomRotationMaxAngle = Math.Abs(rotationAngleMaxDegrees);
-            ExplorationRandomRotationSpeed = rotationSpeed;
+            ////TODOlater use rotation and scaling transformations
+            //ExplorationRandomRotationMaxAngle = Math.Abs(rotationAngleMaxDegrees);
+            //ExplorationRandomRotationSpeed = rotationSpeed;
 
-            ExplorationScalingMin = Math.Abs(scalingMin);
-            ExplorationScalingMax = Math.Abs(scalingMax);
-            ExplorationScalingSpeed = scalingSpeed;
+            //ExplorationScalingMin = Math.Abs(scalingMin);
+            //ExplorationScalingMax = Math.Abs(scalingMax);
+            //ExplorationScalingSpeed = scalingSpeed;
             
             // Default null objects:
             TestFolders = new List<DirectoryInfo>(); 
@@ -177,9 +241,9 @@ namespace CnrsUniProv.OCodeHtm
         }
 
 
+
         public Inputs GetTrainingInputs(bool useTransformations = Default.UseTransformationsForTraining)
         {
-            //TODOnow test (with/without transformations/filters)
             return new Inputs(this, useTransformations, TrainingFolder);
         }
 
@@ -189,27 +253,33 @@ namespace CnrsUniProv.OCodeHtm
         }
 
 
+        protected abstract void SetCurrentInputFile(FileInfo file);
+
+        protected abstract IEnumerator<TOutput> GetEnumerator(bool useTransformations);
+
+
+
+        /// <summary>
+        /// Resets the random number generator to the ExplorationRandomSeed. Should be called between each layer training if the seed is fixed. 
+        /// </summary>
+        private void ResetRandomGenerator()
+        {
+            randomGenerator = null;
+        }
+        
         public void SetTrainingFolder(string path = Default.TrainingFolderString)
         {
             TrainingFolder = new DirectoryInfo(path);
         }
+
         public void AddTestFolder(string path = Default.TestFolderString)
         {
             TestFolders.Add(new DirectoryInfo(path));
         }
+
         public void SetCategoryFolderPattern(string pattern = Default.CategoryFolderPattern)
         {
             CategoryFolderPattern = new Regex(pattern);
         }
-        
-
-        private void ResetRandomizer()
-        {
-            randomizer = null; 
-        }
-
-        protected abstract void SetCurrentInputFile(FileInfo file);
-        protected abstract TOutput GetNextIteration(bool useTransformations);
-        protected abstract TOutput FilterInput(TOutput input);
     }
 }
