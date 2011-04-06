@@ -12,13 +12,13 @@ namespace OCodeHTM_UnitTests
     [TestClass]
     public class BitmapPictureSensorTest
     {
-        readonly string InputPath = Path.Combine("O:", "clean");
-        const int InputSetSize = 26; 
+        readonly string TrainingSetPath = Path.Combine("O:", "clean");
+        const int TrainingSetSize = 26; 
 
         [TestMethod]
         public void InputFilesCanBeFound()
         {
-            var dir = new DirectoryInfo(Path.Combine(InputPath, "a"));
+            var dir = new DirectoryInfo(Path.Combine(TrainingSetPath, "a"));
 
             var nbFiles = dir.GetFiles("*.bmp").Length;
 
@@ -30,7 +30,7 @@ namespace OCodeHTM_UnitTests
         public void CanGetTestInputsWithNormalOrder()
         {
             var sensor = new BitmapPictureSensor(Default.AutomaticSize, Default.AutomaticSize, 0, 1, TrainingOrder.Normal);
-            sensor.AddTestFolder(InputPath);
+            sensor.AddTestFolder(TrainingSetPath);
             var nbInputs = 0;
 
 
@@ -46,14 +46,14 @@ namespace OCodeHTM_UnitTests
                 }
             }
 
-            Assert.AreEqual(InputSetSize, nbInputs);
+            Assert.AreEqual(TrainingSetSize, nbInputs);
         }
 
         [TestMethod]
         public void CanGetTestInputsWithRandomOrderSameAsNormal()
         {
             var sensor = new BitmapPictureSensor(Default.AutomaticSize, Default.AutomaticSize, 0, 1, TrainingOrder.Normal);
-            sensor.AddTestFolder(InputPath);
+            sensor.AddTestFolder(TrainingSetPath);
             var nbInputs = 0;
             var categories = new List<string>();
 
@@ -70,13 +70,13 @@ namespace OCodeHTM_UnitTests
                 }
             }
 
-            Assert.AreEqual(InputSetSize, nbInputs);
+            Assert.AreEqual(TrainingSetSize, nbInputs);
 
 
             // Compare with normal order sequence
             var normalCategories = new List<string>();
             var normalSensor = new BitmapPictureSensor(Default.AutomaticSize, Default.AutomaticSize, 0, 1, TrainingOrder.Normal);
-            normalSensor.AddTestFolder(InputPath);
+            normalSensor.AddTestFolder(TrainingSetPath);
             foreach (var input in normalSensor.GetTestInputs(false))
             {
                 normalCategories.Add(input.CategoryName);
@@ -91,7 +91,7 @@ namespace OCodeHTM_UnitTests
         {
             int nbRepetitions = 2;
             var sensor = new BitmapPictureSensor(Default.AutomaticSize, Default.AutomaticSize, 0, nbRepetitions, TrainingOrder.Normal);
-            sensor.SetTrainingFolder(InputPath);
+            sensor.SetTrainingFolder(TrainingSetPath);
             var nbInputs = 0;
 
 
@@ -106,7 +106,7 @@ namespace OCodeHTM_UnitTests
                 }
             }
 
-            Assert.AreEqual(nbRepetitions * InputSetSize, nbInputs);
+            Assert.AreEqual(nbRepetitions * TrainingSetSize, nbInputs);
         }
 
 
@@ -115,7 +115,7 @@ namespace OCodeHTM_UnitTests
         {
             int nbRepetitions = 2;
             var sensor = new BitmapPictureSensor(Default.AutomaticSize, Default.AutomaticSize, 0, nbRepetitions, TrainingOrder.Random);
-            sensor.SetTrainingFolder(InputPath);
+            sensor.SetTrainingFolder(TrainingSetPath);
             var nbInputs = 0;
             var categories = new List<string>();
 
@@ -132,7 +132,7 @@ namespace OCodeHTM_UnitTests
                 }
             }
 
-            Assert.AreEqual(nbRepetitions * InputSetSize, nbInputs);
+            Assert.AreEqual(nbRepetitions * TrainingSetSize, nbInputs);
 
 
             // Compare with normal order sequence
@@ -153,7 +153,7 @@ namespace OCodeHTM_UnitTests
         {
             int nbRepetitions = 2;
             var sensor = new BitmapPictureSensor(Default.AutomaticSize, Default.AutomaticSize, 0, nbRepetitions, TrainingOrder.RandomAll);
-            sensor.SetTrainingFolder(InputPath);
+            sensor.SetTrainingFolder(TrainingSetPath);
             var nbInputs = 0;
             var categories = new List<string>();
 
@@ -171,7 +171,7 @@ namespace OCodeHTM_UnitTests
                 }
             }
 
-            Assert.AreEqual(nbRepetitions * InputSetSize, nbInputs);
+            Assert.AreEqual(nbRepetitions * TrainingSetSize, nbInputs);
 
 
             // Compare with normal order sequence
@@ -196,7 +196,7 @@ namespace OCodeHTM_UnitTests
         {
             int nbRepetitions = 2;
             var sensor = new BitmapPictureSensor(Default.AutomaticSize, Default.AutomaticSize, Default.RandomizerSeed, nbRepetitions, TrainingOrder.Random);
-            sensor.SetTrainingFolder(InputPath);
+            sensor.SetTrainingFolder(TrainingSetPath);
             var nbInputs = 0;
             var categories = new List<string>();
 
@@ -214,7 +214,7 @@ namespace OCodeHTM_UnitTests
                 }
             }
 
-            Assert.AreEqual(nbRepetitions * InputSetSize, nbInputs);
+            Assert.AreEqual(nbRepetitions * TrainingSetSize, nbInputs);
 
 
             // Compare with normal order sequence
@@ -233,6 +233,29 @@ namespace OCodeHTM_UnitTests
             Assert.IsTrue(categories.SequenceEqual(controlCategories));
         }
 
-        //TODO tests with transformations &| filters
+        [TestMethod]
+        public void CanGetTrainingInputsWithTransformationsNoFiltersInNormalOrder()
+        {
+            
+            var sensor = new BitmapPictureSensor();
+            sensor.SetTrainingFolder(TrainingSetPath);
+            var nbInputs = 0;
+
+
+            foreach (var input in sensor.GetTrainingInputs(true))
+            {
+                Assert.IsNotNull(input.CurrentFile);
+                Assert.IsFalse(string.IsNullOrWhiteSpace(input.CategoryName));
+
+                foreach (var iteration in input)
+                {
+                    nbInputs++;
+                }
+            }
+
+            Assert.IsTrue(nbInputs > TrainingSetSize);
+        }
+
+        //TODO tests with filters(&transformations)
     }
 }

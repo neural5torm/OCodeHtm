@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml;
+using System.Diagnostics;
 
 namespace CnrsUniProv.OCodeHtm
-{/*
+{
     class Temp
     {
+        
+        /*
         void main()
         {
             var net = new HtmNetwork();
@@ -59,6 +63,6 @@ namespace CnrsUniProv.OCodeHtm
                     net.Classifier.Learn(output, cat);
                 }
             }
-        }
-    }*/
+        }*/
+    }
 }

@@ -126,7 +126,270 @@
                 LastKnownLocation="UmlModel.uml" />
             </type_NamedElement>
           </property>
+          <property
+            Id="17306581-392f-4d17-bcbf-50ea6a280b7e"
+            name="CurrentPosV"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="f5fdf7d5-4c61-4101-941a-a3ee2e86170a"
+                LastKnownName="int"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="2df73cbd-8ad0-40cd-8414-bdc50569d2f6"
+            name="CurrentPosH"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="f5fdf7d5-4c61-4101-941a-a3ee2e86170a"
+                LastKnownName="int"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="ecf0ae4e-0969-4fa6-ad2e-ccfd3c2f547e"
+            name="CurrentPathDeltaV"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="f5fdf7d5-4c61-4101-941a-a3ee2e86170a"
+                LastKnownName="int"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="70ea644d-9f6a-4924-8214-ce3afad1c32d"
+            name="CurrentPathDeltaH"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="f5fdf7d5-4c61-4101-941a-a3ee2e86170a"
+                LastKnownName="int"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="ce630450-bc99-4298-95ef-270328e0d159"
+            name="OriginalImage"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="dac84a52-4445-4b40-a83a-87291b20204b"
+                LastKnownName="Bitmap"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="1023aee4-fc46-44e4-b8a9-c4664712636f"
+            name="CurrentInputFile"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="e830efe0-a098-40d0-a8d8-96723ee1f02a"
+                LastKnownName="FileInfo"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="0939c7f1-d63a-4470-8da9-7c5037443920"
+            name="CurrentPath"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="f7c072f0-97bc-4ee8-885f-b8bc1c130160"
+                LastKnownName="ExplorationPath"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="1737342a-3dc6-4699-a2cf-80c27af465ee"
+            name="IsOutsideField"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="1e54acf1-0d02-4896-a606-2e388056f9d4"
+                LastKnownName="bool"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
         </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="aa589b6e-e6c4-4fef-844e-ff662b5c17ba"
+            name="SetCurrentInputFile"
+            visibility="Protected"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="646440a4-715b-4a16-8aed-630327f1c43d"
+                  name="file"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="49d05212-e2e1-46b0-b493-c157a5b6beef"
+            name="GetEnumerator"
+            visibility="Protected"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="c2e99116-ebca-49a4-bec1-3f59319f04fd"
+                  name="useTransformations"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="f5fbc953-b56f-42bb-b26c-04c364e85779"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="70f857f3-3280-4e50-a17d-9c160930b2d4"
+                      LastKnownName="IEnumerator&lt;SparseMatrix&gt;"
+                      LastKnownLocation="UmlModel.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="ad2b8473-4634-4876-8483-261c54c1f9cf"
+            name="FilterInput"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="4e5f3770-9cce-4de3-9445-8e95078f21c0"
+                  name="input"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="f7d0f5ce-f6a7-4486-8332-a3c66d196dd7"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="43f0311f-1804-4ecc-8852-e5c9ed74dcc0"
+                      LastKnownName="SparseMatrix"
+                      LastKnownLocation="UmlModel.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="dd990d14-abbc-4d80-bf09-c448ed9c418e"
+            name="InitPathDirection"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="547f739c-28a2-4ddf-9ad4-ff58eca37dd3"
+            name="GetNextTransformedInput"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="736a5746-194e-4dbc-b4e0-7de5694cb09e"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="43f0311f-1804-4ecc-8852-e5c9ed74dcc0"
+                      LastKnownName="SparseMatrix"
+                      LastKnownLocation="UmlModel.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -2176,8 +2439,8 @@
             isComposite="false">
             <type_NamedElement>
               <undefinedTypeMoniker
-                Id="eb090254-7698-44e3-bcfe-d374d99d5754"
-                LastKnownName="double"
+                Id="c4e30149-8792-47ff-b260-b7cae0ff15db"
+                LastKnownName="float"
                 LastKnownLocation="UmlModel.uml" />
             </type_NamedElement>
           </property>
@@ -2194,8 +2457,8 @@
             isComposite="false">
             <type_NamedElement>
               <undefinedTypeMoniker
-                Id="eb090254-7698-44e3-bcfe-d374d99d5754"
-                LastKnownName="double"
+                Id="c4e30149-8792-47ff-b260-b7cae0ff15db"
+                LastKnownName="float"
                 LastKnownLocation="UmlModel.uml" />
             </type_NamedElement>
           </property>
@@ -2266,8 +2529,8 @@
             isComposite="false">
             <type_NamedElement>
               <undefinedTypeMoniker
-                Id="eb090254-7698-44e3-bcfe-d374d99d5754"
-                LastKnownName="double"
+                Id="c4e30149-8792-47ff-b260-b7cae0ff15db"
+                LastKnownName="float"
                 LastKnownLocation="UmlModel.uml" />
             </type_NamedElement>
           </property>
@@ -2302,8 +2565,8 @@
             isComposite="false">
             <type_NamedElement>
               <undefinedTypeMoniker
-                Id="eb090254-7698-44e3-bcfe-d374d99d5754"
-                LastKnownName="double"
+                Id="c4e30149-8792-47ff-b260-b7cae0ff15db"
+                LastKnownName="float"
                 LastKnownLocation="UmlModel.uml" />
             </type_NamedElement>
           </property>
@@ -2320,8 +2583,8 @@
             isComposite="false">
             <type_NamedElement>
               <undefinedTypeMoniker
-                Id="eb090254-7698-44e3-bcfe-d374d99d5754"
-                LastKnownName="double"
+                Id="c4e30149-8792-47ff-b260-b7cae0ff15db"
+                LastKnownName="float"
                 LastKnownLocation="UmlModel.uml" />
             </type_NamedElement>
           </property>
@@ -2950,6 +3213,21 @@
       <undefinedType
         Id="f0bcdecf-7f32-4ef3-a18c-3c1ff09aeaaa"
         name="{ Normal, Random, RandomAll, Reverse }" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="70f857f3-3280-4e50-a17d-9c160930b2d4"
+        name="IEnumerator&lt;SparseMatrix&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="f7c072f0-97bc-4ee8-885f-b8bc1c130160"
+        name="ExplorationPath" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="c4e30149-8792-47ff-b260-b7cae0ff15db"
+        name="float" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType

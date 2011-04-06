@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
-using MathNet.Numerics.LinearAlgebra.Double;
 using System.IO;
+using D2D = System.Drawing.Drawing2D;
+
+using MathNet.Numerics.LinearAlgebra.Double;
 using CnrsUniProv.OCodeHtm.Exceptions;
 
 namespace CnrsUniProv.OCodeHtm
 {
     public class BitmapPictureSensor : Sensor<SparseMatrix>
     {
+        public const double MAX_VALUE = 255.0;
+
         private int height;
         public int Height
         {
@@ -20,11 +24,11 @@ namespace CnrsUniProv.OCodeHtm
                 {
                     try
                     {
-                        if (CurrentInputFile == null)
+                        if (CurrentInputFile == null || OriginalImage == null)
                             throw new Exception("No current input file");
 
-                        height = originalImage.Height;
-                        width = originalImage.Width;
+                        height = OriginalImage.Height;
+                        width = OriginalImage.Width;
                     }
                     catch (Exception e)
                     {
@@ -62,29 +66,35 @@ namespace CnrsUniProv.OCodeHtm
 
         public FileInfo CurrentInputFile { get; private set; }
 
-        private Bitmap originalImage;
-        public Bitmap OriginalImage
-        {
-            get { return new Bitmap(originalImage); }
-            private set { originalImage = value; }
-        }
+        public Bitmap OriginalImage { get; set; }
 
         public int CurrentPosV { get; private set; }
         public int CurrentPosH { get; private set; }
 
+        private ExplorationPath CurrentPath { get; set;}
+
         public int CurrentPathDeltaV { get; private set; }
         public int CurrentPathDeltaH { get; private set; }
+
+        public bool IsOutsideField
+        {
+            get
+            {
+                return CurrentPosH < -Width || CurrentPosH > Width
+                    || CurrentPosV < -Height || CurrentPosV > Height;
+            }
+        }
         
 
-        public BitmapPictureSensor(params ExplorationPath[] explorationPaths)
-            : this(Default.AutomaticSize, Default.AutomaticSize, Default.RandomizerSeed, Default.SinglePresentation, TrainingOrder.Normal, Default.NoMaxIterations, Default.PathSpeed, Default.PathUseRandomOrigin,
-                    explorationPaths)
-        { }
+        //public BitmapPictureSensor(params ExplorationPath[] explorationPaths)
+        //    : this(Default.AutomaticSize, Default.AutomaticSize, Default.RandomizerSeed, Default.SinglePresentation, TrainingOrder.Normal, Default.NoMaxIterations, Default.PathSpeed, Default.PathUseRandomOrigin,
+        //            explorationPaths)
+        //{ }
 
 
         public BitmapPictureSensor(uint height = Default.AutomaticSize, uint width = Default.AutomaticSize, 
             int randomizerSeed = Default.RandomizerSeed, int presentationsPerInput = Default.SinglePresentation, TrainingOrder trainingOrder = TrainingOrder.Normal,
-            uint maxIterations = Default.NoMaxIterations, uint pathSpeed = Default.PathSpeed, bool useRandomOrigin = Default.PathUseRandomOrigin, //TODOlater use enum {Center,Random,RandomOutsideField?} for origins
+            uint maxIterations = Default.NoMaxIterations, uint pathSpeed = Default.PathSpeed, bool useRandomOrigin = Default.PathUseRandomOrigin, //TODOlater use enum {Center,Left,RandomOutsideSensor?,Random} for origins
             params ExplorationPath[] explorationPaths)
             : base(randomizerSeed, presentationsPerInput, trainingOrder, explorationPaths, maxIterations, pathSpeed, useRandomOrigin)
         {
@@ -109,47 +119,133 @@ namespace CnrsUniProv.OCodeHtm
         protected override void SetCurrentInputFile(FileInfo file)
         {
             CurrentInputFile = file;
+
             OriginalImage = new Bitmap(file.FullName);
-            
-            //TODOnow
-            if (ExplorationPathUseRandomOrigin)
+
+            // Initialize origin (by default, leave the input in the center of the sensor)
+            if (ExplorationPathUseRandomOrigin) 
             {
-               // ChooseRandomOrigin();
-            }
-            
-            // ChooseRandomPathDelta();
-
-
-           
-
+                CurrentPosH = RandomGenerator.Next(2 * Width + 1) - Width;
+                CurrentPosV = RandomGenerator.Next(2 * Height + 1) - Height;
+            }        
         }
+
+       
 
         protected override IEnumerator<SparseMatrix> GetEnumerator(bool useTransformations)
         {
-            SparseMatrix input = new SparseMatrix(5);//TODO
-
             if (!useTransformations)
             {
-                yield return FilterInput(input);
+                yield return FilterInput(GetNextTransformedInput());
             }
             else
-                while (true)
+                foreach (var path in ExplorationPaths)
                 {
-                    //TODO transformations
+                    CurrentPath = path;
+                    InitPathDirection();
 
+                    for (int iteration = 0; iteration < ExplorationPathMaxIterations; iteration++)
+                    {
+                        if (IsOutsideField)
+                            break;
 
-                    //input.IndexedEnumerator
-
-                    yield return FilterInput(input);
+                        var input = GetNextTransformedInput();
+                        yield return FilterInput(input);
+                    }
                 }
-
-            yield break;
         }
 
-        protected SparseMatrix FilterInput(SparseMatrix input)
+        
+
+        private SparseMatrix GetNextTransformedInput()
         {
-            //TODO (add filters)
+            var image = new Bitmap(Width, Height);
+            var graphics = Graphics.FromImage(image);
+            
+            var transformMatrix = new D2D.Matrix();            
+            transformMatrix.RotateAt(ExplorationRandomRotationMaxAngle, new Point(Width / 2, Height / 2), D2D.MatrixOrder.Append);
+            transformMatrix.Scale(ExplorationScalingMax, ExplorationScalingMax, D2D.MatrixOrder.Append);
+            transformMatrix.Translate(CurrentPathDeltaH, CurrentPathDeltaV, D2D.MatrixOrder.Append);
+
+            var graphicsPath = new D2D.GraphicsPath();
+            graphicsPath.AddPolygon(new Point[] { new Point(0, 0), new Point(Width, 0), new Point(0, Height) });
+            graphicsPath.Transform(transformMatrix);
+            
+            graphics.DrawImage(OriginalImage, graphicsPath.PathPoints);
+            // TODOnow notify writers of the resulting bitmap 
+
+            var input = new SparseMatrix(Height, Width);
+            for (int i = 0; i < input.ColumnCount; i++)
+            {
+                for (int j = 0; j < input.RowCount; j++)
+                {
+                    if (image.GetPixel(i, j).GetBrightness() > 0)
+                    { input.At(i, j, MAX_VALUE); }
+                }
+            }
+
+            // Increment transformation params:
+            // Translation
+            CurrentPosH += CurrentPathDeltaH;
+            CurrentPosV += CurrentPathDeltaV;
+
+            // Rotation
+            // Scaling
+
             return input;
         }
+
+        private SparseMatrix FilterInput(SparseMatrix input)
+        {
+            //TODO add filters
+            return input;
+        }
+
+
+        
+        private void InitPathDirection()
+        {
+            // Path direction (translation)
+            switch (CurrentPath)
+            {
+                case ExplorationPath.RandomSweep4Axes:
+                    CurrentPathDeltaH = RandomGenerator.Next(3) - 1;
+                    CurrentPathDeltaV = RandomGenerator.Next(3) - 1;
+                    // Check
+                    if (CurrentPathDeltaH == 0 && CurrentPathDeltaV == 0)
+                        switch (RandomGenerator.Next(3))
+                        {
+                            case 0:
+                                CurrentPathDeltaH = RandomGenerator.Next(2) > 0 ? -1 : 1;
+                                break;
+                            case 1:
+                                CurrentPathDeltaV = RandomGenerator.Next(2) > 0 ? -1 : 1;
+                                break;
+                            default:
+                                CurrentPathDeltaH = RandomGenerator.Next(2) > 0 ? -1 : 1;
+                                CurrentPathDeltaV = RandomGenerator.Next(2) > 0 ? -1 : 1;
+                                break;
+                        }
+                    break;
+                case ExplorationPath.LeftToRightSweep:
+                    CurrentPathDeltaH = 1;
+                    CurrentPathDeltaV = 0;
+                    break;
+                case ExplorationPath.TopToBottomSweep:
+                    CurrentPathDeltaH = 0;
+                    CurrentPathDeltaV = 1;
+                    break;
+                default:
+                    break;
+            }
+            
+
+            CurrentPathDeltaH *= ExplorationPathSpeed;
+            CurrentPathDeltaV *= ExplorationPathSpeed;
+
+            // Rotation
+            // Scaling
+        }
+
     }
 }

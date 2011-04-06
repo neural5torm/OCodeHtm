@@ -185,18 +185,18 @@ namespace CnrsUniProv.OCodeHtm
         public int ExplorationPathSpeed { get; set; }
 
         
-        public double ExplorationRandomRotationMaxAngle { get; private set; }
+        public float ExplorationRandomRotationMaxAngle { get; private set; }
         /// <summary>
         /// Determines angle delta between two consecutive rotated iterations.
         /// </summary>
-        public double ExplorationRandomRotationSpeed { get; private set; }
-        public double ExplorationScalingMin { get; private set; }
-        public double ExplorationScalingMax { get; private set; }
+        public float ExplorationRandomRotationSpeed { get; private set; }
+        public float ExplorationScalingMin { get; private set; }
+        public float ExplorationScalingMax { get; private set; }
         /// <summary>
         /// Determines change of scale between two consecutive iterations, based on (ScalingMax - ScalingMin) range.
         /// Value between 0.0 and 1.0.
         /// </summary>
-        public double ExplorationScalingSpeed { get; set; }
+        public float ExplorationScalingSpeed { get; set; }
 
         public int TrainingPresentationsPerInput { get; private set; }
         public TrainingOrder TrainingOrder { get; private set; }
@@ -213,8 +213,8 @@ namespace CnrsUniProv.OCodeHtm
 
         public Sensor(int randomizerSeed, int trainingPresentations, TrainingOrder trainingOrder,
             ExplorationPath[] explorationModes, uint maxIterations, uint pathSpeed, bool useRandomOrigin,
-            double rotationAngleMaxDegrees = Default.NoRandomRotationAngle, double rotationSpeed = Default.NoRandomRotationSpeed,
-            double scalingMin = Default.NoRandomScalingFactor, double scalingMax = Default.NoRandomScalingFactor, double scalingSpeed = Default.NoRandomScalingSpeed)
+            float rotationAngleMaxDegrees = Default.NoRandomRotationAngle, float rotationSpeed = Default.NoRandomRotationSpeed,
+            float scalingMin = Default.NoRandomScalingFactor, float scalingMax = Default.NoRandomScalingFactor, float scalingSpeed = Default.NoRandomScalingSpeed)
         {
             ExplorationRandomSeed = randomizerSeed;
 

@@ -29,7 +29,7 @@ namespace CnrsUniProv.OCodeHtm
     public enum ExplorationPath
     {
         //2D:
-        RandomSweep4Axes, //LeftToRightSweep, TopToBottomSweep, //TODOlater
+        RandomSweep4Axes, LeftToRightSweep, TopToBottomSweep,
         
         //1D:
         //BeginningToEndSweep, EndToBeginningSweep,
@@ -69,11 +69,11 @@ namespace CnrsUniProv.OCodeHtm
         public const int NoMaxIterations = int.MaxValue;
         public const int PathSpeed = 1;
 
-        public const double NoRandomRotationAngle = 0.0;
-        public const double NoRandomRotationSpeed = 0.0;
+        public const float NoRandomRotationAngle = 0.0f;
+        public const float NoRandomRotationSpeed = 0.0f;
 
-        public const double NoRandomScalingFactor = 1.0;
-        public const double NoRandomScalingSpeed = 0.0;
+        public const float NoRandomScalingFactor = 1.0f;
+        public const float NoRandomScalingSpeed = 0.0f;
 
         public const bool UseTransformationsForTraining = true;
         public const bool DontUseTransformationsForTesting = false;
