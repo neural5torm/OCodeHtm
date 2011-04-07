@@ -8,10 +8,11 @@ using D2D = System.Drawing.Drawing2D;
 
 using MathNet.Numerics.LinearAlgebra.Double;
 using CnrsUniProv.OCodeHtm.Exceptions;
+using CnrsUniProv.OCodeHtm.Interfaces;
 
 namespace CnrsUniProv.OCodeHtm
 {
-    public class BitmapPictureSensor : Sensor<SparseMatrix>
+    public class BitmapPictureSensor : Sensor<SparseMatrix>, IObservableOutput<Bitmap>
     {
         public const double MAX_VALUE = 255.0;
 
@@ -76,6 +77,11 @@ namespace CnrsUniProv.OCodeHtm
         public int CurrentPathDeltaV { get; private set; }
         public int CurrentPathDeltaH { get; private set; }
 
+
+        /// <summary>
+        /// Determines if the current input is shown outside of the area surrounding the sensor 
+        /// (its top left origin should remain between -Width&lt;=X&lt;=Width and -Height&lt;=Y&lt;=Height)
+        /// </summary>
         public bool IsOutsideField
         {
             get
@@ -85,11 +91,6 @@ namespace CnrsUniProv.OCodeHtm
             }
         }
         
-
-        //public BitmapPictureSensor(params ExplorationPath[] explorationPaths)
-        //    : this(Default.AutomaticSize, Default.AutomaticSize, Default.RandomizerSeed, Default.SinglePresentation, TrainingOrder.Normal, Default.NoMaxIterations, Default.PathSpeed, Default.PathUseRandomOrigin,
-        //            explorationPaths)
-        //{ }
 
 
         public BitmapPictureSensor(uint height = Default.AutomaticSize, uint width = Default.AutomaticSize, 
@@ -103,7 +104,7 @@ namespace CnrsUniProv.OCodeHtm
 
 
             // More default values, for good measure:
-            InputFilenameFormat = Default.BitmapInputFilenameFormat;
+            InputFilenameMask = Default.BitmapInputFilenameMask;
 
             if (explorationPaths.Length == 0)
                 ExplorationPaths.Add(ExplorationPath.RandomSweep4Axes);
@@ -111,6 +112,7 @@ namespace CnrsUniProv.OCodeHtm
 
 
 
+        public event OutputEventHandler<Bitmap> OnOutput;
 
         /// <summary>
         /// Set the current input file before starting enumerating exploration iterations
@@ -172,7 +174,10 @@ namespace CnrsUniProv.OCodeHtm
             graphicsPath.Transform(transformMatrix);
             
             graphics.DrawImage(OriginalImage, graphicsPath.PathPoints);
-            // TODOnow notify writers of the resulting bitmap 
+
+            // notify observers about the output just created
+            if (OnOutput != null)
+                OnOutput(this, new OutputEventArgs<Bitmap>(image));
 
             var input = new SparseMatrix(Height, Width);
             for (int i = 0; i < input.ColumnCount; i++)
@@ -189,7 +194,7 @@ namespace CnrsUniProv.OCodeHtm
             CurrentPosH += CurrentPathDeltaH;
             CurrentPosV += CurrentPathDeltaV;
 
-            // Rotation
+            // TODO Rotation
             // Scaling
 
             return input;
@@ -197,7 +202,7 @@ namespace CnrsUniProv.OCodeHtm
 
         private SparseMatrix FilterInput(SparseMatrix input)
         {
-            //TODO add filters
+            //TODOnow add filters
             return input;
         }
 
@@ -243,9 +248,11 @@ namespace CnrsUniProv.OCodeHtm
             CurrentPathDeltaH *= ExplorationPathSpeed;
             CurrentPathDeltaV *= ExplorationPathSpeed;
 
-            // Rotation
+            // TODO Rotation
             // Scaling
         }
 
+
+        
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using CnrsUniProv.OCodeHtm;
 using System.Diagnostics;
+using CnrsUniProv.OCodeHtm.Exceptions;
 
 namespace OCodeHTM_UnitTests
 {
@@ -13,7 +14,8 @@ namespace OCodeHTM_UnitTests
     public class BitmapPictureSensorTest
     {
         readonly string TrainingSetPath = Path.Combine("O:", "clean");
-        const int TrainingSetSize = 26; 
+        const int TrainingSetSize = 26;
+
 
         [TestMethod]
         public void InputFilesCanBeFound()
@@ -27,9 +29,91 @@ namespace OCodeHTM_UnitTests
         }
 
         [TestMethod]
+        public void ErrorWhenTrainingFolderNotFound()
+        {
+            var sensor = new BitmapPictureSensor();
+            sensor.SetTrainingFolder("stuff.xyz");
+            try
+            {
+                foreach (var input in sensor.GetTrainingInputs())
+                {
+
+                }
+                Assert.Fail("No exception thrown while parsing training inputs with inexistent training folder");
+            }
+            catch (Exception e)
+            {
+                Assert.IsInstanceOfType(e, typeof(DirectoryNotFoundException), e.ToString());
+            }
+
+        }
+
+        [TestMethod]
+        public void NoErrorWhenTrainingFolderEmpty()
+        {
+            var sensor = new BitmapPictureSensor();
+            sensor.SetTrainingFolder(".");
+            try
+            {
+                foreach (var input in sensor.GetTrainingInputs())
+                {
+                    Assert.Fail("This folder should be empty for testing purposes: " + sensor.TrainingFolder);
+                }
+            }
+            catch (Exception e)
+            {
+                Assert.Fail("Should not throw an exception when an empty folder is used for training: " + e.ToString());
+            }
+        }
+
+        [TestMethod]
+        public void ErrorWhenTrainingFolderNotSet()
+        {
+            var sensor = new BitmapPictureSensor();
+
+            try
+            {
+                foreach (var input in sensor.GetTrainingInputs())
+                {
+
+                }
+                Assert.Fail("No exception thrown while parsing training inputs with no training folder set");
+            }
+            catch (Exception e)
+            {
+
+                Assert.IsInstanceOfType(e, typeof(HtmException), e.Message);
+            }
+            
+        }
+
+
+        [TestMethod]
+        public void ErrorWhenTestFoldersNotSet()
+        {
+            var sensor = new BitmapPictureSensor();
+
+            try
+            {
+                foreach (var input in sensor.GetTestInputs())
+                {
+
+                }
+                Assert.Fail("No exception thrown while parsing test inputs with no test folders set");
+            }
+            catch (Exception e)
+            {
+
+                Assert.IsInstanceOfType(e, typeof(HtmException), e.Message);
+            }
+
+        }
+
+
+        [TestMethod]
         public void CanGetTestInputsWithNormalOrder()
         {
-            var sensor = new BitmapPictureSensor(Default.AutomaticSize, Default.AutomaticSize, 0, 1, TrainingOrder.Normal);
+            var sensor = new BitmapPictureSensor(trainingOrder: TrainingOrder.Normal);
             sensor.AddTestFolder(TrainingSetPath);
             var nbInputs = 0;
 

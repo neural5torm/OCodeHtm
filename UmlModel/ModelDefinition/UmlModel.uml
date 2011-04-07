@@ -1192,8 +1192,8 @@
             concurrency="Sequential"
             isQuery="false" />
           <operation
-            Id="bcb612d9-950b-4f98-addb-4367e4b92b10"
-            name="GetInstanceName"
+            Id="dfb05bdf-dd36-4356-93e3-532cbab18d2a"
+            name="OnOutput"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -1202,27 +1202,34 @@
             <ownedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="d1de10e6-acb1-4333-8264-25222e32703f"
-                  direction="Return"
+                  Id="bf94d8d0-3875-4cf7-ac96-b124d194ac37"
+                  name=")"
+                  direction="In"
                   isUnique="false">
                   <type_NamedElement>
                     <undefinedTypeMoniker
-                      Id="4114563f-dd5c-41a7-acb7-b441622c0e7d"
-                      LastKnownName="string"
+                      Id="eafeaaca-6cfa-45b5-af25-f64a680700a3"
+                      LastKnownName="object"
+                      LastKnownLocation="UmlModel.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="6cf51ce6-a1e5-407c-a6c1-abda39ba24d1"
+                  name="OutputEventArgs&lt;TOutput&gt; e"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="32d4a746-03bb-4e46-a988-34f2380c4fe3"
+                      LastKnownName="OutputEventArgs&lt;TOutput&gt;"
                       LastKnownLocation="UmlModel.uml" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
-          <operation
-            Id="dfb05bdf-dd36-4356-93e3-532cbab18d2a"
-            name="NotifyWriters"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="false"
-            concurrency="Sequential"
-            isQuery="false" />
         </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
@@ -1734,7 +1741,7 @@
         <ownedAttributesInternal>
           <property
             Id="018379cf-ae5e-4e9d-9c31-45ef3a00e9a3"
-            name="File"
+            name="OutputFile"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -1753,40 +1760,8 @@
         </ownedAttributesInternal>
         <ownedOperationsInternal>
           <operation
-            Id="4fec7fe9-e62c-4de9-9262-ac86dea1f939"
-            name="OutputToString"
-            visibility="Protected"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="true"
-            concurrency="Sequential"
-            isQuery="false">
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter
-                  Id="7c583ded-3bba-45c9-9d8e-01fbec686936"
-                  direction="Return"
-                  isUnique="false">
-                  <type_NamedElement>
-                    <undefinedTypeMoniker
-                      Id="3ff8610f-0ab1-4e2e-b7ee-0ec4e54b0105"
-                      LastKnownName="delegate"
-                      LastKnownLocation="UmlModel.uml" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-              <operationHasOwnedParameters>
-                <parameter
-                  Id="9e1d9c91-362e-4b8c-8fcf-2632876396e0"
-                  name="TOutput output"
-                  direction="In"
-                  isUnique="false" />
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
-          <operation
-            Id="3c0585e1-5ca9-44f7-be85-fad098ccfb59"
-            name="Write"
+            Id="df7b76f9-394f-4567-8e97-d454fcbffee2"
+            name="OutputWriteHandler"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -1795,22 +1770,15 @@
             <ownedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="aeedb448-f121-44c2-845b-5fd0bde3a927"
-                  name="info"
+                  Id="04e874eb-58fc-4aaa-8b8d-f38cda398ccc"
+                  name="sender"
                   direction="In"
-                  isUnique="false">
-                  <type_NamedElement>
-                    <undefinedTypeMoniker
-                      Id="e86d3f84-d792-47ab-9c1f-e9fa60d544f7"
-                      LastKnownName="TOutput"
-                      LastKnownLocation="UmlModel.uml" />
-                  </type_NamedElement>
-                </parameter>
+                  isUnique="false" />
               </operationHasOwnedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="ab1bc4b4-7ee9-49a0-864c-ea610b93b001"
-                  name="from"
+                  Id="4543bd78-e8cf-41bb-b0a0-b770cde258fb"
+                  name="e"
                   direction="In"
                   isUnique="false" />
               </operationHasOwnedParameters>
@@ -2590,7 +2558,7 @@
           </property>
           <property
             Id="351629ce-6fee-48f9-b095-adb566054b76"
-            name="InputFilenameFormat"
+            name="InputFilenameMask"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -2608,7 +2576,7 @@
           </property>
           <property
             Id="c5be3b79-214e-4ffc-8c3c-b85a9dd3e2c2"
-            name="CategoryFolderPattern"
+            name="TrainingCategoryFolderPattern"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -2660,6 +2628,24 @@
                 LastKnownLocation="UmlModel.uml" />
             </type_NamedElement>
           </property>
+          <property
+            Id="19c0c190-d348-409e-b915-53e2ee2228bf"
+            name="TestCategoryFolderPattern"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="848cf53c-0df7-4838-af8e-ee89b5a0ce54"
+                LastKnownName="Regex"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
         </ownedAttributesInternal>
         <ownedOperationsInternal>
           <operation
@@ -2681,6 +2667,7 @@
           <operation
             Id="f5a09ea4-e755-4e2e-bdd6-db8a36a3c9de"
             name="SetCurrentInputFile"
+            visibility="Protected"
             isLeaf="false"
             isStatic="false"
             isAbstract="true"
@@ -2699,6 +2686,7 @@
           <operation
             Id="d47e4889-9df9-4c68-a2d2-c10e9c21f251"
             name="GetEnumerator"
+            visibility="Protected"
             isLeaf="false"
             isStatic="false"
             isAbstract="true"
@@ -2804,7 +2792,7 @@
     <packageHasNamedElement>
       <Interface
         Id="5a9d0f32-51d2-4123-892a-44673442d5ab"
-        name="IWritable"
+        name="IObservableOutput&lt;TOutput&gt;"
         isAbstract="false"
         isLeaf="false">
         <targetEnds>
@@ -2864,8 +2852,8 @@
         </targetEnds>
         <ownedAttributes>
           <property
-            Id="afe52076-cc06-4348-931d-dc0a93fbbf15"
-            name="Writers"
+            Id="b91f2bb2-5d59-4e5b-87ee-df4bd19c593b"
+            name="_ForLater_Name"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -2876,16 +2864,16 @@
             isComposite="false">
             <type_NamedElement>
               <undefinedTypeMoniker
-                Id="f7f0a750-0a01-40a1-92ab-5265d5d93c43"
-                LastKnownName="List&lt;IWriter&gt;"
+                Id="4114563f-dd5c-41a7-acb7-b441622c0e7d"
+                LastKnownName="string"
                 LastKnownLocation="UmlModel.uml" />
             </type_NamedElement>
           </property>
         </ownedAttributes>
         <ownedOperations>
           <operation
-            Id="895081bc-345d-461b-b71b-1055f1db6912"
-            name="GetInstanceName"
+            Id="2a7dc51c-33ba-4dc2-9c25-8c1b1c288690"
+            name="OnOutput"
             isLeaf="false"
             isStatic="false"
             isAbstract="true"
@@ -2894,27 +2882,34 @@
             <ownedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="77e872cc-a6b3-4a2a-b705-e38014115717"
-                  direction="Return"
+                  Id="916bebb6-d26e-4ff7-a8dd-b1916add9435"
+                  name=") : delegate (sender"
+                  direction="In"
                   isUnique="false">
                   <type_NamedElement>
                     <undefinedTypeMoniker
-                      Id="4114563f-dd5c-41a7-acb7-b441622c0e7d"
-                      LastKnownName="string"
+                      Id="eafeaaca-6cfa-45b5-af25-f64a680700a3"
+                      LastKnownName="object"
+                      LastKnownLocation="UmlModel.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="5889dec6-1adf-4f9b-93d3-dbd3dcae403e"
+                  name="e"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="32d4a746-03bb-4e46-a988-34f2380c4fe3"
+                      LastKnownName="OutputEventArgs&lt;TOutput&gt;"
                       LastKnownLocation="UmlModel.uml" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
-          <operation
-            Id="2a7dc51c-33ba-4dc2-9c25-8c1b1c288690"
-            name="NotifyWriters"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="true"
-            concurrency="Sequential"
-            isQuery="false" />
         </ownedOperations>
       </Interface>
     </packageHasNamedElement>
@@ -2931,8 +2926,8 @@
         isLeaf="false">
         <ownedOperations>
           <operation
-            Id="abdc74f5-f8c5-4543-a223-94bef3fcc5bb"
-            name="Write"
+            Id="5b3efe31-34a5-4e05-91f9-2ad2c5d9a53e"
+            name="OutputWriteHandler"
             isLeaf="false"
             isStatic="false"
             isAbstract="true"
@@ -2941,22 +2936,15 @@
             <ownedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="aa78a51d-a1df-410e-a883-9b7d8c0d669d"
-                  name="info"
+                  Id="690ab497-669b-4b7e-9661-24f395119f96"
+                  name="sender"
                   direction="In"
-                  isUnique="false">
-                  <type_NamedElement>
-                    <undefinedTypeMoniker
-                      Id="e86d3f84-d792-47ab-9c1f-e9fa60d544f7"
-                      LastKnownName="TOutput"
-                      LastKnownLocation="UmlModel.uml" />
-                  </type_NamedElement>
-                </parameter>
+                  isUnique="false" />
               </operationHasOwnedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="76567826-93c8-4512-a704-075bb5640738"
-                  name="from"
+                  Id="f3d2c9c5-9e12-4abb-9bb3-f54ba6e63e92"
+                  name="e"
                   direction="In"
                   isUnique="false" />
               </operationHasOwnedParameters>
@@ -2987,7 +2975,7 @@
             Id="8fa6799d-0fca-487e-8937-23300b573b03">
             <interfaceMoniker
               Id="5a9d0f32-51d2-4123-892a-44673442d5ab"
-              LastKnownName="IWritable"
+              LastKnownName="IObservableOutput&lt;TOutput&gt;"
               LastKnownLocation="UmlModel.uml" />
           </interfaceRealization>
           <interfaceRealization
@@ -3040,8 +3028,8 @@
         </targetEnds>
         <ownedOperationsInternal>
           <operation
-            Id="825381cd-2565-4a80-a931-3db5c62bbe1e"
-            name="GetInstanceName"
+            Id="0c525937-20e7-4132-9ecd-b26987da5b54"
+            name="OnOutput"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -3050,27 +3038,34 @@
             <ownedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="302018ee-d583-4b68-9c95-22db5268f54c"
-                  direction="Return"
+                  Id="41a1dbfc-05ef-4686-9630-56f7892c7c94"
+                  name=")"
+                  direction="In"
                   isUnique="false">
                   <type_NamedElement>
                     <undefinedTypeMoniker
-                      Id="4114563f-dd5c-41a7-acb7-b441622c0e7d"
-                      LastKnownName="string"
+                      Id="eafeaaca-6cfa-45b5-af25-f64a680700a3"
+                      LastKnownName="object"
+                      LastKnownLocation="UmlModel.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="d682c4a5-9f3a-4a3a-8730-fcf8f70f4135"
+                  name="OutputEventArgs&lt;TOutput&gt; e"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="32d4a746-03bb-4e46-a988-34f2380c4fe3"
+                      LastKnownName="OutputEventArgs&lt;TOutput&gt;"
                       LastKnownLocation="UmlModel.uml" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
-          <operation
-            Id="0c525937-20e7-4132-9ecd-b26987da5b54"
-            name="NotifyWriters"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="false"
-            concurrency="Sequential"
-            isQuery="false" />
           <operation
             Id="29bca39f-e78c-4b14-9c09-6acfee2470da"
             name="Learn"
@@ -3125,7 +3120,7 @@
     <packageHasNamedElement>
       <class
         Id="5615f2c8-a7f4-4e1c-8597-8791d7193480"
-        name="ImageFileWriter&lt;TOutput&gt;"
+        name="BitmapFileWriter"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
@@ -3157,11 +3152,29 @@
                 LastKnownLocation="UmlModel.uml" />
             </type_NamedElement>
           </property>
+          <property
+            Id="89c1c420-332a-4b2b-b809-7e225075597a"
+            name="Counter"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="f5fdf7d5-4c61-4101-941a-a3ee2e86170a"
+                LastKnownName="int"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
         </ownedAttributesInternal>
         <ownedOperationsInternal>
           <operation
-            Id="f98a1841-932c-4393-948e-ff57dfff5b5f"
-            name="Write"
+            Id="1a4a417c-eb16-42a1-9e47-126771464052"
+            name="OutputWriteHandler"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -3170,22 +3183,15 @@
             <ownedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="a12908b6-883d-4993-932b-81c0064a117f"
-                  name="info"
+                  Id="dd95d9ed-006a-43c1-8afc-b4a9b10126ee"
+                  name="sender"
                   direction="In"
-                  isUnique="false">
-                  <type_NamedElement>
-                    <undefinedTypeMoniker
-                      Id="e86d3f84-d792-47ab-9c1f-e9fa60d544f7"
-                      LastKnownName="TOutput"
-                      LastKnownLocation="UmlModel.uml" />
-                  </type_NamedElement>
-                </parameter>
+                  isUnique="false" />
               </operationHasOwnedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="334ab813-8cb1-4253-b7ae-f8148559e172"
-                  name="from"
+                  Id="4fe57f5e-5e1e-4afa-b914-808072597869"
+                  name="e"
                   direction="In"
                   isUnique="false" />
               </operationHasOwnedParameters>
@@ -3228,6 +3234,21 @@
       <undefinedType
         Id="c4e30149-8792-47ff-b260-b7cae0ff15db"
         name="float" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="5f602eaf-89fa-4a3f-91f4-72eb158b2265"
+        name="delegate void OutputEventHandler&lt;TOutput&gt;(object sender" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="eafeaaca-6cfa-45b5-af25-f64a680700a3"
+        name="object" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="32d4a746-03bb-4e46-a988-34f2380c4fe3"
+        name="OutputEventArgs&lt;TOutput&gt;" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType

@@ -55,8 +55,8 @@ namespace CnrsUniProv.OCodeHtm
         public const string CategoryFolderPattern = "(?<cat>.*)";
         public const string TrainingFolderString = "clean";
         public const string TestFolderString = "test";
-        public const string InputFilenameFormat = "*";
-        public const string BitmapInputFilenameFormat = "*.bmp";
+        public const string InputFilenameMask = "*";
+        public const string BitmapInputFilenameMask = "*.bmp";
 
         public const int AutomaticSize = 0;
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.IO;
+using CnrsUniProv.OCodeHtm.Exceptions;
 
 namespace CnrsUniProv.OCodeHtm
 {
@@ -62,7 +63,7 @@ namespace CnrsUniProv.OCodeHtm
                 
                 TestFolders = testFolders;
                 TrainingFolder = null;
-                CategoryFolderPattern = sensor.CategoryFolderPattern;
+                CategoryFolderPattern = sensor.TestCategoryFolderPattern;
             }
             public Inputs(Sensor<TOutput> sensor, bool useTransformations, DirectoryInfo trainingFolder)
             {
@@ -71,7 +72,7 @@ namespace CnrsUniProv.OCodeHtm
 
                 TrainingFolder = trainingFolder;
                 TestFolders = null;
-                CategoryFolderPattern = sensor.CategoryFolderPattern;
+                CategoryFolderPattern = sensor.TrainingCategoryFolderPattern;
             }
 
 
@@ -79,6 +80,9 @@ namespace CnrsUniProv.OCodeHtm
             {
                 if (IsTest)
                 {
+                    if (TestFolders.Count == 0)
+                        throw new HtmException("No test folder set", this);
+
                     // Browsing test sets
                     foreach (var testFolder in TestFolders)
                     {
@@ -86,13 +90,16 @@ namespace CnrsUniProv.OCodeHtm
                         foreach (var catFolder in testFolder.EnumerateDirectories())
                         {
                             // Browsing input files in each category
-                            foreach (var file in catFolder.GetFiles(Sensor.InputFilenameFormat))
+                            foreach (var file in catFolder.GetFiles(Sensor.InputFilenameMask))
                                 yield return new ExplorationIterations(Sensor, file, UseTransformations, GetCategoryFromFolder(catFolder));
                         }
                     }
                 }
                 else // Training
                 {
+                    if (TrainingFolder == null)
+                        throw new HtmException("No training folder set", this);
+
                     // Ordering category folders in training set
                     var orderedCatFolders = TrainingFolder.EnumerateDirectories();
 
@@ -126,7 +133,7 @@ namespace CnrsUniProv.OCodeHtm
                     foreach (var catFolder in catFolders)
                     {
                         // Ordering input files in each category
-                        IEnumerable<FileInfo> inputFiles = catFolder.GetFiles(Sensor.InputFilenameFormat);
+                        IEnumerable<FileInfo> inputFiles = catFolder.GetFiles(Sensor.InputFilenameMask);
                         switch (Sensor.TrainingOrder)
                         {
                             case TrainingOrder.Normal:
@@ -201,12 +208,13 @@ namespace CnrsUniProv.OCodeHtm
         public int TrainingPresentationsPerInput { get; private set; }
         public TrainingOrder TrainingOrder { get; private set; }
 
-        // TODO make List of DirectoryInfo TrainingFolders
+        
         public DirectoryInfo TrainingFolder { get; private set; }
         public List<DirectoryInfo> TestFolders { get; private set; }
 
-        public Regex CategoryFolderPattern { get; private set; }
-        public string InputFilenameFormat { get; set; }
+        public Regex TrainingCategoryFolderPattern { get; private set; }
+        public Regex TestCategoryFolderPattern { get; private set; }
+        public string InputFilenameMask { get; set; }
 
 
 
@@ -226,18 +234,18 @@ namespace CnrsUniProv.OCodeHtm
             ExplorationPathUseRandomOrigin = useRandomOrigin;
             ExplorationPathSpeed = (int)pathSpeed;
 
-            ////TODOlater use rotation and scaling transformations
-            //ExplorationRandomRotationMaxAngle = Math.Abs(rotationAngleMaxDegrees);
-            //ExplorationRandomRotationSpeed = rotationSpeed;
+            ExplorationRandomRotationMaxAngle = Math.Abs(rotationAngleMaxDegrees);
+            ExplorationRandomRotationSpeed = rotationSpeed;
 
-            //ExplorationScalingMin = Math.Abs(scalingMin);
-            //ExplorationScalingMax = Math.Abs(scalingMax);
-            //ExplorationScalingSpeed = scalingSpeed;
+            ExplorationScalingMin = Math.Abs(scalingMin);
+            ExplorationScalingMax = Math.Abs(scalingMax);
+            ExplorationScalingSpeed = scalingSpeed;
             
             // Default null objects:
             TestFolders = new List<DirectoryInfo>(); 
-            InputFilenameFormat = Default.InputFilenameFormat;
-            SetCategoryFolderPattern();
+            InputFilenameMask = Default.InputFilenameMask;
+            SetTrainingCategoryFolderPattern();
+            SetTestCategoryFolderPattern();
         }
 
 
@@ -277,9 +285,13 @@ namespace CnrsUniProv.OCodeHtm
             TestFolders.Add(new DirectoryInfo(path));
         }
 
-        public void SetCategoryFolderPattern(string pattern = Default.CategoryFolderPattern)
+        public void SetTrainingCategoryFolderPattern(string pattern = Default.CategoryFolderPattern)
         {
-            CategoryFolderPattern = new Regex(pattern);
+            TrainingCategoryFolderPattern = new Regex(pattern);
+        }
+        public void SetTestCategoryFolderPattern(string pattern = Default.CategoryFolderPattern)
+        {
+            TestCategoryFolderPattern = new Regex(pattern);
         }
     }
 }
