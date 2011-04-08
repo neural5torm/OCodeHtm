@@ -7,13 +7,14 @@ using System.IO;
 using CnrsUniProv.OCodeHtm;
 using System.Diagnostics;
 using CnrsUniProv.OCodeHtm.Exceptions;
+using System.Drawing;
 
-namespace OCodeHTM_UnitTests
+namespace CnrsUniProv.OCodeHtm.UnitTests
 {
     [TestClass]
     public class BitmapPictureSensorTest
     {
-        readonly string TrainingSetPath = Path.Combine("O:", "clean");
+        static readonly string TrainingSetPath = Path.Combine("O:", "clean");
         const int TrainingSetSize = 26;
 
 
@@ -274,6 +275,11 @@ namespace OCodeHTM_UnitTests
             Assert.IsFalse(categories.SequenceEqual(randomCategories));
         }
 
+        [TestMethod]
+        public void CanGetTrainingInputsNoTransformationsWithoutFiltersInReverseOrder()
+        {
+            //TODO CanGetTrainingInputsNoTransformationsWithoutFiltersInReverseOrder test
+        }
 
         [TestMethod]
         public void CanGetTrainingInputsNoTransformationsWithoutFiltersInSameRandomOrderWithSeed()
@@ -319,10 +325,10 @@ namespace OCodeHTM_UnitTests
 
         [TestMethod]
         public void CanGetTrainingInputsWithTransformationsNoFiltersInNormalOrder()
-        {
-            
+        { 
             var sensor = new BitmapPictureSensor();
             sensor.SetTrainingFolder(TrainingSetPath);
+
             var nbInputs = 0;
 
 

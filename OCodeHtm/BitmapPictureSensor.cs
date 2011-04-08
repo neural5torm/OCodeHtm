@@ -12,7 +12,7 @@ using CnrsUniProv.OCodeHtm.Interfaces;
 
 namespace CnrsUniProv.OCodeHtm
 {
-    public class BitmapPictureSensor : Sensor<SparseMatrix>, IObservableOutput<Bitmap>
+    public class BitmapPictureSensor : Sensor<SparseMatrix>
     {
         public const double MAX_VALUE = 255.0;
 
@@ -66,6 +66,7 @@ namespace CnrsUniProv.OCodeHtm
         }
 
         public FileInfo CurrentInputFile { get; private set; }
+        public string CurrentCategory { get; private set; }
 
         public Bitmap OriginalImage { get; set; }
 
@@ -112,15 +113,16 @@ namespace CnrsUniProv.OCodeHtm
 
 
 
-        public event OutputEventHandler<Bitmap> OnOutput;
+        public event OutputEventHandler<Bitmap> OnBitmapOutput;
 
         /// <summary>
         /// Set the current input file before starting enumerating exploration iterations
         /// </summary>
         /// <param name="file"></param>
-        protected override void SetCurrentInputFile(FileInfo file)
+        protected override void SetCurrentInputFile(FileInfo file, string category)
         {
             CurrentInputFile = file;
+            CurrentCategory = category;
 
             OriginalImage = new Bitmap(file.FullName);
 
@@ -146,12 +148,13 @@ namespace CnrsUniProv.OCodeHtm
                     CurrentPath = path;
                     InitPathDirection();
 
+                    SparseMatrix input = new SparseMatrix(1, 1, 1);
                     for (int iteration = 0; iteration < ExplorationPathMaxIterations; iteration++)
                     {
-                        if (IsOutsideField)
+                        if (IsOutsideField || input.FrobeniusNorm() == 0.0)
                             break;
 
-                        var input = GetNextTransformedInput();
+                        input = GetNextTransformedInput();
                         yield return FilterInput(input);
                     }
                 }
@@ -167,17 +170,18 @@ namespace CnrsUniProv.OCodeHtm
             var transformMatrix = new D2D.Matrix();            
             transformMatrix.RotateAt(ExplorationRandomRotationMaxAngle, new Point(Width / 2, Height / 2), D2D.MatrixOrder.Append);
             transformMatrix.Scale(ExplorationScalingMax, ExplorationScalingMax, D2D.MatrixOrder.Append);
-            transformMatrix.Translate(CurrentPathDeltaH, CurrentPathDeltaV, D2D.MatrixOrder.Append);
+            transformMatrix.Translate(CurrentPosH, CurrentPosV, D2D.MatrixOrder.Append);
 
             var graphicsPath = new D2D.GraphicsPath();
             graphicsPath.AddPolygon(new Point[] { new Point(0, 0), new Point(Width, 0), new Point(0, Height) });
             graphicsPath.Transform(transformMatrix);
-            
+
+            graphics.FillRectangle(new SolidBrush(Color.Black), 0, 0, Width, Height);
             graphics.DrawImage(OriginalImage, graphicsPath.PathPoints);
 
-            // notify observers about the output just created
-            if (OnOutput != null)
-                OnOutput(this, new OutputEventArgs<Bitmap>(image));
+            // notify observers about the bitmal output just created
+            if (OnBitmapOutput != null)
+                OnBitmapOutput(this, new OutputEventArgs<Bitmap>(image, CurrentCategory));
 
             var input = new SparseMatrix(Height, Width);
             for (int i = 0; i < input.ColumnCount; i++)
@@ -197,6 +201,8 @@ namespace CnrsUniProv.OCodeHtm
             // TODO Rotation
             // Scaling
 
+            // notify observers about the matrix output
+            //TODOnow! text writer
             return input;
         }
 
@@ -251,8 +257,5 @@ namespace CnrsUniProv.OCodeHtm
             // TODO Rotation
             // Scaling
         }
-
-
-        
     }
 }

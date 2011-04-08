@@ -1285,10 +1285,10 @@
               <referencedTypeMoniker Id="14871fd3-8fdd-4f6e-a331-614bd91ab7bd" LastKnownName="DirectoryInfo" />
             </type_NamedElement>
           </property>
-          <property Id="39e2991b-7cb1-4efb-9368-dd91b7124151" name="Counter" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="39e2991b-7cb1-4efb-9368-dd91b7124151" name="FileCounter" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="89c1c420-332a-4b2b-b809-7e225075597a" />
             <type_NamedElement>
-              <referencedTypeMoniker Id="47e2c258-95a9-4780-8876-7b159231da0b" LastKnownName="int" />
+              <referencedTypeMoniker Id="6d939768-57af-4aa8-81c0-ac9ac29f2c09" LastKnownName="int" />
             </type_NamedElement>
           </property>
         </ownedAttributesInternal>
@@ -1394,6 +1394,11 @@
     <packageHasNamedElement>
       <referencedType Id="2c6fab80-b32f-4c0e-b3ba-210c64db2f53" name="FileInfo" isAbstract="false" isLeaf="false" cachedFullName="FileInfo">
         <elementDefinition Id="e830efe0-a098-40d0-a8d8-96723ee1f02a" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="6d939768-57af-4aa8-81c0-ac9ac29f2c09" name="int" isAbstract="false" isLeaf="false" cachedFullName="int">
+        <elementDefinition Id="f5fdf7d5-4c61-4101-941a-a3ee2e86170a" />
       </referencedType>
     </packageHasNamedElement>
   </packagedElements>

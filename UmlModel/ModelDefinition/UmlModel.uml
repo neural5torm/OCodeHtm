@@ -3154,7 +3154,7 @@
           </property>
           <property
             Id="89c1c420-332a-4b2b-b809-7e225075597a"
-            name="Counter"
+            name="FileCounter"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"

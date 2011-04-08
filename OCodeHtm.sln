@@ -5,9 +5,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OCodeHtm GUI", "OCodeHtmMai
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OCodeHtm", "OCodeHtm\OCodeHtm.csproj", "{3855B0A7-9FBA-4103-9B4C-62805D5D2F83}"
 EndProject
-Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "UmlModel", "UmlModel\UmlModel.modelproj", "{C98913DD-5E51-4965-A471-653D466FC8F2}"
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "UML Model", "UmlModel\UML Model.modelproj", "{C98913DD-5E51-4965-A471-653D466FC8F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OCodeHtm Tests", "OCodeHTM UnitTests\OCodeHtm Tests.csproj", "{955DB3E4-66AC-4474-87C7-AEDF9ACB42CA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unit Tests", "OCodeHTM UnitTests\Unit Tests.csproj", "{955DB3E4-66AC-4474-87C7-AEDF9ACB42CA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{54E05998-E912-4D44-A64B-A167A48D7936}"
 	ProjectSection(SolutionItems) = preProject
@@ -16,9 +16,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Model (Tests+UML)", "Model (Tests+UML)", "{67C2635A-C636-4EDA-A3B9-8B53C9A3DB17}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Model+Tests", "Model+Tests", "{67C2635A-C636-4EDA-A3B9-8B53C9A3DB17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Numerics", "Numerics\Numerics.csproj", "{B7CAE5F4-A23F-4438-B5BE-41226618B695}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{617BABFE-731D-4B72-AB3D-C9F86EDDE6DF}"
+	ProjectSection(SolutionItems) = preProject
+		lib\MathNet.Numerics.dll = lib\MathNet.Numerics.dll
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integration Tests", "IntegrationTests\Integration Tests.csproj", "{087973C6-0990-4FAF-BE45-E3ECEBAF8587}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
@@ -57,12 +62,12 @@ Global
 		{955DB3E4-66AC-4474-87C7-AEDF9ACB42CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{955DB3E4-66AC-4474-87C7-AEDF9ACB42CA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{955DB3E4-66AC-4474-87C7-AEDF9ACB42CA}.Release|x86.ActiveCfg = Release|Any CPU
-		{B7CAE5F4-A23F-4438-B5BE-41226618B695}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B7CAE5F4-A23F-4438-B5BE-41226618B695}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B7CAE5F4-A23F-4438-B5BE-41226618B695}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{B7CAE5F4-A23F-4438-B5BE-41226618B695}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B7CAE5F4-A23F-4438-B5BE-41226618B695}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B7CAE5F4-A23F-4438-B5BE-41226618B695}.Release|x86.ActiveCfg = Release|Any CPU
+		{087973C6-0990-4FAF-BE45-E3ECEBAF8587}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{087973C6-0990-4FAF-BE45-E3ECEBAF8587}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{087973C6-0990-4FAF-BE45-E3ECEBAF8587}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{087973C6-0990-4FAF-BE45-E3ECEBAF8587}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{087973C6-0990-4FAF-BE45-E3ECEBAF8587}.Release|Any CPU.Build.0 = Release|Any CPU
+		{087973C6-0990-4FAF-BE45-E3ECEBAF8587}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,5 +76,6 @@ Global
 		{955DB3E4-66AC-4474-87C7-AEDF9ACB42CA} = {67C2635A-C636-4EDA-A3B9-8B53C9A3DB17}
 		{54E05998-E912-4D44-A64B-A167A48D7936} = {67C2635A-C636-4EDA-A3B9-8B53C9A3DB17}
 		{C98913DD-5E51-4965-A471-653D466FC8F2} = {67C2635A-C636-4EDA-A3B9-8B53C9A3DB17}
+		{087973C6-0990-4FAF-BE45-E3ECEBAF8587} = {67C2635A-C636-4EDA-A3B9-8B53C9A3DB17}
 	EndGlobalSection
 EndGlobal

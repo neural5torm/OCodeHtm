@@ -9,7 +9,7 @@ using MathNet.Numerics.LinearAlgebra.Double;
 using CnrsUniProv.OCodeHtm;
 using CnrsUniProv.OCodeHtm.Exceptions;
 
-namespace OCodeHTM_UnitTests
+namespace CnrsUniProv.OCodeHtm.UnitTests
 {
     [TestClass]
     public class SpatialLayerTest 

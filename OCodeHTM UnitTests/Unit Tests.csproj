@@ -3,15 +3,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
+    <ProductVersion>
+    </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{3855B0A7-9FBA-4103-9B4C-62805D5D2F83}</ProjectGuid>
+    <ProjectGuid>{955DB3E4-66AC-4474-87C7-AEDF9ACB42CA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CnrsUniProv.OCodeHtm</RootNamespace>
-    <AssemblyName>OCodeHtm</AssemblyName>
+    <RootNamespace>CnrsUniProv.OCodeHtm.UnitTests</RootNamespace>
+    <AssemblyName>OCodeHTM UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,39 +36,31 @@
     <Reference Include="MathNet.Numerics">
       <HintPath>..\lib\MathNet.Numerics.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
-    <Reference Include="System.Core" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BitmapFileWriter.cs" />
-    <Compile Include="BitmapPictureSensor.cs" />
-    <Compile Include="Exceptions\HtmException.cs" />
-    <Compile Include="HtmLayer2D.cs" />
-    <Compile Include="Interfaces\ICloneable.cs" />
-    <Compile Include="Interfaces\ILearningInferring.cs" />
-    <Compile Include="Interfaces\INode.cs" />
-    <Compile Include="Interfaces\OutputEventHandler.cs" />
-    <Compile Include="Interfaces\IOutputWriter.cs" />
-    <Compile Include="ProductMatchClassifierNode.cs" />
-    <Compile Include="Sensor.cs" />
-    <Compile Include="SpatialLayer.cs" />
-    <Compile Include="Constants.cs" />
-    <Compile Include="Exceptions\HtmRuleException.cs" />
-    <Compile Include="HtmLayer.cs" />
-    <Compile Include="HtmNetwork.cs" />
-    <Compile Include="SpatialNode2D.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SpatialNode.cs" />
-    <Compile Include="SpatialNodeGaussian.cs" />
-    <Compile Include="TemporalLayer.cs" />
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Include="BitmapPictureSensorTest.cs" />
+    <Compile Include="SpatialLayerTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SpatialNodeGaussianTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OCodeHtm\OCodeHtm.csproj">
+      <Project>{3855B0A7-9FBA-4103-9B4C-62805D5D2F83}</Project>
+      <Name>OCodeHtm</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

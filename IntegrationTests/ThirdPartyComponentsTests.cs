@@ -6,10 +6,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using MathNet.Numerics.LinearAlgebra.Double;
 
-namespace OCodeHTM_UnitTests
+namespace CnrsUniProv.OCodeHtm.IntegrationTests
 {
     [TestClass]
-    public class SomeTests
+    public class OtherComponentsTests
     {
        
         [TestMethod]

@@ -18,10 +18,12 @@ namespace CnrsUniProv.OCodeHtm.Interfaces
     public class OutputEventArgs<TOutput> : EventArgs
     {
         public TOutput Output { get; private set; }
+        public string Category { get; private set; }
 
-        public OutputEventArgs(TOutput output)
+        public OutputEventArgs(TOutput output, string category)
         {
             Output = output;
+            Category = category;
         }
     }
 }

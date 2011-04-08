@@ -6,11 +6,11 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{955DB3E4-66AC-4474-87C7-AEDF9ACB42CA}</ProjectGuid>
+    <ProjectGuid>{087973C6-0990-4FAF-BE45-E3ECEBAF8587}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OCodeHTM_UnitTests</RootNamespace>
-    <AssemblyName>OCodeHTM UnitTests</AssemblyName>
+    <RootNamespace>CnrsUniProv.OCodeHtm.IntegrationTests</RootNamespace>
+    <AssemblyName>IntegrationTests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -48,17 +48,9 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BitmapPictureSensorTest.cs" />
-    <Compile Include="SpatialLayerTest.cs" />
+    <Compile Include="IOTests.cs" />
+    <Compile Include="ThirdPartyComponentsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SpatialNodeGaussianTest.cs" />
-    <Compile Include="SomeTests.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\OCodeHtm\OCodeHtm.csproj">
-      <Project>{3855B0A7-9FBA-4103-9B4C-62805D5D2F83}</Project>
-      <Name>OCodeHtm</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

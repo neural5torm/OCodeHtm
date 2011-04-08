@@ -31,7 +31,7 @@ namespace CnrsUniProv.OCodeHtm
 
             public IEnumerator<TOutput> GetEnumerator()
             {
-                Sensor.SetCurrentInputFile(CurrentFile);
+                Sensor.SetCurrentInputFile(CurrentFile, CategoryName);
 
                 return Sensor.GetEnumerator(UseTransformations);
             }
@@ -261,7 +261,7 @@ namespace CnrsUniProv.OCodeHtm
         }
 
 
-        protected abstract void SetCurrentInputFile(FileInfo file);
+        protected abstract void SetCurrentInputFile(FileInfo file, string category);
 
         protected abstract IEnumerator<TOutput> GetEnumerator(bool useTransformations);
 
