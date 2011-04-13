@@ -51,7 +51,7 @@
     <Compile Include="Interfaces\ICloneable.cs" />
     <Compile Include="Interfaces\ILearningInferring.cs" />
     <Compile Include="Interfaces\INode.cs" />
-    <Compile Include="Interfaces\OutputEventHandler.cs" />
+    <Compile Include="Interfaces\IObservableOutput.cs" />
     <Compile Include="Interfaces\IOutputWriter.cs" />
     <Compile Include="ProductMatchClassifierNode.cs" />
     <Compile Include="Sensor.cs" />

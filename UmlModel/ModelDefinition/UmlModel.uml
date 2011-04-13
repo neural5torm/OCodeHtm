@@ -1725,7 +1725,7 @@
     <packageHasNamedElement>
       <class
         Id="065026be-4f5c-4e0d-b497-5622c8e7d543"
-        name="TextFileWriter&lt;TOutput&gt;"
+        name="LogWriter&lt;TOutput&gt;"
         isAbstract="true"
         isLeaf="false"
         isActiveClass="false">
@@ -3120,8 +3120,8 @@
     <packageHasNamedElement>
       <class
         Id="5615f2c8-a7f4-4e1c-8597-8791d7193480"
-        name="BitmapFileWriter"
-        isAbstract="false"
+        name="BitmapFileWriter&lt;TOutput&gt;"
+        isAbstract="true"
         isLeaf="false"
         isActiveClass="false">
         <suppliersInternal>
@@ -3155,6 +3155,26 @@
           <property
             Id="89c1c420-332a-4b2b-b809-7e225075597a"
             name="FileCounter"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="f5fdf7d5-4c61-4101-941a-a3ee2e86170a"
+                LastKnownName="int"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="8662dcd8-dbb0-4c9f-96ce-108d14943193"
+            name="SubFolderCounter"
+            visibility="Private"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -3194,6 +3214,57 @@
                   name="e"
                   direction="In"
                   isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="e243dea4-af66-4a3e-b5e7-05609400b466"
+            name="SetFolder"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="1fb4b1e9-35e7-4bcb-bad9-76c009e9ee95"
+                  name="folder"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="4114563f-dd5c-41a7-acb7-b441622c0e7d"
+                      LastKnownName="string"
+                      LastKnownLocation="UmlModel.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="81bd9cec-e403-4ed2-9ee4-c8bfc7e53f17"
+            name="GetBitmapFrom"
+            visibility="Protected"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="d2c44fb5-20ff-4271-aad6-8afbbea0bd39"
+                  name="output"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="e86d3f84-d792-47ab-9c1f-e9fa60d544f7"
+                      LastKnownName="TOutput"
+                      LastKnownLocation="UmlModel.uml" />
+                  </type_NamedElement>
+                </parameter>
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>

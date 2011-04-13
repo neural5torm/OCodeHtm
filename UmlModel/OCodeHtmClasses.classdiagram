@@ -584,7 +584,7 @@
       </referencedType>
     </packageHasNamedElement>
     <logicalClassDesignerModelHasTypes>
-      <class Id="2b2e3977-6e77-4fda-a858-5fadeb64f32a" name="TextFileWriter&lt;TOutput&gt;" isAbstract="true" isLeaf="false" isActiveClass="false">
+      <class Id="2b2e3977-6e77-4fda-a858-5fadeb64f32a" name="LogWriter&lt;TOutput&gt;" isAbstract="true" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="065026be-4f5c-4e0d-b497-5622c8e7d543" />
         <suppliersInternal>
           <interfaceRealization Id="4cb82ce5-68a8-45d2-902b-7da7bbf95ab5">
@@ -1270,7 +1270,7 @@
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
-      <class Id="8b850225-05a1-42f4-ba4f-c657b340e43e" name="BitmapFileWriter" isAbstract="false" isLeaf="false" isActiveClass="false">
+      <class Id="8b850225-05a1-42f4-ba4f-c657b340e43e" name="BitmapFileWriter&lt;TOutput&gt;" isAbstract="true" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="5615f2c8-a7f4-4e1c-8597-8791d7193480" />
         <suppliersInternal>
           <interfaceRealization Id="386919df-ee0c-4027-b428-0237880432ed">
@@ -1285,10 +1285,16 @@
               <referencedTypeMoniker Id="14871fd3-8fdd-4f6e-a331-614bd91ab7bd" LastKnownName="DirectoryInfo" />
             </type_NamedElement>
           </property>
-          <property Id="39e2991b-7cb1-4efb-9368-dd91b7124151" name="FileCounter" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="39e2991b-7cb1-4efb-9368-dd91b7124151" name="FileCounter" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="89c1c420-332a-4b2b-b809-7e225075597a" />
             <type_NamedElement>
               <referencedTypeMoniker Id="6d939768-57af-4aa8-81c0-ac9ac29f2c09" LastKnownName="int" />
+            </type_NamedElement>
+          </property>
+          <property Id="5fb2bc44-2a26-431b-a0c6-b54c56f9eeaf" name="SubFolderCounter" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="8662dcd8-dbb0-4c9f-96ce-108d14943193" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="47e2c258-95a9-4780-8876-7b159231da0b" LastKnownName="int" />
             </type_NamedElement>
           </property>
         </ownedAttributesInternal>
@@ -1304,6 +1310,32 @@
               <operationHasOwnedParameters>
                 <parameter Id="a8dead00-cd7d-48fa-85b8-68650f09bcba" name="e" direction="In" isUnique="false">
                   <elementDefinition Id="4fe57f5e-5e1e-4afa-b914-808072597869" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="c2458b24-4849-4e0c-9d25-4ae79c925c80" name="SetFolder" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="e243dea4-af66-4a3e-b5e7-05609400b466" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="7eff54d8-1c79-49c7-8279-ec14aaefc069" name="folder" direction="In" isUnique="false">
+                  <elementDefinition Id="1fb4b1e9-35e7-4bcb-bad9-76c009e9ee95" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="315bf9bc-c0f4-421f-9090-7407e6c695db" LastKnownName="string" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="c3edb37a-1da3-4921-b8e6-2a077276be5a" name="GetBitmapFrom" visibility="Protected" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="81bd9cec-e403-4ed2-9ee4-c8bfc7e53f17" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="81e3212d-9261-444e-b947-8daac7e60d70" name="output" direction="In" isUnique="false">
+                  <elementDefinition Id="d2c44fb5-20ff-4271-aad6-8afbbea0bd39" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="d17d9ee9-477c-4c6a-9273-db95062e277b" LastKnownName="TOutput" />
+                  </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
             </ownedParameters>
@@ -1399,6 +1431,11 @@
     <packageHasNamedElement>
       <referencedType Id="6d939768-57af-4aa8-81c0-ac9ac29f2c09" name="int" isAbstract="false" isLeaf="false" cachedFullName="int">
         <elementDefinition Id="f5fdf7d5-4c61-4101-941a-a3ee2e86170a" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="d17d9ee9-477c-4c6a-9273-db95062e277b" name="TOutput" isAbstract="false" isLeaf="false" cachedFullName="TOutput">
+        <elementDefinition Id="e86d3f84-d792-47ab-9c1f-e9fa60d544f7" />
       </referencedType>
     </packageHasNamedElement>
   </packagedElements>

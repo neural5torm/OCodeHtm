@@ -5,10 +5,11 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 
+
 namespace CnrsUniProv.OCodeHtm.IntegrationTests
 {
     [TestClass]
-    public class IOTests
+    public class IntegrationTests
     {
         static readonly string TrainingSetPath = Path.Combine("O:", "clean");
 
@@ -25,15 +26,69 @@ namespace CnrsUniProv.OCodeHtm.IntegrationTests
         }
 
         [TestMethod]
-        public void CanOutputBitmapFilesFromSensorGeneratedImages()
+        public void CanOutputBitmapFilesFromSensorGeneratedImagesUsingTwoSensorsAndOneOutputFolder()
         {
-            //TODOnow! CanOutputBitmapFilesFromSensorGeneratedImages test
+            var sensor = new BitmapPictureSensor(presentationsPerInput:2, pathSpeed: 2);
+            sensor.SetTrainingFolder(TrainingSetPath);
+            var writer = new BitmapFileWriter("");
+            sensor.OnBitmapOutput += writer.OutputWriterHandler;
+
+            var nbIterations = 0;
+
+            foreach (var input in sensor.GetTrainingInputs(true))
+            {
+                foreach (var iteration in input)
+                {
+                    nbIterations++;
+                }
+            }
+
+            Assert.AreEqual(nbIterations, writer.OutputFolder.GetFiles().Length);
+
+
+            var sensor2 = new BitmapPictureSensor(presentationsPerInput: 1, pathSpeed: 4);
+            sensor2.SetTrainingFolder(TrainingSetPath);
+            var writer2 = new BitmapFileWriter("");
+            sensor2.OnBitmapOutput += writer2.OutputWriterHandler;
+
+            var nbIterations2 = 0;
+
+            foreach (var input in sensor2.GetTrainingInputs(true))
+            {
+                foreach (var iteration in input)
+                {
+                    nbIterations2++;
+                }
+            }
+
+            Assert.AreEqual(nbIterations2, writer2.OutputFolder.GetFiles().Length);
         }
 
         [TestMethod]
-        public void CanOutputTextFilesFromSensorTransformedInputs()
+        public void CanOutputBitmapFilesFromSensorTransformedInputs()
         {
-            //TODOnow CanOutputTextFilesFromSensorTransformedInputs test
+            var sensor = new BitmapPictureSensor(presentationsPerInput: 2, pathSpeed: 2);
+            sensor.SetTrainingFolder(TrainingSetPath);
+            var writer = new MatrixToBitmapFileWriter("");
+            sensor.OnMatrixOutput += writer.OutputWriterHandler;
+
+            var nbIterations = 0;
+
+            foreach (var input in sensor.GetTrainingInputs(true))
+            {
+                foreach (var iteration in input)
+                {
+                    nbIterations++;
+                }
+            }
+
+            Assert.AreEqual(nbIterations, writer.OutputFolder.GetFiles().Length);
+        }
+
+        [TestMethod]
+        public void GaussianSpatialLayerCanLearnAndInferFromPictureSensor()
+        {
+            //TODO GaussianSpatialLayerCanLearnAndInferFromPictureSensor
         }
 
         [TestMethod]

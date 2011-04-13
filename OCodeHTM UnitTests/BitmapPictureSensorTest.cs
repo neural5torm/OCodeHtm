@@ -53,7 +53,8 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         public void NoErrorWhenTrainingFolderEmpty()
         {
             var sensor = new BitmapPictureSensor();
-            sensor.SetTrainingFolder(".");
+            var emptyFolder = Directory.CreateDirectory("empty");
+            sensor.SetTrainingFolder(emptyFolder.FullName);
             try
             {
                 foreach (var input in sensor.GetTrainingInputs())

@@ -114,6 +114,7 @@ namespace CnrsUniProv.OCodeHtm
 
 
         public event OutputEventHandler<Bitmap> OnBitmapOutput;
+        public event OutputEventHandler<Matrix> OnMatrixOutput;
 
         /// <summary>
         /// Set the current input file before starting enumerating exploration iterations
@@ -129,8 +130,8 @@ namespace CnrsUniProv.OCodeHtm
             // Initialize origin (by default, leave the input in the center of the sensor)
             if (ExplorationPathUseRandomOrigin) 
             {
-                CurrentPosH = RandomGenerator.Next(2 * Width + 1) - Width;
-                CurrentPosV = RandomGenerator.Next(2 * Height + 1) - Height;
+                CurrentPosH = RandomGenerator.Next(Width + 1) - Width / 2;
+                CurrentPosV = RandomGenerator.Next(Height + 1) - Height / 2;
             }        
         }
 
@@ -179,7 +180,7 @@ namespace CnrsUniProv.OCodeHtm
             graphics.FillRectangle(new SolidBrush(Color.Black), 0, 0, Width, Height);
             graphics.DrawImage(OriginalImage, graphicsPath.PathPoints);
 
-            // notify observers about the bitmal output just created
+            // notify observers about the bitmap output just created
             if (OnBitmapOutput != null)
                 OnBitmapOutput(this, new OutputEventArgs<Bitmap>(image, CurrentCategory));
 
@@ -202,7 +203,9 @@ namespace CnrsUniProv.OCodeHtm
             // Scaling
 
             // notify observers about the matrix output
-            //TODOnow! text writer
+            if (OnMatrixOutput != null)
+                OnMatrixOutput(this, new OutputEventArgs<Matrix>(input, CurrentCategory));
+
             return input;
         }
 

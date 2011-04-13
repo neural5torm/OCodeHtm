@@ -102,9 +102,10 @@ namespace CnrsUniProv.OCodeHtm
             return output;
         }
 
-        // TODOlater get rid of clone method, use unique "cloned" node as n by m virtual (read-only) inferring nodes?
+        // TODOlater? get rid of clone method, use unique "cloned" node as n by m virtual (read-only) inferring nodes
         protected abstract void CloneTrainedNodeToArray();
 
+        // TODOlater get rid of sub matrices and use a virtual sub matrix object inheriting SparseMatrix, and referring to the original matrix but bounded
         public SparseMatrix GetSubMatrixForNodeAt(int nodeRow, int nodeColumn, SparseMatrix input)
         {
             var subInputHeight = (double)input.RowCount / Height + InputOverlapRatio * (input.RowCount - (double)input.RowCount / Height);
