@@ -31,7 +31,7 @@ namespace CnrsUniProv.OCodeHtm.IntegrationTests
             var sensor = new BitmapPictureSensor(presentationsPerInput:2, pathSpeed: 2);
             sensor.SetTrainingFolder(TrainingSetPath);
             var writer = new BitmapFileWriter("");
-            sensor.OnBitmapOutput += writer.OutputWriterHandler;
+            sensor.OnTransformedBitmapOutput += writer.OutputWriterHandler;
 
             var nbIterations = 0;
 
@@ -49,7 +49,7 @@ namespace CnrsUniProv.OCodeHtm.IntegrationTests
             var sensor2 = new BitmapPictureSensor(presentationsPerInput: 1, pathSpeed: 4);
             sensor2.SetTrainingFolder(TrainingSetPath);
             var writer2 = new BitmapFileWriter("");
-            sensor2.OnBitmapOutput += writer2.OutputWriterHandler;
+            sensor2.OnTransformedBitmapOutput += writer2.OutputWriterHandler;
 
             var nbIterations2 = 0;
 
@@ -65,12 +65,13 @@ namespace CnrsUniProv.OCodeHtm.IntegrationTests
         }
 
         [TestMethod]
-        public void CanOutputBitmapFilesFromSensorTransformedInputs()
+        public void CanOutputBitmapFilesFromSensorTransformedInputsWithRotationScalingAndTranslation()
         {
-            var sensor = new BitmapPictureSensor(presentationsPerInput: 2, pathSpeed: 2);
+            var sensor = new BitmapPictureSensor(presentationsPerInput: 1, pathSpeed: 2, 
+                rotationAngleMaxDegrees:180.0f, rotationSpeed:10.0f, scalingMin:0.5f, scalingMax:2.0f, scalingSpeed:0.1f);
             sensor.SetTrainingFolder(TrainingSetPath);
             var writer = new MatrixToBitmapFileWriter("");
-            sensor.OnMatrixOutput += writer.OutputWriterHandler;
+            sensor.OnTransformedMatrixOutput += writer.OutputWriterHandler;
 
             var nbIterations = 0;
 

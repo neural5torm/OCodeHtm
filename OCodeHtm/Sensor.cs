@@ -192,7 +192,7 @@ namespace CnrsUniProv.OCodeHtm
         public int ExplorationPathSpeed { get; set; }
 
         
-        public float ExplorationRandomRotationMaxAngle { get; private set; }
+        public float ExplorationRandomRotationAngleMaxDegrees { get; private set; }
         /// <summary>
         /// Determines angle delta between two consecutive rotated iterations.
         /// </summary>
@@ -220,21 +220,20 @@ namespace CnrsUniProv.OCodeHtm
 
 
         public Sensor(int randomizerSeed, int trainingPresentations, TrainingOrder trainingOrder,
-            ExplorationPath[] explorationModes, uint maxIterations, uint pathSpeed, bool useRandomOrigin,
-            float rotationAngleMaxDegrees = Default.NoRandomRotationAngle, float rotationSpeed = Default.NoRandomRotationSpeed,
-            float scalingMin = Default.NoRandomScalingFactor, float scalingMax = Default.NoRandomScalingFactor, float scalingSpeed = Default.NoRandomScalingSpeed)
+            ExplorationPath[] explorationPaths, uint maxIterations, uint pathSpeed, bool useRandomOrigin,
+            float rotationAngleMaxDegrees, float rotationSpeed, float scalingMin, float scalingMax, float scalingSpeed)
         {
             ExplorationRandomSeed = randomizerSeed;
 
             TrainingPresentationsPerInput = trainingPresentations;
             TrainingOrder = trainingOrder;
 
-            ExplorationPaths = explorationModes.ToList();
+            ExplorationPaths = explorationPaths.ToList();
             ExplorationPathMaxIterations = (int)maxIterations;
             ExplorationPathUseRandomOrigin = useRandomOrigin;
             ExplorationPathSpeed = (int)pathSpeed;
 
-            ExplorationRandomRotationMaxAngle = Math.Abs(rotationAngleMaxDegrees);
+            ExplorationRandomRotationAngleMaxDegrees = Math.Abs(rotationAngleMaxDegrees);
             ExplorationRandomRotationSpeed = rotationSpeed;
 
             ExplorationScalingMin = Math.Abs(scalingMin);
@@ -293,5 +292,8 @@ namespace CnrsUniProv.OCodeHtm
         {
             TestCategoryFolderPattern = new Regex(pattern);
         }
+
+
+        
     }
 }

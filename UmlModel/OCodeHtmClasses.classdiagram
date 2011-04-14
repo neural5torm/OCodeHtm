@@ -12,7 +12,7 @@
         </generalsInternal>
         <targetEnds>
           <association Id="4e140629-6ac2-4488-b1b2-59d47bf5c24e" isDerived="false" sourceEndRoleName="" targetEndRoleName="Filters {ordered}" isLeaf="false" isAbstract="false">
-            <interfaceMoniker Id="9c7ecd57-2c44-438f-89dc-785e488b58bc" LastKnownName="IFilter" />
+            <interfaceMoniker Id="9c7ecd57-2c44-438f-89dc-785e488b58bc" LastKnownName="IFilter&lt;TInput&gt;" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd Id="660e9437-b381-464f-9105-84d0747446e6" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
@@ -75,10 +75,10 @@
               <referencedTypeMoniker Id="47e2c258-95a9-4780-8876-7b159231da0b" LastKnownName="int" />
             </type_NamedElement>
           </property>
-          <property Id="7c8ba837-a6d3-4b8c-9203-511ec609fa8f" name="OriginalImage" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="7c8ba837-a6d3-4b8c-9203-511ec609fa8f" name="CurrentInputOriginalImage" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="ce630450-bc99-4298-95ef-270328e0d159" />
             <type_NamedElement>
-              <referencedTypeMoniker Id="e3964056-c05a-4e8e-90c6-63233aea3ba5" LastKnownName="Bitmap" />
+              <referencedTypeMoniker Id="c628244f-d091-4da8-a066-3a6f951ca702" LastKnownName="Bitmap" />
             </type_NamedElement>
           </property>
           <property Id="0275a2b8-421d-4ae3-ab1c-cc5660bdbff0" name="CurrentInputFile" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
@@ -93,10 +93,46 @@
               <referencedTypeMoniker Id="1f9df098-c87b-4611-adfe-934df77dc100" LastKnownName="ExplorationPath" />
             </type_NamedElement>
           </property>
-          <property Id="e6b0c731-47a1-4afd-b543-2a9a1824e942" name="IsOutsideField" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="e6b0c731-47a1-4afd-b543-2a9a1824e942" name="IsCurrentInputOutsideField" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="1737342a-3dc6-4699-a2cf-80c27af465ee" />
             <type_NamedElement>
-              <referencedTypeMoniker Id="17369a56-3da5-46d6-8dbd-1ed3305169e3" LastKnownName="bool" />
+              <referencedTypeMoniker Id="c036ed30-dd92-4f68-bd37-a78113e60979" LastKnownName="bool" />
+            </type_NamedElement>
+          </property>
+          <property Id="eecebc73-fae4-42ce-983b-5c14423b1921" name="CurrentRotationAngleDelta" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="08828e1d-c68e-48f4-ae60-3e297d9ea84f" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="692894a3-cb96-4751-9bf3-a7ab7d7c1afd" LastKnownName="float" />
+            </type_NamedElement>
+          </property>
+          <property Id="2e2180e9-f856-4ec9-bc91-5d1e1e628c2a" name="CurrentScaleDelta" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="6b4f4cb1-b2ea-4fe9-b140-dd4d249c85fa" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="2b6aded1-af2c-4079-bb5b-87af687bae98" LastKnownName="float" />
+            </type_NamedElement>
+          </property>
+          <property Id="cf78dadd-d106-4293-929f-ac973765987e" name="CurrentScale" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="b48c246a-977e-4285-9307-943433910a84" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="6891b2ca-8c1e-4f38-9fe3-175b893df2dc" LastKnownName="float" />
+            </type_NamedElement>
+          </property>
+          <property Id="39ffd99e-07f0-4134-bae8-9c6f371d9043" name="CurrentRotationAngleDegrees" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="be1fd812-cfc4-4e2c-aedb-4d4d491819aa" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="7de8f485-b086-4226-b02d-ef0cbf210a76" LastKnownName="float" />
+            </type_NamedElement>
+          </property>
+          <property Id="35d48883-e8f9-4e15-8812-50125bf69e86" name="OnTransformedBitmapOutput" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="4ae35b03-ec9c-48a0-b9b8-f13348c04b3c" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="54f8950c-7d8f-402d-a697-5bfbc4b03d27" LastKnownName="OutputEventHandler&lt;Bitmap&gt;" />
+            </type_NamedElement>
+          </property>
+          <property Id="a57e1c04-fa2f-4e81-a1e8-9c54fe2e3f07" name="OnTransformedMatrixOutput" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="97230646-a9bf-41aa-a4d3-e6b1ab3f6838" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="2583e709-f4a9-483d-a2e1-cf2d180cfbe4" LastKnownName="OutputEventHandler&lt;Matrix&gt;" />
             </type_NamedElement>
           </property>
         </ownedAttributesInternal>
@@ -147,7 +183,7 @@
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
-          <operation Id="c8611414-dacd-461c-8ef1-c076753f8520" name="InitPathDirection" visibility="Private" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+          <operation Id="c8611414-dacd-461c-8ef1-c076753f8520" name="InitTranslationPath" visibility="Private" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="dd990d14-abbc-4d80-bf09-c448ed9c418e" />
           </operation>
           <operation Id="fdd22049-7e4e-44a2-a43b-870db0cca745" name="GetNextTransformedInput" visibility="Private" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
@@ -678,8 +714,28 @@
       </Interface>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
-      <Interface Id="9c7ecd57-2c44-438f-89dc-785e488b58bc" name="IFilter" isAbstract="false" isLeaf="false">
+      <Interface Id="9c7ecd57-2c44-438f-89dc-785e488b58bc" name="IFilter&lt;TInput&gt;" isAbstract="false" isLeaf="false">
         <elementDefinition Id="fdb26c52-029b-4aa5-80ef-fe64e6e06d51" />
+        <ownedOperations>
+          <operation Id="1076e848-b64c-4b08-97e4-3c4ec4d13ccb" name="Filter" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="67c99071-e6e5-4353-bc1b-74b2255f422c" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="aa97c500-caac-4de3-aa6a-96b11d236488" name="input" direction="In" isUnique="false">
+                  <elementDefinition Id="86f38bb7-16e4-48a9-808a-9feb29fc4151" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="67351865-9d1d-4354-aa42-1fe00da5ae23" direction="Return" isUnique="false">
+                  <elementDefinition Id="a0a1c313-0a0b-4130-b46d-8a4b7b7943ea" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="b51fcfeb-8635-48d3-9b64-0ee9d40b15df" LastKnownName="TInput" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperations>
       </Interface>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
@@ -687,7 +743,7 @@
         <elementDefinition Id="81a06600-7f15-4809-a878-42670b186c68" />
         <suppliersInternal>
           <interfaceRealization Id="3de2ee2d-62b1-400b-b858-5cd7cff1e5ca">
-            <interfaceMoniker Id="9c7ecd57-2c44-438f-89dc-785e488b58bc" LastKnownName="IFilter" />
+            <interfaceMoniker Id="9c7ecd57-2c44-438f-89dc-785e488b58bc" LastKnownName="IFilter&lt;TInput&gt;" />
             <elementDefinition Id="d4c22f11-d27f-4a64-a7e2-f0418cb1291c" />
           </interfaceRealization>
         </suppliersInternal>
@@ -705,6 +761,26 @@
             </type_NamedElement>
           </property>
         </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation Id="a018538f-1cd1-4e53-91e0-0b3ca5e8efc5" name="Filter" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="41947ec0-14d6-436f-9165-28a4d0d39464" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="d55abdcf-ed5c-4111-a465-0fd8c8f4cffb" name="input" direction="In" isUnique="false">
+                  <elementDefinition Id="85726dcd-54d3-4fc8-8c69-fed61f2cd9d1" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="84399ea4-9dcd-48b5-b56a-cef5b6386d0e" direction="Return" isUnique="false">
+                  <elementDefinition Id="8d6d81fe-c5d2-420d-a0da-cbf93a55e23b" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="b51fcfeb-8635-48d3-9b64-0ee9d40b15df" LastKnownName="TInput" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
     <packageHasNamedElement>
@@ -954,10 +1030,10 @@
               <referencedTypeMoniker Id="1632cb0c-d788-4b2f-9f43-2288450b6854" LastKnownName="int" />
             </type_NamedElement>
           </property>
-          <property Id="9cb44a53-940a-4592-84cf-56511dc2dbb5" name="ExplorationRandomRotationAngleMax" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="9cb44a53-940a-4592-84cf-56511dc2dbb5" name="ExplorationRandomRotationAngleMaxDegrees" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="fd7b6141-a3f7-45c5-a3d2-3cee875fde45" />
             <type_NamedElement>
-              <referencedTypeMoniker Id="692894a3-cb96-4751-9bf3-a7ab7d7c1afd" LastKnownName="float" />
+              <referencedTypeMoniker Id="f6a33c99-404f-4c39-825a-65f3d7a4d920" LastKnownName="float" />
             </type_NamedElement>
           </property>
           <property Id="4a0f8792-e002-4bb3-b2ec-c85bc37e1a29" name="ExplorationRandomRotationSpeed" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
@@ -1364,11 +1440,6 @@
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <referencedType Id="e3964056-c05a-4e8e-90c6-63233aea3ba5" name="Bitmap" isAbstract="false" isLeaf="false" cachedFullName="Bitmap">
-        <elementDefinition Id="dac84a52-4445-4b40-a83a-87291b20204b" />
-      </referencedType>
-    </packageHasNamedElement>
-    <packageHasNamedElement>
       <referencedType Id="36273efd-4355-483d-894b-a57d84d69712" name="IEnumerator&lt;SparseMatrix&gt;" isAbstract="false" isLeaf="false" cachedFullName="IEnumerator&lt;SparseMatrix&gt;">
         <elementDefinition Id="70f857f3-3280-4e50-a17d-9c160930b2d4" />
       </referencedType>
@@ -1436,6 +1507,51 @@
     <packageHasNamedElement>
       <referencedType Id="d17d9ee9-477c-4c6a-9273-db95062e277b" name="TOutput" isAbstract="false" isLeaf="false" cachedFullName="TOutput">
         <elementDefinition Id="e86d3f84-d792-47ab-9c1f-e9fa60d544f7" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="b51fcfeb-8635-48d3-9b64-0ee9d40b15df" name="TInput" isAbstract="false" isLeaf="false" cachedFullName="TInput">
+        <elementDefinition Id="293a0302-9c40-4df6-8dbb-6d6445f9fc5b" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="c036ed30-dd92-4f68-bd37-a78113e60979" name="bool" isAbstract="false" isLeaf="false" cachedFullName="bool">
+        <elementDefinition Id="1e54acf1-0d02-4896-a606-2e388056f9d4" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="c628244f-d091-4da8-a066-3a6f951ca702" name="Bitmap" isAbstract="false" isLeaf="false" cachedFullName="Bitmap">
+        <elementDefinition Id="dac84a52-4445-4b40-a83a-87291b20204b" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="6891b2ca-8c1e-4f38-9fe3-175b893df2dc" name="float" isAbstract="false" isLeaf="false" cachedFullName="float">
+        <elementDefinition Id="c4e30149-8792-47ff-b260-b7cae0ff15db" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="2b6aded1-af2c-4079-bb5b-87af687bae98" name="float" isAbstract="false" isLeaf="false" cachedFullName="float">
+        <elementDefinition Id="c4e30149-8792-47ff-b260-b7cae0ff15db" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="2583e709-f4a9-483d-a2e1-cf2d180cfbe4" name="OutputEventHandler&lt;Matrix&gt;" isAbstract="false" isLeaf="false" cachedFullName="OutputEventHandler&lt;Matrix&gt;">
+        <elementDefinition Id="ce7c0a57-835b-47dc-ba0d-5c4322456706" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="54f8950c-7d8f-402d-a697-5bfbc4b03d27" name="OutputEventHandler&lt;Bitmap&gt;" isAbstract="false" isLeaf="false" cachedFullName="OutputEventHandler&lt;Bitmap&gt;">
+        <elementDefinition Id="186099dc-05d7-4915-85b2-4fa083c82aeb" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="f6a33c99-404f-4c39-825a-65f3d7a4d920" name="float" isAbstract="false" isLeaf="false" cachedFullName="float">
+        <elementDefinition Id="c4e30149-8792-47ff-b260-b7cae0ff15db" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="7de8f485-b086-4226-b02d-ef0cbf210a76" name="float" isAbstract="false" isLeaf="false" cachedFullName="float">
+        <elementDefinition Id="c4e30149-8792-47ff-b260-b7cae0ff15db" />
       </referencedType>
     </packageHasNamedElement>
   </packagedElements>

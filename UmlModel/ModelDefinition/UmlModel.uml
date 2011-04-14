@@ -45,7 +45,7 @@
             isAbstract="false">
             <interfaceMoniker
               Id="fdb26c52-029b-4aa5-80ef-fe64e6e06d51"
-              LastKnownName="IFilter"
+              LastKnownName="IFilter&lt;TInput&gt;"
               LastKnownLocation="UmlModel.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
@@ -200,7 +200,7 @@
           </property>
           <property
             Id="ce630450-bc99-4298-95ef-270328e0d159"
-            name="OriginalImage"
+            name="CurrentInputOriginalImage"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -254,7 +254,7 @@
           </property>
           <property
             Id="1737342a-3dc6-4699-a2cf-80c27af465ee"
-            name="IsOutsideField"
+            name="IsCurrentInputOutsideField"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -267,6 +267,114 @@
               <undefinedTypeMoniker
                 Id="1e54acf1-0d02-4896-a606-2e388056f9d4"
                 LastKnownName="bool"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="08828e1d-c68e-48f4-ae60-3e297d9ea84f"
+            name="CurrentRotationAngleDelta"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="c4e30149-8792-47ff-b260-b7cae0ff15db"
+                LastKnownName="float"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="6b4f4cb1-b2ea-4fe9-b140-dd4d249c85fa"
+            name="CurrentScaleDelta"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="c4e30149-8792-47ff-b260-b7cae0ff15db"
+                LastKnownName="float"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="b48c246a-977e-4285-9307-943433910a84"
+            name="CurrentScale"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="c4e30149-8792-47ff-b260-b7cae0ff15db"
+                LastKnownName="float"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="be1fd812-cfc4-4e2c-aedb-4d4d491819aa"
+            name="CurrentRotationAngleDegrees"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="c4e30149-8792-47ff-b260-b7cae0ff15db"
+                LastKnownName="float"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="4ae35b03-ec9c-48a0-b9b8-f13348c04b3c"
+            name="OnTransformedBitmapOutput"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="186099dc-05d7-4915-85b2-4fa083c82aeb"
+                LastKnownName="OutputEventHandler&lt;Bitmap&gt;"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="97230646-a9bf-41aa-a4d3-e6b1ab3f6838"
+            name="OnTransformedMatrixOutput"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="ce7c0a57-835b-47dc-ba0d-5c4322456706"
+                LastKnownName="OutputEventHandler&lt;Matrix&gt;"
                 LastKnownLocation="UmlModel.uml" />
             </type_NamedElement>
           </property>
@@ -357,7 +465,7 @@
           </operation>
           <operation
             Id="dd990d14-abbc-4d80-bf09-c448ed9c418e"
-            name="InitPathDirection"
+            name="InitTranslationPath"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -1941,9 +2049,43 @@
     <packageHasNamedElement>
       <Interface
         Id="fdb26c52-029b-4aa5-80ef-fe64e6e06d51"
-        name="IFilter"
+        name="IFilter&lt;TInput&gt;"
         isAbstract="false"
-        isLeaf="false" />
+        isLeaf="false">
+        <ownedOperations>
+          <operation
+            Id="67c99071-e6e5-4353-bc1b-74b2255f422c"
+            name="Filter"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="86f38bb7-16e4-48a9-808a-9feb29fc4151"
+                  name="input"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="a0a1c313-0a0b-4130-b46d-8a4b7b7943ea"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="293a0302-9c40-4df6-8dbb-6d6445f9fc5b"
+                      LastKnownName="TInput"
+                      LastKnownLocation="UmlModel.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperations>
+      </Interface>
     </packageHasNamedElement>
     <packageHasNamedElement>
       <class
@@ -1957,7 +2099,7 @@
             Id="d4c22f11-d27f-4a64-a7e2-f0418cb1291c">
             <interfaceMoniker
               Id="fdb26c52-029b-4aa5-80ef-fe64e6e06d51"
-              LastKnownName="IFilter"
+              LastKnownName="IFilter&lt;TInput&gt;"
               LastKnownLocation="UmlModel.uml" />
           </interfaceRealization>
         </suppliersInternal>
@@ -1999,6 +2141,39 @@
             </type_NamedElement>
           </property>
         </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="41947ec0-14d6-436f-9165-28a4d0d39464"
+            name="Filter"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="85726dcd-54d3-4fc8-8c69-fed61f2cd9d1"
+                  name="input"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="8d6d81fe-c5d2-420d-a0da-cbf93a55e23b"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="293a0302-9c40-4df6-8dbb-6d6445f9fc5b"
+                      LastKnownName="TInput"
+                      LastKnownLocation="UmlModel.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -2522,7 +2697,7 @@
           </property>
           <property
             Id="fd7b6141-a3f7-45c5-a3d2-3cee875fde45"
-            name="ExplorationRandomRotationAngleMax"
+            name="ExplorationRandomRotationAngleMaxDegrees"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -3320,6 +3495,21 @@
       <undefinedType
         Id="32d4a746-03bb-4e46-a988-34f2380c4fe3"
         name="OutputEventArgs&lt;TOutput&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="293a0302-9c40-4df6-8dbb-6d6445f9fc5b"
+        name="TInput" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="186099dc-05d7-4915-85b2-4fa083c82aeb"
+        name="OutputEventHandler&lt;Bitmap&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="ce7c0a57-835b-47dc-ba0d-5c4322456706"
+        name="OutputEventHandler&lt;Matrix&gt;" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType

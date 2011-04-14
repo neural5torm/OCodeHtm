@@ -47,6 +47,7 @@
     <Compile Include="BitmapFileWriter.cs" />
     <Compile Include="BitmapPictureSensor.cs" />
     <Compile Include="Exceptions\HtmException.cs" />
+    <Compile Include="ExtensionMethods.cs" />
     <Compile Include="HtmLayer2D.cs" />
     <Compile Include="Interfaces\ICloneable.cs" />
     <Compile Include="Interfaces\ILearningInferring.cs" />

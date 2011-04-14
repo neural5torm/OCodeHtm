@@ -348,5 +348,6 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         }
 
         //TODO tests with filters(&transformations)
+        //TODO test IsCurrentInputOutsideField()
     }
 }

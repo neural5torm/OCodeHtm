@@ -25,11 +25,11 @@ namespace CnrsUniProv.OCodeHtm
                 {
                     try
                     {
-                        if (CurrentInputFile == null || OriginalImage == null)
+                        if (CurrentInputFile == null || CurrentInputOriginalImage == null)
                             throw new Exception("No current input file");
 
-                        height = OriginalImage.Height;
-                        width = OriginalImage.Width;
+                        height = CurrentInputOriginalImage.Height;
+                        width = CurrentInputOriginalImage.Width;
                     }
                     catch (Exception e)
                     {
@@ -65,25 +65,22 @@ namespace CnrsUniProv.OCodeHtm
             }
         }
 
+
         public FileInfo CurrentInputFile { get; private set; }
+        public Bitmap CurrentInputOriginalImage { get; set; }
         public string CurrentCategory { get; private set; }
 
-        public Bitmap OriginalImage { get; set; }
+
+        private ExplorationPath CurrentPath { get; set; }
 
         public int CurrentPosV { get; private set; }
         public int CurrentPosH { get; private set; }
-
-        private ExplorationPath CurrentPath { get; set;}
-
-        public int CurrentPathDeltaV { get; private set; }
-        public int CurrentPathDeltaH { get; private set; }
-
 
         /// <summary>
         /// Determines if the current input is shown outside of the area surrounding the sensor 
         /// (its top left origin should remain between -Width&lt;=X&lt;=Width and -Height&lt;=Y&lt;=Height)
         /// </summary>
-        public bool IsOutsideField
+        public bool IsCurrentInputOutsideField
         {
             get
             {
@@ -91,20 +88,34 @@ namespace CnrsUniProv.OCodeHtm
                     || CurrentPosV < -Height || CurrentPosV > Height;
             }
         }
-        
+
+        public int CurrentPathDeltaV { get; private set; }
+        public int CurrentPathDeltaH { get; private set; }
+
+
+        public float CurrentRotationAngleDegrees { get; private set; }
+        public float CurrentScale { get; private set; }
+
+        public float CurrentRotationAngleDelta { get; private set; }
+        public float CurrentScaleDelta { get; private set; }
+
 
 
         public BitmapPictureSensor(uint height = Default.AutomaticSize, uint width = Default.AutomaticSize, 
             int randomizerSeed = Default.RandomizerSeed, int presentationsPerInput = Default.SinglePresentation, TrainingOrder trainingOrder = TrainingOrder.Normal,
             uint maxIterations = Default.NoMaxIterations, uint pathSpeed = Default.PathSpeed, bool useRandomOrigin = Default.PathUseRandomOrigin, //TODOlater use enum {Center,Left,RandomOutsideSensor?,Random} for origins
+            float rotationAngleMaxDegrees = Default.NoRandomRotationAngle, float rotationSpeed = Default.NoRandomRotationSpeed,
+            float scalingMin = Default.NoRandomScalingFactor, float scalingMax = Default.NoRandomScalingFactor, float scalingSpeed = Default.NoRandomScalingSpeed,
             params ExplorationPath[] explorationPaths)
-            : base(randomizerSeed, presentationsPerInput, trainingOrder, explorationPaths, maxIterations, pathSpeed, useRandomOrigin)
+
+            : base(randomizerSeed, presentationsPerInput, trainingOrder, explorationPaths, maxIterations, pathSpeed, useRandomOrigin, 
+                    rotationAngleMaxDegrees, rotationSpeed, scalingMin, scalingMax, scalingSpeed)
         {
             Height = (int)height;
             Width = (int)width;
 
 
-            // More default values, for good measure:
+            // More default values:
             InputFilenameMask = Default.BitmapInputFilenameMask;
 
             if (explorationPaths.Length == 0)
@@ -113,8 +124,9 @@ namespace CnrsUniProv.OCodeHtm
 
 
 
-        public event OutputEventHandler<Bitmap> OnBitmapOutput;
-        public event OutputEventHandler<Matrix> OnMatrixOutput;
+        public event OutputEventHandler<Bitmap> OnTransformedBitmapOutput;
+        public event OutputEventHandler<Matrix> OnTransformedMatrixOutput;
+        public event OutputEventHandler<Matrix> OnFilteredMatrixOutput;//TODO use OnFilteredMatrixOutput
 
         /// <summary>
         /// Set the current input file before starting enumerating exploration iterations
@@ -125,13 +137,13 @@ namespace CnrsUniProv.OCodeHtm
             CurrentInputFile = file;
             CurrentCategory = category;
 
-            OriginalImage = new Bitmap(file.FullName);
+            CurrentInputOriginalImage = new Bitmap(file.FullName);
 
             // Initialize origin (by default, leave the input in the center of the sensor)
             if (ExplorationPathUseRandomOrigin) 
             {
-                CurrentPosH = RandomGenerator.Next(Width + 1) - Width / 2;
-                CurrentPosV = RandomGenerator.Next(Height + 1) - Height / 2;
+                CurrentPosH = RandomGenerator.Next(-Width / 2, Width / 2 + 1);
+                CurrentPosV = RandomGenerator.Next(-Height / 2, Height / 2 + 1);
             }        
         }
 
@@ -147,12 +159,16 @@ namespace CnrsUniProv.OCodeHtm
                 foreach (var path in ExplorationPaths)
                 {
                     CurrentPath = path;
-                    InitPathDirection();
 
-                    SparseMatrix input = new SparseMatrix(1, 1, 1);
+                    InitPathTranslation();
+                    InitRotation();
+                    InitScaling();
+
+                    var input = new SparseMatrix(1, 1, 1);
+
                     for (int iteration = 0; iteration < ExplorationPathMaxIterations; iteration++)
                     {
-                        if (IsOutsideField || input.FrobeniusNorm() == 0.0)
+                        if (IsCurrentInputOutsideField || IsInputBlank(input))
                             break;
 
                         input = GetNextTransformedInput();
@@ -161,7 +177,7 @@ namespace CnrsUniProv.OCodeHtm
                 }
         }
 
-        
+               
 
         private SparseMatrix GetNextTransformedInput()
         {
@@ -169,8 +185,8 @@ namespace CnrsUniProv.OCodeHtm
             var graphics = Graphics.FromImage(image);
             
             var transformMatrix = new D2D.Matrix();            
-            transformMatrix.RotateAt(ExplorationRandomRotationMaxAngle, new Point(Width / 2, Height / 2), D2D.MatrixOrder.Append);
-            transformMatrix.Scale(ExplorationScalingMax, ExplorationScalingMax, D2D.MatrixOrder.Append);
+            transformMatrix.RotateAt(CurrentRotationAngleDegrees, new Point(Width / 2, Height / 2), D2D.MatrixOrder.Append);
+            transformMatrix.Scale(CurrentScale, CurrentScale, D2D.MatrixOrder.Append);
             transformMatrix.Translate(CurrentPosH, CurrentPosV, D2D.MatrixOrder.Append);
 
             var graphicsPath = new D2D.GraphicsPath();
@@ -178,11 +194,11 @@ namespace CnrsUniProv.OCodeHtm
             graphicsPath.Transform(transformMatrix);
 
             graphics.FillRectangle(new SolidBrush(Color.Black), 0, 0, Width, Height);
-            graphics.DrawImage(OriginalImage, graphicsPath.PathPoints);
+            graphics.DrawImage(CurrentInputOriginalImage, graphicsPath.PathPoints);
 
             // notify observers about the bitmap output just created
-            if (OnBitmapOutput != null)
-                OnBitmapOutput(this, new OutputEventArgs<Bitmap>(image, CurrentCategory));
+            if (OnTransformedBitmapOutput != null)
+                OnTransformedBitmapOutput(this, new OutputEventArgs<Bitmap>(image, CurrentCategory));
 
             var input = new SparseMatrix(Height, Width);
             for (int i = 0; i < input.ColumnCount; i++)
@@ -194,20 +210,16 @@ namespace CnrsUniProv.OCodeHtm
                 }
             }
 
-            // Increment transformation params:
-            // Translation
-            CurrentPosH += CurrentPathDeltaH;
-            CurrentPosV += CurrentPathDeltaV;
-
-            // TODO Rotation
-            // Scaling
+            IncrementTransformationParameters();
 
             // notify observers about the matrix output
-            if (OnMatrixOutput != null)
-                OnMatrixOutput(this, new OutputEventArgs<Matrix>(input, CurrentCategory));
+            if (OnTransformedMatrixOutput != null)
+                OnTransformedMatrixOutput(this, new OutputEventArgs<Matrix>(input, CurrentCategory));
 
             return input;
         }
+
+        
 
         private SparseMatrix FilterInput(SparseMatrix input)
         {
@@ -216,28 +228,28 @@ namespace CnrsUniProv.OCodeHtm
         }
 
 
-        
-        private void InitPathDirection()
+
+        private void InitPathTranslation()
         {
             // Path direction (translation)
             switch (CurrentPath)
             {
                 case ExplorationPath.RandomSweep4Axes:
-                    CurrentPathDeltaH = RandomGenerator.Next(3) - 1;
-                    CurrentPathDeltaV = RandomGenerator.Next(3) - 1;
+                    CurrentPathDeltaH = RandomGenerator.Next(-1, 2);
+                    CurrentPathDeltaV = RandomGenerator.Next(-1, 2);
                     // Check
                     if (CurrentPathDeltaH == 0 && CurrentPathDeltaV == 0)
                         switch (RandomGenerator.Next(3))
                         {
                             case 0:
-                                CurrentPathDeltaH = RandomGenerator.Next(2) > 0 ? -1 : 1;
+                                CurrentPathDeltaH = RandomGenerator.NextSign();
                                 break;
                             case 1:
-                                CurrentPathDeltaV = RandomGenerator.Next(2) > 0 ? -1 : 1;
+                                CurrentPathDeltaV = RandomGenerator.NextSign();
                                 break;
                             default:
-                                CurrentPathDeltaH = RandomGenerator.Next(2) > 0 ? -1 : 1;
-                                CurrentPathDeltaV = RandomGenerator.Next(2) > 0 ? -1 : 1;
+                                CurrentPathDeltaH = RandomGenerator.NextSign();
+                                CurrentPathDeltaV = RandomGenerator.NextSign();
                                 break;
                         }
                     break;
@@ -253,12 +265,45 @@ namespace CnrsUniProv.OCodeHtm
                     break;
             }
             
-
             CurrentPathDeltaH *= ExplorationPathSpeed;
             CurrentPathDeltaV *= ExplorationPathSpeed;
+        }
 
-            // TODO Rotation
+        private void InitRotation()
+        {
+            CurrentRotationAngleDegrees = Convert.ToSingle(RandomGenerator.NextDouble() * 2 * ExplorationRandomRotationAngleMaxDegrees - ExplorationRandomRotationAngleMaxDegrees);
+            
+            CurrentRotationAngleDelta = RandomGenerator.NextSign() * ExplorationRandomRotationSpeed;
+        }
+
+        private void InitScaling()
+        {
+            CurrentScale = Convert.ToSingle(RandomGenerator.NextDouble() * (ExplorationScalingMax - ExplorationScalingMin) + ExplorationScalingMin);
+
+            CurrentScaleDelta = RandomGenerator.NextSign() * ExplorationScalingSpeed;
+        }
+
+
+        private void IncrementTransformationParameters()
+        {
+            // Increment transformation params:
+            // Translation
+            CurrentPosH += CurrentPathDeltaH;
+            CurrentPosV += CurrentPathDeltaV;
+
+            // Rotation
+            if (Math.Abs(CurrentRotationAngleDegrees + CurrentRotationAngleDelta) <= ExplorationRandomRotationAngleMaxDegrees)
+                CurrentRotationAngleDegrees += CurrentRotationAngleDelta;
+
             // Scaling
+            if (CurrentScale + CurrentScaleDelta >= ExplorationScalingMin
+                && CurrentScale + CurrentScaleDelta <= ExplorationScalingMax)
+                CurrentScale += CurrentScaleDelta;
+        }
+
+        private bool IsInputBlank(SparseMatrix input)
+        {
+            return input.FrobeniusNorm() == 0.0;
         }
     }
 }
