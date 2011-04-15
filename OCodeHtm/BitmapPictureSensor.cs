@@ -103,7 +103,7 @@ namespace CnrsUniProv.OCodeHtm
 
         public BitmapPictureSensor(uint height = Default.AutomaticSize, uint width = Default.AutomaticSize, 
             int randomizerSeed = Default.RandomizerSeed, int presentationsPerInput = Default.SinglePresentation, TrainingOrder trainingOrder = TrainingOrder.Normal,
-            uint maxIterations = Default.NoMaxIterations, uint pathSpeed = Default.PathSpeed, bool useRandomOrigin = Default.PathUseRandomOrigin, //TODOlater use enum {Center,Left,RandomOutsideSensor?,Random} for origins
+            uint maxIterations = Default.NoMaxIterations, uint pathSpeed = Default.PathSpeed, bool useRandomOrigin = Default.PathUseRandomOrigin, // TODOlater use enum {Center,Left,RandomOutsideSensor?,Random} for origins
             float rotationAngleMaxDegrees = Default.NoRandomRotationAngle, float rotationSpeed = Default.NoRandomRotationSpeed,
             float scalingMin = Default.NoRandomScalingFactor, float scalingMax = Default.NoRandomScalingFactor, float scalingSpeed = Default.NoRandomScalingSpeed,
             params ExplorationPath[] explorationPaths)
