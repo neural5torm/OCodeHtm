@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OCodeHtm", "OCodeHtm\OCodeH
 EndProject
 Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "UML Model", "UmlModel\UML Model.modelproj", "{C98913DD-5E51-4965-A471-653D466FC8F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unit Tests", "OCodeHTM UnitTests\Unit Tests.csproj", "{955DB3E4-66AC-4474-87C7-AEDF9ACB42CA}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{54E05998-E912-4D44-A64B-A167A48D7936}"
 	ProjectSection(SolutionItems) = preProject
 		Local.testsettings = Local.testsettings
@@ -24,6 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{617BABFE-7
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integration Tests", "IntegrationTests\Integration Tests.csproj", "{087973C6-0990-4FAF-BE45-E3ECEBAF8587}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unit Tests", "UnitTests\Unit Tests.csproj", "{955DB3E4-66AC-4474-87C7-AEDF9ACB42CA}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
@@ -56,26 +56,26 @@ Global
 		{C98913DD-5E51-4965-A471-653D466FC8F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C98913DD-5E51-4965-A471-653D466FC8F2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C98913DD-5E51-4965-A471-653D466FC8F2}.Release|x86.ActiveCfg = Release|Any CPU
-		{955DB3E4-66AC-4474-87C7-AEDF9ACB42CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{955DB3E4-66AC-4474-87C7-AEDF9ACB42CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{955DB3E4-66AC-4474-87C7-AEDF9ACB42CA}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{955DB3E4-66AC-4474-87C7-AEDF9ACB42CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{955DB3E4-66AC-4474-87C7-AEDF9ACB42CA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{955DB3E4-66AC-4474-87C7-AEDF9ACB42CA}.Release|x86.ActiveCfg = Release|Any CPU
 		{087973C6-0990-4FAF-BE45-E3ECEBAF8587}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{087973C6-0990-4FAF-BE45-E3ECEBAF8587}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{087973C6-0990-4FAF-BE45-E3ECEBAF8587}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{087973C6-0990-4FAF-BE45-E3ECEBAF8587}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{087973C6-0990-4FAF-BE45-E3ECEBAF8587}.Release|Any CPU.Build.0 = Release|Any CPU
 		{087973C6-0990-4FAF-BE45-E3ECEBAF8587}.Release|x86.ActiveCfg = Release|Any CPU
+		{955DB3E4-66AC-4474-87C7-AEDF9ACB42CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{955DB3E4-66AC-4474-87C7-AEDF9ACB42CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{955DB3E4-66AC-4474-87C7-AEDF9ACB42CA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{955DB3E4-66AC-4474-87C7-AEDF9ACB42CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{955DB3E4-66AC-4474-87C7-AEDF9ACB42CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{955DB3E4-66AC-4474-87C7-AEDF9ACB42CA}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{955DB3E4-66AC-4474-87C7-AEDF9ACB42CA} = {67C2635A-C636-4EDA-A3B9-8B53C9A3DB17}
 		{54E05998-E912-4D44-A64B-A167A48D7936} = {67C2635A-C636-4EDA-A3B9-8B53C9A3DB17}
 		{C98913DD-5E51-4965-A471-653D466FC8F2} = {67C2635A-C636-4EDA-A3B9-8B53C9A3DB17}
 		{087973C6-0990-4FAF-BE45-E3ECEBAF8587} = {67C2635A-C636-4EDA-A3B9-8B53C9A3DB17}
+		{955DB3E4-66AC-4474-87C7-AEDF9ACB42CA} = {67C2635A-C636-4EDA-A3B9-8B53C9A3DB17}
 	EndGlobalSection
 EndGlobal
