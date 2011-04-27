@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
-
+using CnrsUniProv.OCodeHtm.Interfaces;
+using MathNet.Numerics.LinearAlgebra.Double;
 
 namespace CnrsUniProv.OCodeHtm.IntegrationTests
 {
@@ -64,8 +65,30 @@ namespace CnrsUniProv.OCodeHtm.IntegrationTests
             Assert.AreEqual(nbIterations2, writer2.OutputFolder.GetFiles().Length);
         }
 
+
         [TestMethod]
-        public void CanOutputBitmapFilesFromSensorTransformedInputsWithRotationScalingAndTranslation()
+        public void CanOutputBitmapFilesFromSensorTransformedInputsWithTranslation()
+        {
+            var sensor = new BitmapPictureSensor(presentationsPerInput: 1, pathSpeed: 2);
+            sensor.SetTrainingFolder(TrainingSetPath);
+            var writer = new MatrixToBitmapFileWriter("");
+            sensor.OnTransformedMatrixOutput += writer.OutputWriterHandler;
+
+            var nbIterations = 0;
+
+            foreach (var input in sensor.GetTrainingInputs(true))
+            {
+                foreach (var iteration in input)
+                {
+                    nbIterations++;
+                }
+            }
+
+            Assert.AreEqual(nbIterations, writer.OutputFolder.GetFiles().Length);
+        }
+
+        [TestMethod]
+        public void CanOutputBitmapFilesFromSensorTransformedInputsWithTranslationRotationAndScaling()
         {
             var sensor = new BitmapPictureSensor(presentationsPerInput: 1, pathSpeed: 2, 
                 rotationAngleMaxDegrees:180.0f, rotationSpeed:10.0f, scalingMin:0.5f, scalingMax:2.0f, scalingSpeed:0.1f);
@@ -84,6 +107,27 @@ namespace CnrsUniProv.OCodeHtm.IntegrationTests
             }
 
             Assert.AreEqual(nbIterations, writer.OutputFolder.GetFiles().Length);
+        }
+
+        [TestMethod]
+        public void CanOutputFilterFromGabor2DFilter()
+        {
+            //TODOnow! check correctness
+            var filter = new Gabor2DFilter(4, 1.0);
+            var writer = new MatrixToBitmapFileWriter("");
+            filter.OnFilterCreated += writer.OutputWriterHandler;
+
+
+            for (int i = 0; i < filter.FilterMatricesReal.Length; i++)
+            {
+                var real = filter.FilterMatricesReal[i];
+                var imag = filter.FilterMatricesImaginary[i];
+
+                var filterNorm = (Matrix)real.PointwiseApply((d) => Math.Pow(d, 2.0)).Add(imag.PointwiseApply((d) => Math.Pow(d, 2.0)));
+                filterNorm = (Matrix)filterNorm.PointwiseApply((d) => Math.Pow(d, 0.5));
+
+                writer.OutputWriterHandler(this, new OutputEventArgs<Matrix>(filterNorm, "normedFilter"));
+            }
         }
 
         [TestMethod]

@@ -42,6 +42,10 @@ namespace CnrsUniProv.OCodeHtm
         Random, Normal, Reverse, RandomAll
     }
     
+    public enum MultipleOutputFilterMode
+    {
+        Concatenated,
+    }
     
     
     public static class Default
@@ -77,5 +81,8 @@ namespace CnrsUniProv.OCodeHtm
 
         public const bool UseTransformationsForTraining = true;
         public const bool DontUseTransformationsForTesting = false;
+
+        public const int GaborOrientations = 4;
+        public const double SquareAspectRatio = 1.0;
     }
 }

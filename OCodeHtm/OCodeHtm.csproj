@@ -37,6 +37,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,7 +49,9 @@
     <Compile Include="BitmapPictureSensor.cs" />
     <Compile Include="Exceptions\HtmException.cs" />
     <Compile Include="ExtensionMethods.cs" />
+    <Compile Include="Gabor2DFilter.cs" />
     <Compile Include="HtmLayer2D.cs" />
+    <Compile Include="Interfaces\IFilter.cs" />
     <Compile Include="Interfaces\ICloneable.cs" />
     <Compile Include="Interfaces\ILearningInferring.cs" />
     <Compile Include="Interfaces\INode.cs" />

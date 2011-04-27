@@ -52,8 +52,9 @@ namespace CnrsUniProv.OCodeHtm
         public void OutputWriterHandler(object sender, OutputEventArgs<TOutput> e)
         {
             //TODO async (see http://stackoverflow.com/questions/803242/understanding-events-and-event-handlers-in-c/803274#803274)
-            GetBitmapFrom(e.Output).Save(Path.Combine(OutputFolder.FullName, string.Format("{0}{1:D4}_{2}_{3}.png", 
-                sender.GetType().Name, FileCounter++, e.Category, this.GetType().Name)), ImageFormat.Png);
+            GetBitmapFrom(e.Output).Save(
+                Path.Combine(OutputFolder.FullName, string.Format("{0}{1:D7}_{2}_{3}.bmp", sender.GetType().Name, FileCounter++, e.Category, this.GetType().Name)), 
+                ImageFormat.Bmp);
         }
 
 
@@ -82,16 +83,18 @@ namespace CnrsUniProv.OCodeHtm
 
         protected override Bitmap GetBitmapFrom(Matrix output)
         {
-            int width = output.ColumnCount;
-            int height = output.RowCount;
+            var normalized = output.Normalize(byte.MaxValue, 0, 0.5);
+
+            int width = normalized.ColumnCount;
+            int height = normalized.RowCount;
             byte[] pixelValues = new byte[width * height * 3]; // 24bpp
 
-            foreach (var item in output.IndexedEnumerator())
+            foreach (var item in normalized.IndexedEnumerator())
             {
                 var color = Convert.ToByte(item.Item3);
-                pixelValues[(item.Item2 * width + item.Item1) * 3/*24bpp*/] = color;
-                pixelValues[(item.Item2 * width + item.Item1) * 3/*24bpp*/ + 1] = color;
-                pixelValues[(item.Item2 * width + item.Item1) * 3/*24bpp*/ + 2] = color;
+                pixelValues[(item.Item1 + item.Item2 * height) * 3/*24bpp*/] = color;
+                pixelValues[(item.Item1 + item.Item2 * height) * 3/*24bpp*/ + 1] = color;
+                pixelValues[(item.Item1 + item.Item2 * height) * 3/*24bpp*/ + 2] = color;
             }
 
             var bitmap = new Bitmap(width, height, PixelFormat.Format24bppRgb);

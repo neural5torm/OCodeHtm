@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.IO;
 using CnrsUniProv.OCodeHtm.Exceptions;
+using CnrsUniProv.OCodeHtm.Interfaces;
 
 namespace CnrsUniProv.OCodeHtm
 {
@@ -217,6 +218,7 @@ namespace CnrsUniProv.OCodeHtm
         public string InputFilenameMask { get; set; }
 
 
+        public List<IFilter<TOutput>> Filters { get; private set; }
 
 
         public Sensor(int randomizerSeed, int trainingPresentations, TrainingOrder trainingOrder,
@@ -241,7 +243,9 @@ namespace CnrsUniProv.OCodeHtm
             ExplorationScalingSpeed = scalingSpeed;
             
             // Default null objects:
+            Filters = new List<IFilter<TOutput>>();
             TestFolders = new List<DirectoryInfo>(); 
+            
             InputFilenameMask = Default.InputFilenameMask;
             SetTrainingCategoryFolderPattern();
             SetTestCategoryFolderPattern();
@@ -293,7 +297,10 @@ namespace CnrsUniProv.OCodeHtm
             TestCategoryFolderPattern = new Regex(pattern);
         }
 
-
+        public void AddFilter(IFilter<TOutput> filter)
+        {
+            Filters.Add(filter);
+        }
         
     }
 }

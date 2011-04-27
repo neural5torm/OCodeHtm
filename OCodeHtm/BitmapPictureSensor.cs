@@ -14,7 +14,7 @@ namespace CnrsUniProv.OCodeHtm
 {
     public class BitmapPictureSensor : Sensor<SparseMatrix>
     {
-        public const double MAX_VALUE = 255.0;
+        public const double MAX_VALUE = 1.0;
 
         private int height;
         public int Height
@@ -126,7 +126,7 @@ namespace CnrsUniProv.OCodeHtm
 
         public event OutputEventHandler<Bitmap> OnTransformedBitmapOutput;
         public event OutputEventHandler<Matrix> OnTransformedMatrixOutput;
-        public event OutputEventHandler<Matrix> OnFilteredMatrixOutput;//TODO use OnFilteredMatrixOutput
+        public event OutputEventHandler<Matrix> OnFilteredMatrixOutput;//TODO test and use OnFilteredMatrixOutput
 
         /// <summary>
         /// Set the current input file before starting enumerating exploration iterations
@@ -153,7 +153,7 @@ namespace CnrsUniProv.OCodeHtm
         {
             if (!useTransformations)
             {
-                yield return FilterInput(GetNextTransformedInput());
+                yield return FilterInput(TransformNextInput());
             }
             else
                 foreach (var path in ExplorationPaths)
@@ -171,7 +171,7 @@ namespace CnrsUniProv.OCodeHtm
                         if (IsCurrentInputOutsideField || IsInputBlank(input))
                             break;
 
-                        input = GetNextTransformedInput();
+                        input = TransformNextInput();
                         yield return FilterInput(input);
                     }
                 }
@@ -179,7 +179,7 @@ namespace CnrsUniProv.OCodeHtm
 
                
 
-        private SparseMatrix GetNextTransformedInput()
+        private SparseMatrix TransformNextInput()
         {
             var image = new Bitmap(Width, Height);
             var graphics = Graphics.FromImage(image);
@@ -200,13 +200,13 @@ namespace CnrsUniProv.OCodeHtm
             if (OnTransformedBitmapOutput != null)
                 OnTransformedBitmapOutput(this, new OutputEventArgs<Bitmap>(image, CurrentCategory));
 
-            var input = new SparseMatrix(Height, Width);
-            for (int i = 0; i < input.ColumnCount; i++)
+            var output = new SparseMatrix(Height, Width);
+            for (int i = 0; i < output.ColumnCount; i++)
             {
-                for (int j = 0; j < input.RowCount; j++)
+                for (int j = 0; j < output.RowCount; j++)
                 {
                     if (image.GetPixel(i, j).GetBrightness() > 0)
-                    { input.At(i, j, MAX_VALUE); }
+                    { output.At(i, j, MAX_VALUE); }
                 }
             }
 
@@ -214,17 +214,27 @@ namespace CnrsUniProv.OCodeHtm
 
             // notify observers about the matrix output
             if (OnTransformedMatrixOutput != null)
-                OnTransformedMatrixOutput(this, new OutputEventArgs<Matrix>(input, CurrentCategory));
+                OnTransformedMatrixOutput(this, new OutputEventArgs<Matrix>(output, CurrentCategory));
 
-            return input;
+            return output;
         }
 
         
 
         private SparseMatrix FilterInput(SparseMatrix input)
         {
-            //TODOnow add filters
-            return input;
+            var output = input;
+
+            foreach (var filter in Filters)
+            {
+                output = filter.Filter(output);
+            }
+
+            // notify observers about the filtered output
+            if (OnFilteredMatrixOutput != null)
+                OnFilteredMatrixOutput(this, new OutputEventArgs<Matrix>(output, CurrentCategory));
+
+            return output;
         }
 
 

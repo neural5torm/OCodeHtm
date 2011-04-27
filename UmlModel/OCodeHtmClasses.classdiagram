@@ -135,6 +135,12 @@
               <referencedTypeMoniker Id="2583e709-f4a9-483d-a2e1-cf2d180cfbe4" LastKnownName="OutputEventHandler&lt;Matrix&gt;" />
             </type_NamedElement>
           </property>
+          <property Id="bf516f87-3cd9-4522-a0ba-696c0bdaf7a0" name="OnFilteredMatrixOutput" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="a7eb3c10-e153-44e4-a860-20ca34cf854a" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="2583e709-f4a9-483d-a2e1-cf2d180cfbe4" LastKnownName="OutputEventHandler&lt;Matrix&gt;" />
+            </type_NamedElement>
+          </property>
         </ownedAttributesInternal>
         <ownedOperationsInternal>
           <operation Id="f92385a4-06fd-4fd2-9548-27699b88d588" name="SetCurrentInputFile" visibility="Protected" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
@@ -186,7 +192,7 @@
           <operation Id="c8611414-dacd-461c-8ef1-c076753f8520" name="InitTranslationPath" visibility="Private" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="dd990d14-abbc-4d80-bf09-c448ed9c418e" />
           </operation>
-          <operation Id="fdd22049-7e4e-44a2-a43b-870db0cca745" name="GetNextTransformedInput" visibility="Private" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+          <operation Id="fdd22049-7e4e-44a2-a43b-870db0cca745" name="TransformNextInput" visibility="Private" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="547f739c-28a2-4ddf-9ad4-ff58eca37dd3" />
             <ownedParameters>
               <operationHasOwnedParameters>

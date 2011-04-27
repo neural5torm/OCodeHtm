@@ -378,6 +378,24 @@
                 LastKnownLocation="UmlModel.uml" />
             </type_NamedElement>
           </property>
+          <property
+            Id="a7eb3c10-e153-44e4-a860-20ca34cf854a"
+            name="OnFilteredMatrixOutput"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="ce7c0a57-835b-47dc-ba0d-5c4322456706"
+                LastKnownName="OutputEventHandler&lt;Matrix&gt;"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
         </ownedAttributesInternal>
         <ownedOperationsInternal>
           <operation
@@ -474,7 +492,7 @@
             isQuery="false" />
           <operation
             Id="547f739c-28a2-4ddf-9ad4-ff58eca37dd3"
-            name="GetNextTransformedInput"
+            name="TransformNextInput"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
