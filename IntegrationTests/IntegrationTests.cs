@@ -29,9 +29,9 @@ namespace CnrsUniProv.OCodeHtm.IntegrationTests
         [TestMethod]
         public void CanOutputBitmapFilesFromSensorGeneratedImagesUsingTwoSensorsAndOneOutputFolder()
         {
-            var sensor = new BitmapPictureSensor(presentationsPerInput:2, pathSpeed: 2);
+            var sensor = new BitmapPictureSensor(presentationsPerInput: 1, pathSpeed: 2);
             sensor.SetTrainingFolder(TrainingSetPath);
-            var writer = new BitmapFileWriter("");
+            var writer = new BitmapFileWriter("0001");
             sensor.OnTransformedBitmapOutput += writer.OutputWriterHandler;
 
             var nbIterations = 0;
@@ -47,9 +47,9 @@ namespace CnrsUniProv.OCodeHtm.IntegrationTests
             Assert.AreEqual(nbIterations, writer.OutputFolder.GetFiles().Length);
 
 
-            var sensor2 = new BitmapPictureSensor(presentationsPerInput: 1, pathSpeed: 4);
+            var sensor2 = new BitmapPictureSensor(presentationsPerInput: 1, pathSpeed: 2);
             sensor2.SetTrainingFolder(TrainingSetPath);
-            var writer2 = new BitmapFileWriter("");
+            var writer2 = new BitmapFileWriter("0001");
             sensor2.OnTransformedBitmapOutput += writer2.OutputWriterHandler;
 
             var nbIterations2 = 0;
@@ -69,7 +69,8 @@ namespace CnrsUniProv.OCodeHtm.IntegrationTests
         [TestMethod]
         public void CanOutputBitmapFilesFromSensorTransformedInputsWithTranslation()
         {
-            var sensor = new BitmapPictureSensor(presentationsPerInput: 1, pathSpeed: 2);
+            //TODO solve bug (stops after first input)
+            var sensor = new BitmapPictureSensor(presentationsPerInput: 1, pathSpeed: 2, useRandomOrigin: false);
             sensor.SetTrainingFolder(TrainingSetPath);
             var writer = new MatrixToBitmapFileWriter("");
             sensor.OnTransformedMatrixOutput += writer.OutputWriterHandler;
@@ -112,22 +113,9 @@ namespace CnrsUniProv.OCodeHtm.IntegrationTests
         [TestMethod]
         public void CanOutputFilterFromGabor2DFilter()
         {
-            //TODOnow! check correctness
             var filter = new Gabor2DFilter(4, 1.0);
             var writer = new MatrixToBitmapFileWriter("");
             filter.OnFilterCreated += writer.OutputWriterHandler;
-
-
-            for (int i = 0; i < filter.FilterMatricesReal.Length; i++)
-            {
-                var real = filter.FilterMatricesReal[i];
-                var imag = filter.FilterMatricesImaginary[i];
-
-                var filterNorm = (Matrix)real.PointwiseApply((d) => Math.Pow(d, 2.0)).Add(imag.PointwiseApply((d) => Math.Pow(d, 2.0)));
-                filterNorm = (Matrix)filterNorm.PointwiseApply((d) => Math.Pow(d, 0.5));
-
-                writer.OutputWriterHandler(this, new OutputEventArgs<Matrix>(filterNorm, "normedFilter"));
-            }
         }
 
         [TestMethod]

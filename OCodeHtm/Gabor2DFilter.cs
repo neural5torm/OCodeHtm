@@ -13,14 +13,14 @@ namespace CnrsUniProv.OCodeHtm
         public MultipleOutputFilterMode OutputMode { get; private set; }
         public double AspectRatio { get; private set; }
 
-        Lazy<SparseMatrix[]> filterMatricesReal;
-        public SparseMatrix[] FilterMatricesReal 
+        Lazy<Matrix[]> filterMatricesReal;
+        public Matrix[] FilterMatricesReal 
         { 
             get { return filterMatricesReal.Value; } 
         }
 
-        Lazy<SparseMatrix[]> filterMatricesImaginary;
-        public SparseMatrix[] FilterMatricesImaginary 
+        Lazy<Matrix[]> filterMatricesImaginary;
+        public Matrix[] FilterMatricesImaginary 
         { 
             get { return filterMatricesImaginary.Value; } 
         }
@@ -34,24 +34,25 @@ namespace CnrsUniProv.OCodeHtm
             NbOrientations = (int)orientations;
             OutputMode = outputMode;
             AspectRatio = aspectRatio;
+            //TODO properties
+            uint waveLength = 8;
+            double bandwidth = 1.0;
 
             // Create (lazy) filter matrices
-            var sigma = 5.0;
-
-            filterMatricesReal = new Lazy<SparseMatrix[]>(() =>
+            filterMatricesReal = new Lazy<Matrix[]>(() =>
             {
-                var filters = new SparseMatrix[NbOrientations];
+                var filters = new Matrix[NbOrientations];
                 for (int i = 0; i < NbOrientations; i++)
-                    filters[i] = CreateFilter(i * Math.PI / NbOrientations, /*phase:*/ 0, 8, aspectRatio, sigma);
+                    filters[i] = CreateFilter(i * Math.PI / NbOrientations, /*phase:*/0, waveLength, AspectRatio, bandwidth);
                 
                 return filters;
             });
 
-            filterMatricesImaginary = new Lazy<SparseMatrix[]>(() =>
+            filterMatricesImaginary = new Lazy<Matrix[]>(() =>
             {
-                var filters = new SparseMatrix[NbOrientations];
+                var filters = new Matrix[NbOrientations];
                 for (int i = 0; i < NbOrientations; i++)
-                    filters[i] = CreateFilter(i * Math.PI / NbOrientations, /*phase:*/ Math.PI / 2, 8, aspectRatio, sigma);
+                    filters[i] = CreateFilter(i * Math.PI / NbOrientations, /*phase:*/Math.PI / 2, waveLength, AspectRatio, bandwidth);
                 
                 return filters;
             });
@@ -66,35 +67,32 @@ namespace CnrsUniProv.OCodeHtm
         /// <param name="aspectRatio"></param>
         /// <param name="sigma"></param>
         /// <returns></returns>
-        private SparseMatrix CreateFilter(double angle, double phase, uint waveLength, double aspectRatio, double sigma)
+        private Matrix CreateFilter(double angle, double phase, uint waveLength, double aspectRatio, double bandwidth)
         {
-            var sigmaX = sigma;
-            var sigmaY = sigma / aspectRatio;
+
+            var sigmaX = waveLength / Math.PI * Math.Sqrt(Math.Log(2) / 2) * (Math.Pow(2, bandwidth) + 1) / (Math.Pow(2.0, bandwidth) - 1);
+            var sigmaY = sigmaX / aspectRatio;
 
             // Bounding box
-            var n = 5;
-            var xMax = (int)Math.Ceiling(Math.Max(Math.Abs(n * sigmaX * Math.Cos(angle)), Math.Abs(n * sigmaY * Math.Sin(angle))));
-            var yMax = (int)Math.Ceiling(Math.Max(Math.Abs(n * sigmaX * Math.Sin(angle)), Math.Abs(n * sigmaY * Math.Cos(angle))));
+            int n = 4;
+            int halfSize = (int)Math.Ceiling(n * Math.Max(sigmaX, sigmaY));
+            var size = /*symmetrical values:*/2 * halfSize + /*the middle zero:*/1;
 
-            xMax = Math.Max(1, xMax);
-            var xMin = -xMax;
-            yMax = Math.Max(1, yMax);
-            var yMin = -yMax;
+            // Filter matrix
+            var filterMatrix = new DenseMatrix(size);
 
-            var filterMatrix = new SparseMatrix(yMax - yMin + 1, xMax - xMin + 1);
-            for (int xPos = 0; xPos < filterMatrix.ColumnCount; xPos++)
+            for (int x = -halfSize, xPos = 0; x <= halfSize; x++, xPos++)
             {
-                for (int yPos = 0; yPos < filterMatrix.RowCount; yPos++)
+                for (int y = -halfSize, yPos = 0; y <= halfSize; y++, yPos++)
                 {
-                    double x = xMin + xPos;
-                    double y = yMin + yPos;
+                    double xTheta = x * Math.Cos(angle) + y * Math.Sin(angle);
+                    double yTheta = -x * Math.Sin(angle) + y * Math.Cos(angle);
 
-                    filterMatrix.At(yPos, xPos, GaborFunction(x * Math.Cos(angle) + y * Math.Sin(angle), -x * Math.Sin(angle) + y * Math.Cos(angle), sigmaX, sigmaY, (double)waveLength, phase));
+                    filterMatrix.At(yPos, xPos, GaborFunction(xTheta, yTheta, sigmaX, sigmaY, waveLength, phase));
                 }
             }
 
-
-            // Notify observers about the Gabor filter
+            // Notify observers about the Gabor filter created
             if (OnFilterCreated != null)
                 OnFilterCreated(this, new OutputEventArgs<Matrix>(filterMatrix, string.Format("{0:G3}rad.angle_{1:G3}rad.phase_filter", angle, phase)));
 
@@ -103,10 +101,8 @@ namespace CnrsUniProv.OCodeHtm
 
         private double GaborFunction(double xTheta, double yTheta, double sigmaX, double sigmaY, double lambda, double psi)
         {
-            return 1 / (2 * Math.PI * sigmaX * sigmaY) 
-                * Math.Exp(-0.5 * (Math.Pow(xTheta, 2) / Math.Pow(sigmaX, 2) 
-                                    + Math.Pow(yTheta, 2) / Math.Pow(sigmaY, 2))) 
-                * Math.Cos(2 * Math.PI / lambda * xTheta + psi);
+            return Math.Exp(-0.5 * (Math.Pow(xTheta, 2) / Math.Pow(sigmaX, 2) + Math.Pow(yTheta, 2) / Math.Pow(sigmaY, 2)))
+                    * Math.Cos(2 * Math.PI * xTheta / lambda + psi);
         }
         
         public SparseMatrix Filter(SparseMatrix input)

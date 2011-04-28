@@ -3,16 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace CnrsUniProv.OCodeHtm.Interfaces
+namespace CnrsUniProv.OCodeHtm
 {
     public delegate void OutputEventHandler<TOutput>(object sender, OutputEventArgs<TOutput> e);
-
-
-    public interface IObservableOutput<TOutput>
-        where TOutput : class
-    {
-        event OutputEventHandler<TOutput> OnOutput;
-    }
 
 
     public class OutputEventArgs<TOutput> : EventArgs

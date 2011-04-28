@@ -32,7 +32,7 @@ namespace CnrsUniProv.OCodeHtm
         RandomSweep4Axes, LeftToRightSweep, TopToBottomSweep,
         
         //1D:
-        //BeginningToEndSweep, EndToBeginningSweep,
+        //BeginningToEndSweep, EndToBeginningSweep, ReboundSweep
         
         //3D?
     }
@@ -44,7 +44,7 @@ namespace CnrsUniProv.OCodeHtm
     
     public enum MultipleOutputFilterMode
     {
-        Concatenated,
+        Concatenated, Interleaved, SuperImposed,
     }
     
     
