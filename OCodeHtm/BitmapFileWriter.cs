@@ -83,32 +83,14 @@ namespace CnrsUniProv.OCodeHtm
 
         protected override Bitmap GetBitmapFrom(Matrix output)
         {
-            var normalized = output.Normalize(byte.MaxValue, 0, 0.5);
+            var normalized = output.Normalize(byte.MaxValue);
 
-            int width = normalized.ColumnCount;
-            int height = normalized.RowCount;
-            byte[] pixelValues = new byte[width * height * 3]; // 24bpp
-
-            foreach (var item in normalized.IndexedEnumerator())
+            var bitmap = new Bitmap(normalized.ColumnCount, normalized.RowCount, PixelFormat.Format24bppRgb);
+            foreach (var el in normalized.IndexedEnumerator())
             {
-                var color = Convert.ToByte(item.Item3);
-                pixelValues[(item.Item1 + item.Item2 * height) * 3/*24bpp*/] = color;
-                pixelValues[(item.Item1 + item.Item2 * height) * 3/*24bpp*/ + 1] = color;
-                pixelValues[(item.Item1 + item.Item2 * height) * 3/*24bpp*/ + 2] = color;
+                var lum = (int)el.Item3;
+                bitmap.SetPixel(el.Item2, el.Item1, Color.FromArgb(lum, lum, lum));
             }
-
-            var bitmap = new Bitmap(width, height, PixelFormat.Format24bppRgb);
-
-            //Get a reference to the images pixel data
-            Rectangle dimension = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
-            BitmapData data = bitmap.LockBits(dimension, ImageLockMode.ReadWrite, bitmap.PixelFormat);
-            IntPtr pixelStartAddress = data.Scan0;
-
-            //Copy the pixel data into the bitmap structure
-            System.Runtime.InteropServices.Marshal.Copy(pixelValues, 0, pixelStartAddress, pixelValues.Length);
-
-            bitmap.UnlockBits(data);
-
             return bitmap;
         }
     }

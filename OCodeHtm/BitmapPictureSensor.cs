@@ -8,7 +8,6 @@ using D2D = System.Drawing.Drawing2D;
 
 using MathNet.Numerics.LinearAlgebra.Double;
 using CnrsUniProv.OCodeHtm.Exceptions;
-using CnrsUniProv.OCodeHtm.Interfaces;
 
 namespace CnrsUniProv.OCodeHtm
 {
@@ -201,12 +200,12 @@ namespace CnrsUniProv.OCodeHtm
                 OnTransformedBitmapOutput(this, new OutputEventArgs<Bitmap>(image, CurrentCategory));
 
             var output = new SparseMatrix(Height, Width);
-            for (int i = 0; i < output.ColumnCount; i++)
+            for (int col = 0; col < output.ColumnCount; col++)
             {
-                for (int j = 0; j < output.RowCount; j++)
+                for (int row = 0; row < output.RowCount; row++)
                 {
-                    if (image.GetPixel(i, j).GetBrightness() > 0)
-                    { output.At(i, j, MAX_VALUE); }
+                    if (image.GetPixel(col, row).GetBrightness() > 0)
+                    { output.At(row, col, MAX_VALUE); }
                 }
             }
 

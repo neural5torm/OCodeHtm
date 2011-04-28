@@ -46,7 +46,7 @@ namespace CnrsUniProv.OCodeHtm
             return maxValue;
         }
 
-        public static Matrix<double> Normalize(this Matrix<double> matrix, double max = 1.0, double min = 0.0, double filterDeltaToMin = 0.0)
+        public static Matrix<double> Normalize(this Matrix<double> matrix, double max = 1.0, double min = 0.0)
         {
             var rows = matrix.RowCount;
             var columns = matrix.ColumnCount;
@@ -59,12 +59,7 @@ namespace CnrsUniProv.OCodeHtm
             var normalized0To1 = maxValue != 0 ? floored.Divide(maxValue) : floored;
             
             // Expand back matrix range and shifting floor according to given min & max params
-            var normalized = normalized0To1 * (max - min) + new DenseMatrix(rows, columns, min);
-
-            if (filterDeltaToMin == 0.0)
-                return normalized;
-            else
-                return normalized.PointwiseApply((d) => Math.Abs(d - min) < Math.Abs(filterDeltaToMin) ? min : d);
+            return normalized0To1 * (max - min) + new DenseMatrix(rows, columns, min);
         }
 
 
