@@ -29,7 +29,7 @@ namespace CnrsUniProv.OCodeHtm.IntegrationTests
         [TestMethod]
         public void CanOutputBitmapFilesFromSensorGeneratedImagesUsingTwoSensorsAndOneOutputFolder()
         {
-            var sensor = new BitmapPictureSensor(presentationsPerInput: 1, pathSpeed: 2);
+            var sensor = new BitmapPicture2DSensor(presentationsPerInput: 1, pathSpeed: 2);
             sensor.SetTrainingFolder(TrainingSetPath);
             var writer = new BitmapFileWriter("0001");
             sensor.OnTransformedBitmapOutput += writer.OutputWriterHandler;
@@ -47,7 +47,7 @@ namespace CnrsUniProv.OCodeHtm.IntegrationTests
             Assert.AreEqual(nbIterations, writer.OutputFolder.GetFiles().Length);
 
 
-            var sensor2 = new BitmapPictureSensor(presentationsPerInput: 1, pathSpeed: 2);
+            var sensor2 = new BitmapPicture2DSensor(presentationsPerInput: 1, pathSpeed: 2);
             sensor2.SetTrainingFolder(TrainingSetPath);
             var writer2 = new BitmapFileWriter("0001");
             sensor2.OnTransformedBitmapOutput += writer2.OutputWriterHandler;
@@ -69,8 +69,8 @@ namespace CnrsUniProv.OCodeHtm.IntegrationTests
         [TestMethod]
         public void CanOutputBitmapFilesFromSensorTransformedInputsWithTranslation()
         {
-            //TODO solve bug (stops after first input)
-            var sensor = new BitmapPictureSensor(presentationsPerInput: 1, pathSpeed: 2, useRandomOrigin: false);
+            //TODO solve bug (stops after first input) + add test
+            var sensor = new BitmapPicture2DSensor(presentationsPerInput: 1, pathSpeed: 2, useRandomOrigin: false);
             sensor.SetTrainingFolder(TrainingSetPath);
             var writer = new MatrixToBitmapFileWriter("");
             sensor.OnTransformedMatrixOutput += writer.OutputWriterHandler;
@@ -91,7 +91,7 @@ namespace CnrsUniProv.OCodeHtm.IntegrationTests
         [TestMethod]
         public void CanOutputBitmapFilesFromSensorTransformedInputsWithTranslationRotationAndScaling()
         {
-            var sensor = new BitmapPictureSensor(presentationsPerInput: 1, pathSpeed: 2, 
+            var sensor = new BitmapPicture2DSensor(presentationsPerInput: 1, pathSpeed: 2, 
                 rotationAngleMaxDegrees:180.0f, rotationSpeed:10.0f, scalingMin:0.5f, scalingMax:2.0f, scalingSpeed:0.1f);
             sensor.SetTrainingFolder(TrainingSetPath);
             var writer = new MatrixToBitmapFileWriter("");
@@ -113,9 +113,42 @@ namespace CnrsUniProv.OCodeHtm.IntegrationTests
         [TestMethod]
         public void CanOutputFilterFromGabor2DFilter()
         {
-            var filter = new Gabor2DFilter(4, 1.0);
+            var filter = new Gabor2DFilter();
             var writer = new MatrixToBitmapFileWriter("");
             filter.OnFilterCreated += writer.OutputWriterHandler;
+
+            var r = filter.FilterMatricesReal.Length;
+            var i = filter.FilterMatricesImaginary.Length;
+
+            Assert.AreEqual(r + i, writer.OutputFolder.GetFiles().Length);
+        }
+
+        [TestMethod]
+        public void CanOutputFilteredInputsFromGabor2DFilter()
+        {
+
+            var filter = new Gabor2DFilter();
+            var writer = new MatrixToBitmapFileWriter("");
+
+            var sensor = new BitmapPicture2DSensor(presentationsPerInput: 1, pathSpeed: 2, useRandomOrigin: true);
+            sensor.SetTrainingFolder(TrainingSetPath);
+            sensor.AddFilter(filter);
+            sensor.OnFilteredMatrixOutput += writer.OutputWriterHandler;
+            int maxIterations = 30, nbIterations = 0;
+
+            foreach (var input in sensor.GetTrainingInputs(true))
+            {
+                foreach (var iteration in input)
+                {
+                    nbIterations++;
+                    if (nbIterations >= maxIterations)
+                        break;
+                }
+                if (nbIterations >= maxIterations)
+                    break;
+            }
+
+            Assert.AreEqual(maxIterations, writer.OutputFolder.GetFiles().Length);
         }
 
         [TestMethod]

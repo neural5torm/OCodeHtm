@@ -11,12 +11,12 @@ namespace CnrsUniProv.OCodeHtm
     public class OutputEventArgs<TOutput> : EventArgs
     {
         public TOutput Output { get; private set; }
-        public string Category { get; private set; }
+        public string Label { get; private set; }
 
         public OutputEventArgs(TOutput output, string category)
         {
             Output = output;
-            Category = category;
+            Label = category;
         }
     }
 }

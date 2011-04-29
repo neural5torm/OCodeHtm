@@ -7,12 +7,12 @@ using CnrsUniProv.OCodeHtm.Exceptions;
 
 namespace CnrsUniProv.OCodeHtm
 {
-    public class SpatialNodeGaussian : SpatialNode2D
+    public class SpatialNode2DGaussian : SpatialNode2D
     {
         public double SquaredSigma { get; private set; }
 
 
-        public SpatialNodeGaussian(double maxDistance = Default.MaxDistance, double sigma = Default.NoSigma, int maxOutputSize = Default.MaxNodeOutputSize)
+        public SpatialNode2DGaussian(double maxDistance = Default.MaxDistance, double sigma = Default.NoSigma, int maxOutputSize = Default.MaxNodeOutputSize)
             : base(maxDistance, maxOutputSize)
         { 
             if (sigma == Default.NoSigma || sigma < 0.0)
@@ -144,7 +144,7 @@ namespace CnrsUniProv.OCodeHtm
 
         public override SpatialNode<SparseMatrix, Vector> GetClone()
         {
-            var node = new SpatialNodeGaussian();
+            var node = new SpatialNode2DGaussian();
             node.SquaredSigma = this.SquaredSigma;
 
             return node;

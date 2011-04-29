@@ -9,9 +9,13 @@ namespace CnrsUniProv.OCodeHtm
 {
     public class Gabor2DFilter : IFilter<SparseMatrix>
     {
-        public int NbOrientations { get; private set; }
         public MultipleOutputFilterMode OutputMode { get; private set; }
+
+        public int NbOrientations { get; private set; }
         public double AspectRatio { get; private set; }
+        public double WaveLength { get; private set; }
+        public double Bandwidth { get; private set; }
+
 
         Lazy<Matrix[]> filterMatricesReal;
         public Matrix[] FilterMatricesReal 
@@ -29,21 +33,21 @@ namespace CnrsUniProv.OCodeHtm
 
 
 
-        public Gabor2DFilter(uint orientations = Default.GaborOrientations, double aspectRatio = Default.SquareAspectRatio, MultipleOutputFilterMode outputMode = MultipleOutputFilterMode.Concatenated)
+        public Gabor2DFilter(MultipleOutputFilterMode outputMode = MultipleOutputFilterMode.Concatenated, 
+            uint orientations = Default.GaborOrientations, double aspectRatio = Default.SquareAspectRatio, double waveLength = Default.GaborWaveLength, double bandwidth = Default.GaborBandwidth)
         {
-            NbOrientations = (int)orientations;
             OutputMode = outputMode;
+            NbOrientations = (int)orientations;
             AspectRatio = aspectRatio;
-            //TODO properties
-            uint waveLength = 8;
-            double bandwidth = 1.0;
+            WaveLength = waveLength;
+            Bandwidth = bandwidth;
 
             // Create (lazy) filter matrices
             filterMatricesReal = new Lazy<Matrix[]>(() =>
             {
                 var filters = new Matrix[NbOrientations];
                 for (int i = 0; i < NbOrientations; i++)
-                    filters[i] = CreateFilter(i * Math.PI / NbOrientations, /*phase:*/0, waveLength, AspectRatio, bandwidth);
+                    filters[i] = CreateFilter(i * Math.PI / NbOrientations, /*phase:*/0, WaveLength, AspectRatio, Bandwidth);
                 
                 return filters;
             });
@@ -52,7 +56,7 @@ namespace CnrsUniProv.OCodeHtm
             {
                 var filters = new Matrix[NbOrientations];
                 for (int i = 0; i < NbOrientations; i++)
-                    filters[i] = CreateFilter(i * Math.PI / NbOrientations, /*phase:*/Math.PI / 2, waveLength, AspectRatio, bandwidth);
+                    filters[i] = CreateFilter(i * Math.PI / NbOrientations, /*phase:*/Math.PI / 2, WaveLength, AspectRatio, Bandwidth);
                 
                 return filters;
             });
@@ -61,13 +65,7 @@ namespace CnrsUniProv.OCodeHtm
         /// <summary>
         /// Create a 2D Gabor filter like in the example at http://en.wikipedia.org/wiki/Gabor_filter
         /// </summary>
-        /// <param name="angle"></param>
-        /// <param name="phase"></param>
-        /// <param name="waveLength"></param>
-        /// <param name="aspectRatio"></param>
-        /// <param name="sigma"></param>
-        /// <returns></returns>
-        private Matrix CreateFilter(double angle, double phase, uint waveLength, double aspectRatio, double bandwidth)
+        private Matrix CreateFilter(double angle, double phase, double waveLength, double aspectRatio, double bandwidth)
         {
 
             var sigmaX = waveLength / Math.PI * Math.Sqrt(Math.Log(2) / 2) * (Math.Pow(2, bandwidth) + 1) / (Math.Pow(2.0, bandwidth) - 1);
@@ -79,7 +77,7 @@ namespace CnrsUniProv.OCodeHtm
             var size = /*symmetrical values:*/2 * halfSize + /*the middle zero:*/1;
 
             // Filter matrix
-            var filterMatrix = new DenseMatrix(size);
+            Matrix filterMatrix = new DenseMatrix(size);
 
             for (int x = -halfSize, xPos = 0; x <= halfSize; x++, xPos++)
             {
@@ -88,9 +86,12 @@ namespace CnrsUniProv.OCodeHtm
                     double xTheta = x * Math.Cos(angle) + y * Math.Sin(angle);
                     double yTheta = -x * Math.Sin(angle) + y * Math.Cos(angle);
 
-                    filterMatrix.At(yPos, xPos, GaborFunction(xTheta, yTheta, sigmaX, sigmaY, waveLength, phase));
+                    filterMatrix[yPos, xPos] = GaborFunction(xTheta, yTheta, sigmaX, sigmaY, waveLength, phase);
                 }
             }
+
+            var normalized = filterMatrix.Normalize(-1, 1);
+            filterMatrix = normalized.ShiftAndFilterToZero(normalized.Mean(), 0.05);
 
             // Notify observers about the Gabor filter created
             if (OnFilterCreated != null)
@@ -107,16 +108,33 @@ namespace CnrsUniProv.OCodeHtm
         
         public SparseMatrix Filter(SparseMatrix input)
         {
-            var outputs = new SparseMatrix[NbOrientations];
+            var outputs = new Matrix[NbOrientations];
 
-            //TODOnow 
-            //TODO create convolve extension method
-            if (OutputMode == MultipleOutputFilterMode.Concatenated)
-            { 
-                // Concatenate outputs
+            for (int i = 0; i < NbOrientations; i++)
+            {//TODOnow add imaginary part + abs
+                outputs[i] = input.Convolve(FilterMatricesReal[i]);
+                if (OnFilterCreated != null)
+                    OnFilterCreated(this, new OutputEventArgs<Matrix>(outputs[i], "output#" + i));
             }
 
-            return input;
+            Matrix output = null;
+            switch (OutputMode)
+            {
+                case MultipleOutputFilterMode.Concatenated:
+                    output = outputs[0];
+                    for (int i = 1; i < outputs.Length; i++)
+                    {
+                        output = (Matrix)output.Stack(outputs[i]);
+                    }
+                    break;
+                case MultipleOutputFilterMode.Interleaved:
+                    break;
+                case MultipleOutputFilterMode.SuperImposed:
+                    break;
+                default:
+                    break;
+            }
+            return (SparseMatrix)output;
         }
 
 

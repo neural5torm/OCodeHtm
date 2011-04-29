@@ -19,7 +19,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         [TestMethod]
         public void ErrorWhenLearningAfterLayerIsTrained()
         {
-            var layer = new SpatialLayer(SpatialLayerType.Gaussian, 1, 1, 0.0, true, 1000);
+            var layer = new Spatial2DLayer(SpatialLayerType.Gaussian, 1, 1, 0.0, true, 1000);
 
             layer.Learn(new SparseMatrix(5));
             layer.Infer(new SparseMatrix(5));
@@ -42,7 +42,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
             var inputsize = 10;
             var size = (uint)inputsize / 2;
             var overlap = 0.0;
-            var layer = new SpatialLayer(SpatialLayerType.Gaussian, size, size, overlap, true, 1000);
+            var layer = new Spatial2DLayer(SpatialLayerType.Gaussian, size, size, overlap, true, 1000);
 
             var list = from i in Enumerable.Range(0, inputsize)
                        select (double)i;
@@ -78,7 +78,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
             var inputsize = 10;
             var size = (uint)inputsize / 2;
             var overlap = 0.5;
-            var layer = new SpatialLayer(SpatialLayerType.Gaussian, size, size, overlap, true, 1000);
+            var layer = new Spatial2DLayer(SpatialLayerType.Gaussian, size, size, overlap, true, 1000);
 
             var list = from i in Enumerable.Range(0, inputsize)
                        select (double)i;
@@ -114,7 +114,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
             var inputsize = 10;
             var size = (uint)inputsize / 2;
             var overlap = 0;
-            var layer = new SpatialLayer(SpatialLayerType.Gaussian, size, size, overlap, true, 1000);
+            var layer = new Spatial2DLayer(SpatialLayerType.Gaussian, size, size, overlap, true, 1000);
 
             var list = from i in Enumerable.Range(0, inputsize)
                        select (double)i;
@@ -156,7 +156,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
             var inputsize = 10;
             var size = (uint)inputsize / 2;
             var overlap = 0.5;
-            var layer = new SpatialLayer(SpatialLayerType.Gaussian, size, size, overlap, true, 1000);
+            var layer = new Spatial2DLayer(SpatialLayerType.Gaussian, size, size, overlap, true, 1000);
 
             var list = from i in Enumerable.Range(0, inputsize)
                        select (double)i;
@@ -201,7 +201,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
             uint height = 5;
             uint width = 4;
 
-            var layer = new SpatialLayer(SpatialLayerType.Gaussian, height, width, overlap, clone, maxoutputsize);
+            var layer = new Spatial2DLayer(SpatialLayerType.Gaussian, height, width, overlap, clone, maxoutputsize);
             var input1 = (SparseMatrix) SparseMatrix.Identity(8).Stack(new SparseMatrix(2, 8));
             var input2 = 2*input1;
             
@@ -214,7 +214,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
 			{
 			    for (int j = 0; j < width; j++)
 			    {
-			        var node = (SpatialNodeGaussian)layer.NodeArray[i, j];
+			        var node = (SpatialNode2DGaussian)layer.NodeArray[i, j];
                     foreach (var coinc in node.CoincidencesFrequencies)
                         Assert.AreEqual(1, coinc.Value);
                 }
@@ -231,7 +231,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
             uint layerwidth = 4;
             int inputtolayerratio = 2;
             
-            var layer = new SpatialLayer(SpatialLayerType.Gaussian, layerheight, layerwidth, overlap, clone, maxoutputsize);
+            var layer = new Spatial2DLayer(SpatialLayerType.Gaussian, layerheight, layerwidth, overlap, clone, maxoutputsize);
             var input1 = new SparseMatrix((int)layerheight * inputtolayerratio, (int)layerwidth * inputtolayerratio, 1.0);
             var input2 = 2 * input1;
             
@@ -274,7 +274,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
             uint layerwidth = 4;
             int inputtolayerratio = 2;
 
-            var layer = new SpatialLayer(SpatialLayerType.Gaussian, layerheight, layerwidth, overlap, clone, maxoutputsize);
+            var layer = new Spatial2DLayer(SpatialLayerType.Gaussian, layerheight, layerwidth, overlap, clone, maxoutputsize);
             var input1 = new SparseMatrix((int)layerheight * inputtolayerratio, (int)layerwidth * inputtolayerratio, 1.0);
             var input2 = 2 * input1;
 
@@ -318,7 +318,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
             uint layerwidth = 4;
             int inputtolayerratio = 2;
 
-            var layer = new SpatialLayer(SpatialLayerType.Gaussian, layerheight, layerwidth, overlap, clone, maxoutputsize);
+            var layer = new Spatial2DLayer(SpatialLayerType.Gaussian, layerheight, layerwidth, overlap, clone, maxoutputsize);
             var input1 = new SparseMatrix((int)layerheight * inputtolayerratio, (int)layerwidth * inputtolayerratio, 1.0);
             var input2 = 2 * input1;
 
@@ -361,7 +361,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
             uint layerwidth = 4;
             int inputtolayerratio = 2;
 
-            var layer = new SpatialLayer(SpatialLayerType.Gaussian, layerheight, layerwidth, overlap, clone, maxoutputsize);
+            var layer = new Spatial2DLayer(SpatialLayerType.Gaussian, layerheight, layerwidth, overlap, clone, maxoutputsize);
             var input1 = new SparseMatrix((int)layerheight * inputtolayerratio, (int)layerwidth * inputtolayerratio, 1.0);
             var input2 = 2 * input1;
 

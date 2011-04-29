@@ -21,7 +21,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         {
             // Arrange
             double maxDistance = 0.0;
-            SpatialNodeGaussian node = new SpatialNodeGaussian(maxDistance);
+            SpatialNode2DGaussian node = new SpatialNode2DGaussian(maxDistance);
             int nbInputs = 1000;
             int width = 4;
             int height = 4;
@@ -41,7 +41,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         {
             // Arrange
             double maxDistance = 0.0;
-            SpatialNodeGaussian node = new SpatialNodeGaussian(maxDistance, 0, 1);
+            SpatialNode2DGaussian node = new SpatialNode2DGaussian(maxDistance, 0, 1);
             int nbInputs = 2;
             int width = 4;
             int height = 4;
@@ -61,7 +61,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         {
             // Arrange
             double maxDistance = 10000.0;
-            SpatialNodeGaussian node = new SpatialNodeGaussian(maxDistance);
+            SpatialNode2DGaussian node = new SpatialNode2DGaussian(maxDistance);
             int nbInputs = 100;
             int width = 4;
             int height = 4;
@@ -82,7 +82,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         {
             // Arrange
             double maxDistance = 1.0;
-            SpatialNodeGaussian node = new SpatialNodeGaussian(maxDistance);
+            SpatialNode2DGaussian node = new SpatialNode2DGaussian(maxDistance);
 
             var matrices = new List<SparseMatrix>();
             matrices.Add(new SparseMatrix(new double[,] { { 3.0, 2.0, 1.0, 0.0 } }));
@@ -107,7 +107,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         {
             // Arrange
             double maxDistance = 0.999;
-            SpatialNodeGaussian node = new SpatialNodeGaussian(maxDistance);
+            SpatialNode2DGaussian node = new SpatialNode2DGaussian(maxDistance);
 
             var matrices = new List<SparseMatrix>();
             matrices.Add(new SparseMatrix(new double[,] { { 3.0, 2.0, 1.0, 0.0 } }));
@@ -129,7 +129,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         [TestMethod]
         public void Several5By5InputsYieldOneCoincidenceWithMaxDistance5()
         {
-            var node = new SpatialNodeGaussian(5);
+            var node = new SpatialNode2DGaussian(5);
             var ones = new SparseMatrix(5, 5, 1.0);
             var twos = new SparseMatrix(5, 5, 2.0);
            
@@ -142,7 +142,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         [TestMethod]
         public void Several5By5InputsYieldSeveralCoincidenceWithMaxDistance4_999()
         {
-            var node = new SpatialNodeGaussian(4.999);
+            var node = new SpatialNode2DGaussian(4.999);
             var ones = new SparseMatrix(5, 5, 1.0);
             var twos = new SparseMatrix(5, 5, 2.0);
 
@@ -156,7 +156,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         [TestMethod]
         public void ErrorWhenLearningAfterInferenceMode()
         {
-            var node = new SpatialNodeGaussian();
+            var node = new SpatialNode2DGaussian();
             var mat = new SparseMatrix(4, 4, 4.0);
             var learnAfterInferFails = false;
             var learnAfterTBInferFails = false;
@@ -193,7 +193,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         [TestMethod]
         public void DontLearnBlankInputs()
         {
-            var node = new SpatialNodeGaussian();
+            var node = new SpatialNode2DGaussian();
             
             node.Learn(new SparseMatrix(4));
 
@@ -203,7 +203,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         [TestMethod]
         public void ErrorWhenLearningVaryingSizeInputs()
         {
-            var node = new SpatialNodeGaussian();
+            var node = new SpatialNode2DGaussian();
             node.Learn(new SparseMatrix(5, 5, 3.0));
 
             try
@@ -222,7 +222,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         [TestMethod]
         public void InferEmptyVectorIfNoCoincidencesLearned()
         {
-            var node = new SpatialNodeGaussian(1.0);
+            var node = new SpatialNode2DGaussian(1.0);
 
             var output = node.Infer(new SparseMatrix(5, 5, 2.0));
 
@@ -236,7 +236,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         [TestMethod]
         public void InferCorrectlyOnIdenticalMatricesWithMaxDistance0()
         {
-            var node = new SpatialNodeGaussian();
+            var node = new SpatialNode2DGaussian();
             var ones = new SparseMatrix(4, 5, 1.0);
             var twos = new SparseMatrix(4, 5, 2.0);
             var expectedLower = Math.Exp(-(ones.RowCount * ones.ColumnCount) / (2 * node.SquaredSigma)) - 0.0001;
@@ -253,7 +253,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         public void StopLearningWhenMaxOutputSizeReached()
         {
             int max = 1;
-            var node = new SpatialNodeGaussian(0.0, 0.0, max);
+            var node = new SpatialNode2DGaussian(0.0, 0.0, max);
             var ones = SparseMatrix.Identity(5);
             var twos = SparseMatrix.Identity(5) * 2.0;
             

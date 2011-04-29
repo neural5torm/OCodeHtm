@@ -2,7 +2,7 @@
 <logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="da5ff99a-5a85-41a8-8cd9-f39802003ea3" name="OCodeHtm" linkedPackageId="54d2adf7-259b-4605-b4d2-a0d6ade258c8" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
   <packagedElements>
     <logicalClassDesignerModelHasTypes>
-      <class Id="440cbd0d-78d8-49b0-9543-11bcfb7b54ea" name="BitmapPictureSensor" isAbstract="false" isLeaf="false" isActiveClass="false">
+      <class Id="440cbd0d-78d8-49b0-9543-11bcfb7b54ea" name="BitmapPicture2DSensor" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="0c8bbcc6-edb3-448e-ab33-36add90ec2c6" />
         <generalsInternal>
           <generalization Id="8af4fe8f-d525-43ef-adac-2359311e2352" isSubstitutable="false">
@@ -209,7 +209,7 @@
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
-      <class Id="f2bbe103-fa86-420f-be8c-733a3f44b572" name="SpatialLayer" isAbstract="false" isLeaf="false" isActiveClass="false">
+      <class Id="f2bbe103-fa86-420f-be8c-733a3f44b572" name="Spatial2DLayer" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="5a39418a-d8f2-4b63-b262-28208cd00f89" />
         <generalsInternal>
           <generalization Id="ebea3037-21d8-4776-9e3f-1de952532ae4" isSubstitutable="false">
@@ -301,7 +301,7 @@
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
-      <class Id="2bc6a803-c10d-48da-859e-e347641843ef" name="SpatialNodeGaussian&lt;SparseMatrix, SparseVector&gt;" isAbstract="false" isLeaf="false" isActiveClass="false">
+      <class Id="2bc6a803-c10d-48da-859e-e347641843ef" name="SpatialNode2DGaussian&lt;SparseMatrix, SparseVector&gt;" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="e3771b28-cb04-44e7-b08c-5e88685e0588" />
         <generalsInternal>
           <generalization Id="64ab43f2-a8fd-4895-b762-88efca7a4e83" isSubstitutable="false">
@@ -325,7 +325,7 @@
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
-      <class Id="e65b6d9a-db4a-402f-842e-d3bade13618b" name="SpatialNodeProduct" isAbstract="true" isLeaf="false" isActiveClass="false">
+      <class Id="e65b6d9a-db4a-402f-842e-d3bade13618b" name="SpatialNode2DProduct" isAbstract="true" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="17180c10-cb53-415b-92ec-35ca50923c04" />
         <generalsInternal>
           <generalization Id="25300bb3-cfcd-4285-9db6-b8c66e13017c" isSubstitutable="false">
@@ -344,7 +344,7 @@
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
-      <class Id="81d4aba6-f1ce-4720-a4c4-c348b4db952e" name="TemporalLayer" isAbstract="false" isLeaf="false" isActiveClass="false">
+      <class Id="81d4aba6-f1ce-4720-a4c4-c348b4db952e" name="Temporal2DLayer" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="7a243d0a-c00c-49ca-82f8-8e352a8701e7" />
         <generalsInternal>
           <generalization Id="05651c0f-fc16-4dbe-b935-57ed599d112c" isSubstitutable="false">
@@ -433,7 +433,7 @@
         </suppliersInternal>
         <targetEnds>
           <association Id="32aeb791-695b-4bc5-bfb9-e5c29a9c03ff" isDerived="false" sourceEndRoleName="SpatialNode" targetEndRoleName="SpatialLayer" isLeaf="false" isAbstract="false">
-            <classMoniker Id="f2bbe103-fa86-420f-be8c-733a3f44b572" LastKnownName="SpatialLayer" />
+            <classMoniker Id="f2bbe103-fa86-420f-be8c-733a3f44b572" LastKnownName="Spatial2DLayer" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd Id="96aced13-23ea-4d85-ab80-204bc976f651" name="SpatialNode" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
@@ -643,7 +643,7 @@
           </property>
         </ownedAttributesInternal>
         <ownedOperationsInternal>
-          <operation Id="162a4baf-20e9-4334-8ee8-cb2f895426dd" name="OutputWriteHandler" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+          <operation Id="162a4baf-20e9-4334-8ee8-cb2f895426dd" name="OutputEventHandler" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="df7b76f9-394f-4567-8e97-d454fcbffee2" />
             <ownedParameters>
               <operationHasOwnedParameters>
@@ -757,13 +757,31 @@
           <property Id="6a7d73de-9117-4550-a0c3-740fc4de5ce9" name="OutputMode" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="6140789d-091f-402b-99f6-d38bce3a99cd" />
             <type_NamedElement>
-              <referencedTypeMoniker Id="fd2bc678-16c6-4cc3-99ab-ac9fc0dfdf42" LastKnownName="{Concatenated,Interleaved}" />
+              <referencedTypeMoniker Id="941f4fba-eb04-4876-b09d-d22ef4d136c3" LastKnownName="{Concatenated,Interleaved,SuperImposed}" />
             </type_NamedElement>
           </property>
           <property Id="11fd70ab-8f2d-4704-8e70-dd1dbc62e1c2" name="NbOrientations" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="f675215e-9a67-4783-b5a3-1e0a1baf0ae8" />
             <type_NamedElement>
               <referencedTypeMoniker Id="47e2c258-95a9-4780-8876-7b159231da0b" LastKnownName="int" />
+            </type_NamedElement>
+          </property>
+          <property Id="ca3e5a88-3c6e-409b-b441-cccafdcda367" name="WaveLength" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="90c83092-58ab-4d87-8d52-99e3a1500bc5" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="a7b11454-fcba-4f1a-87d3-55fca9bef6d1" LastKnownName="double" />
+            </type_NamedElement>
+          </property>
+          <property Id="1f8f3385-494c-4cca-b6b6-1c2a0c87e462" name="AspectRatio" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="02e6b953-61b9-4db8-b0c0-4d53b513504f" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="a7b11454-fcba-4f1a-87d3-55fca9bef6d1" LastKnownName="double" />
+            </type_NamedElement>
+          </property>
+          <property Id="d9c952f3-dc16-4757-b667-ad096616c1dc" name="Bandwidth" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="5aa230aa-bd50-4cc0-90e4-ce5ef758e47b" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="a7b11454-fcba-4f1a-87d3-55fca9bef6d1" LastKnownName="double" />
             </type_NamedElement>
           </property>
         </ownedAttributesInternal>
@@ -886,11 +904,6 @@
     <packageHasNamedElement>
       <referencedType Id="b2995b09-7e51-4df9-905b-2526117c54a0" name="SparseMatrix" isAbstract="false" isLeaf="false" cachedFullName="SparseMatrix">
         <elementDefinition Id="43f0311f-1804-4ecc-8852-e5c9ed74dcc0" />
-      </referencedType>
-    </packageHasNamedElement>
-    <packageHasNamedElement>
-      <referencedType Id="fd2bc678-16c6-4cc3-99ab-ac9fc0dfdf42" name="{Concatenated,Interleaved}" isAbstract="false" isLeaf="false" cachedFullName="{Concatenated,Interleaved}">
-        <elementDefinition Id="a05d974a-00c8-4ca8-8e2f-1c11caee99c5" />
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -1217,10 +1230,10 @@
           </association>
         </targetEnds>
         <ownedAttributes>
-          <property Id="1ac43831-316d-4126-997b-88e316f0930b" name="_ForLater_Name" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="1ac43831-316d-4126-997b-88e316f0930b" name="Name" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="b91f2bb2-5d59-4e5b-87ee-df4bd19c593b" />
             <type_NamedElement>
-              <referencedTypeMoniker Id="315bf9bc-c0f4-421f-9090-7407e6c695db" LastKnownName="string" />
+              <referencedTypeMoniker Id="8197658a-1308-40bd-b91e-0268bfd066b6" LastKnownName="string" />
             </type_NamedElement>
           </property>
         </ownedAttributes>
@@ -1253,17 +1266,17 @@
       <Interface Id="8bb96d57-b837-4820-b5ab-843bf3f2f6cf" name="IWriter&lt;TOutput&gt;" isAbstract="false" isLeaf="false">
         <elementDefinition Id="4e0c5d43-0969-4ad5-962a-e6e63dc1b8a3" />
         <ownedOperations>
-          <operation Id="1c9db7da-53a6-4830-8d71-12edced59228" name="OutputWriteHandler" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+          <operation Id="1c9db7da-53a6-4830-8d71-12edced59228" name="OutputEventHandler" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="5b3efe31-34a5-4e05-91f9-2ad2c5d9a53e" />
             <ownedParameters>
               <operationHasOwnedParameters>
-                <parameter Id="67c2f8ad-0e51-4881-9db6-250def8509e9" name="sender" direction="In" isUnique="false">
-                  <elementDefinition Id="690ab497-669b-4b7e-9661-24f395119f96" />
+                <parameter Id="7d629a0d-6bbf-4ffb-be3d-2a6d2e8d7687" name="sender" direction="In" isUnique="false">
+                  <elementDefinition Id="6af3f9fb-1767-4a9f-afa2-f1938fffde7e" />
                 </parameter>
               </operationHasOwnedParameters>
               <operationHasOwnedParameters>
-                <parameter Id="19a83901-e77e-42a3-9a07-8c2a898783c7" name="e" direction="In" isUnique="false">
-                  <elementDefinition Id="f3d2c9c5-9e12-4abb-9bb3-f54ba6e63e92" />
+                <parameter Id="320569ab-1224-4cb6-9492-3d6fa771b2ec" name="e" direction="In" isUnique="false">
+                  <elementDefinition Id="95334983-0561-438a-9b10-2d5818f7814f" />
                 </parameter>
               </operationHasOwnedParameters>
             </ownedParameters>
@@ -1381,7 +1394,7 @@
           </property>
         </ownedAttributesInternal>
         <ownedOperationsInternal>
-          <operation Id="a4ec4a7c-72d5-49d4-b7ec-cc8ecbd2f214" name="OutputWriteHandler" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+          <operation Id="a4ec4a7c-72d5-49d4-b7ec-cc8ecbd2f214" name="OutputEventHandler" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="1a4a417c-eb16-42a1-9e47-126771464052" />
             <ownedParameters>
               <operationHasOwnedParameters>
@@ -1558,6 +1571,16 @@
     <packageHasNamedElement>
       <referencedType Id="7de8f485-b086-4226-b02d-ef0cbf210a76" name="float" isAbstract="false" isLeaf="false" cachedFullName="float">
         <elementDefinition Id="c4e30149-8792-47ff-b260-b7cae0ff15db" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="8197658a-1308-40bd-b91e-0268bfd066b6" name="string" isAbstract="false" isLeaf="false" cachedFullName="string">
+        <elementDefinition Id="4114563f-dd5c-41a7-acb7-b441622c0e7d" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="941f4fba-eb04-4876-b09d-d22ef4d136c3" name="{Concatenated,Interleaved,SuperImposed}" isAbstract="false" isLeaf="false" cachedFullName="{Concatenated,Interleaved,SuperImposed}">
+        <elementDefinition Id="fa36060d-d043-4a39-ba73-9595c98404aa" />
       </referencedType>
     </packageHasNamedElement>
   </packagedElements>

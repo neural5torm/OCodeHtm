@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CnrsUniProv.OCodeHtm
 {
-    public class SpatialLayer : HtmLayer2D
+    public class Spatial2DLayer : HtmLayer2D
     {
         public SpatialLayerType Type { get; private set; }
         
@@ -18,7 +18,7 @@ namespace CnrsUniProv.OCodeHtm
 
 
 
-        public SpatialLayer(SpatialLayerType type, uint height, uint width, double overlap, bool clone, uint maxOutputSize, 
+        public Spatial2DLayer(SpatialLayerType type, uint height, uint width, double overlap, bool clone, uint maxOutputSize, 
                             double sigma = Default.NoSigma, double maxDistance = Default.MaxDistance)
             : this(type, height, width, overlap, clone, maxOutputSize)
         {
@@ -26,7 +26,7 @@ namespace CnrsUniProv.OCodeHtm
             Sigma = sigma;
         }
 
-        public SpatialLayer(SpatialLayerType type, uint height, uint width, double overlap, bool clone, uint maxOutputSize = Default.MaxNodeOutputSize)
+        public Spatial2DLayer(SpatialLayerType type, uint height, uint width, double overlap, bool clone, uint maxOutputSize = Default.MaxNodeOutputSize)
             : base(height, width, overlap, clone, maxOutputSize)
         { 
             Type = type;
@@ -58,7 +58,7 @@ namespace CnrsUniProv.OCodeHtm
             switch (Type)
             {
                 case SpatialLayerType.Gaussian:
-                    return new SpatialNodeGaussian(MaxDistance, Sigma, MaxNodeOutputSize);
+                    return new SpatialNode2DGaussian(MaxDistance, Sigma, MaxNodeOutputSize);
                 default:
                     return null;
             }

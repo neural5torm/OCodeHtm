@@ -21,7 +21,7 @@
     <packageHasNamedElement>
       <class
         Id="0c8bbcc6-edb3-448e-ab33-36add90ec2c6"
-        name="BitmapPictureSensor"
+        name="BitmapPicture2DSensor"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
@@ -528,7 +528,7 @@
     <packageHasNamedElement>
       <class
         Id="5a39418a-d8f2-4b63-b262-28208cd00f89"
-        name="SpatialLayer"
+        name="Spatial2DLayer"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
@@ -676,7 +676,7 @@
             isAbstract="false">
             <classMoniker
               Id="5a39418a-d8f2-4b63-b262-28208cd00f89"
-              LastKnownName="SpatialLayer"
+              LastKnownName="Spatial2DLayer"
               LastKnownLocation="UmlModel.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
@@ -765,7 +765,7 @@
             isAbstract="false">
             <classMoniker
               Id="5a39418a-d8f2-4b63-b262-28208cd00f89"
-              LastKnownName="SpatialLayer"
+              LastKnownName="Spatial2DLayer"
               LastKnownLocation="UmlModel.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
@@ -902,7 +902,7 @@
     <packageHasNamedElement>
       <class
         Id="e3771b28-cb04-44e7-b08c-5e88685e0588"
-        name="SpatialNodeGaussian&lt;SparseMatrix, SparseVector&gt;"
+        name="SpatialNode2DGaussian&lt;SparseMatrix, SparseVector&gt;"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
@@ -966,7 +966,7 @@
     <packageHasNamedElement>
       <class
         Id="17180c10-cb53-415b-92ec-35ca50923c04"
-        name="SpatialNodeProduct"
+        name="SpatialNode2DProduct"
         isAbstract="true"
         isLeaf="false"
         isActiveClass="false">
@@ -1061,7 +1061,7 @@
     <packageHasNamedElement>
       <class
         Id="7a243d0a-c00c-49ca-82f8-8e352a8701e7"
-        name="TemporalLayer"
+        name="Temporal2DLayer"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
@@ -1385,7 +1385,7 @@
             isAbstract="false">
             <classMoniker
               Id="5a39418a-d8f2-4b63-b262-28208cd00f89"
-              LastKnownName="SpatialLayer"
+              LastKnownName="Spatial2DLayer"
               LastKnownLocation="UmlModel.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
@@ -1887,7 +1887,7 @@
         <ownedOperationsInternal>
           <operation
             Id="df7b76f9-394f-4567-8e97-d454fcbffee2"
-            name="OutputWriteHandler"
+            name="OutputEventHandler"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -2135,8 +2135,8 @@
             isComposite="false">
             <type_NamedElement>
               <undefinedTypeMoniker
-                Id="a05d974a-00c8-4ca8-8e2f-1c11caee99c5"
-                LastKnownName="{Concatenated,Interleaved}"
+                Id="fa36060d-d043-4a39-ba73-9595c98404aa"
+                LastKnownName="{Concatenated,Interleaved,SuperImposed}"
                 LastKnownLocation="UmlModel.uml" />
             </type_NamedElement>
           </property>
@@ -2155,6 +2155,60 @@
               <undefinedTypeMoniker
                 Id="f5fdf7d5-4c61-4101-941a-a3ee2e86170a"
                 LastKnownName="int"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="90c83092-58ab-4d87-8d52-99e3a1500bc5"
+            name="WaveLength"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="eb090254-7698-44e3-bcfe-d374d99d5754"
+                LastKnownName="double"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="02e6b953-61b9-4db8-b0c0-4d53b513504f"
+            name="AspectRatio"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="eb090254-7698-44e3-bcfe-d374d99d5754"
+                LastKnownName="double"
+                LastKnownLocation="UmlModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="5aa230aa-bd50-4cc0-90e4-ce5ef758e47b"
+            name="Bandwidth"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="eb090254-7698-44e3-bcfe-d374d99d5754"
+                LastKnownName="double"
                 LastKnownLocation="UmlModel.uml" />
             </type_NamedElement>
           </property>
@@ -3046,7 +3100,7 @@
         <ownedAttributes>
           <property
             Id="b91f2bb2-5d59-4e5b-87ee-df4bd19c593b"
-            name="_ForLater_Name"
+            name="Name"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -3120,7 +3174,7 @@
         <ownedOperations>
           <operation
             Id="5b3efe31-34a5-4e05-91f9-2ad2c5d9a53e"
-            name="OutputWriteHandler"
+            name="OutputEventHandler"
             isLeaf="false"
             isStatic="false"
             isAbstract="true"
@@ -3129,14 +3183,14 @@
             <ownedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="690ab497-669b-4b7e-9661-24f395119f96"
+                  Id="6af3f9fb-1767-4a9f-afa2-f1938fffde7e"
                   name="sender"
                   direction="In"
                   isUnique="false" />
               </operationHasOwnedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="f3d2c9c5-9e12-4abb-9bb3-f54ba6e63e92"
+                  Id="95334983-0561-438a-9b10-2d5818f7814f"
                   name="e"
                   direction="In"
                   isUnique="false" />
@@ -3387,7 +3441,7 @@
         <ownedOperationsInternal>
           <operation
             Id="1a4a417c-eb16-42a1-9e47-126771464052"
-            name="OutputWriteHandler"
+            name="OutputEventHandler"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -3528,6 +3582,11 @@
       <undefinedType
         Id="ce7c0a57-835b-47dc-ba0d-5c4322456706"
         name="OutputEventHandler&lt;Matrix&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="fa36060d-d043-4a39-ba73-9595c98404aa"
+        name="{Concatenated,Interleaved,SuperImposed}" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType

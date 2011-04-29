@@ -32,7 +32,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         [TestMethod]
         public void ErrorWhenTrainingFolderNotFound()
         {
-            var sensor = new BitmapPictureSensor();
+            var sensor = new BitmapPicture2DSensor();
             sensor.SetTrainingFolder("stuff.xyz");
             try
             {
@@ -52,7 +52,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         [TestMethod]
         public void NoErrorWhenTrainingFolderEmpty()
         {
-            var sensor = new BitmapPictureSensor();
+            var sensor = new BitmapPicture2DSensor();
             var emptyFolder = Directory.CreateDirectory("empty");
             sensor.SetTrainingFolder(emptyFolder.FullName);
             try
@@ -71,7 +71,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         [TestMethod]
         public void ErrorWhenTrainingFolderNotSet()
         {
-            var sensor = new BitmapPictureSensor();
+            var sensor = new BitmapPicture2DSensor();
 
             try
             {
@@ -93,7 +93,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         [TestMethod]
         public void ErrorWhenTestFoldersNotSet()
         {
-            var sensor = new BitmapPictureSensor();
+            var sensor = new BitmapPicture2DSensor();
 
             try
             {
@@ -115,7 +115,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         [TestMethod]
         public void CanGetTestInputsWithNormalOrder()
         {
-            var sensor = new BitmapPictureSensor(trainingOrder: TrainingOrder.Normal);
+            var sensor = new BitmapPicture2DSensor(trainingOrder: TrainingOrder.Normal);
             sensor.AddTestFolder(TrainingSetPath);
             var nbInputs = 0;
 
@@ -138,7 +138,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         [TestMethod]
         public void CanGetTestInputsWithRandomOrderSameAsNormal()
         {
-            var sensor = new BitmapPictureSensor(Default.AutomaticSize, Default.AutomaticSize, 0, 1, TrainingOrder.Normal);
+            var sensor = new BitmapPicture2DSensor(Default.AutomaticSize, Default.AutomaticSize, 0, 1, TrainingOrder.Normal);
             sensor.AddTestFolder(TrainingSetPath);
             var nbInputs = 0;
             var categories = new List<string>();
@@ -161,7 +161,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
 
             // Compare with normal order sequence
             var normalCategories = new List<string>();
-            var normalSensor = new BitmapPictureSensor(Default.AutomaticSize, Default.AutomaticSize, 0, 1, TrainingOrder.Normal);
+            var normalSensor = new BitmapPicture2DSensor(Default.AutomaticSize, Default.AutomaticSize, 0, 1, TrainingOrder.Normal);
             normalSensor.AddTestFolder(TrainingSetPath);
             foreach (var input in normalSensor.GetTestInputs(false))
             {
@@ -176,7 +176,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         public void CanGetTrainingInputsNoTransformationsWithoutFiltersInNormalOrder()
         {
             int nbRepetitions = 2;
-            var sensor = new BitmapPictureSensor(Default.AutomaticSize, Default.AutomaticSize, 0, nbRepetitions, TrainingOrder.Normal);
+            var sensor = new BitmapPicture2DSensor(Default.AutomaticSize, Default.AutomaticSize, 0, nbRepetitions, TrainingOrder.Normal);
             sensor.SetTrainingFolder(TrainingSetPath);
             var nbInputs = 0;
 
@@ -200,7 +200,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         public void CanGetTrainingInputsNoTransformationsWithoutFiltersInRandomOrder()
         {
             int nbRepetitions = 2;
-            var sensor = new BitmapPictureSensor(Default.AutomaticSize, Default.AutomaticSize, 0, nbRepetitions, TrainingOrder.Random);
+            var sensor = new BitmapPicture2DSensor(Default.AutomaticSize, Default.AutomaticSize, 0, nbRepetitions, TrainingOrder.Random);
             sensor.SetTrainingFolder(TrainingSetPath);
             var nbInputs = 0;
             var categories = new List<string>();
@@ -223,7 +223,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
 
             // Compare with normal order sequence
             var normalCategories = new List<string>();
-            var normalSensor = new BitmapPictureSensor(Default.AutomaticSize, Default.AutomaticSize, 0, nbRepetitions, TrainingOrder.Normal);
+            var normalSensor = new BitmapPicture2DSensor(Default.AutomaticSize, Default.AutomaticSize, 0, nbRepetitions, TrainingOrder.Normal);
             normalSensor.SetTrainingFolder(sensor.TrainingFolder.FullName);
             foreach (var input in normalSensor.GetTrainingInputs(false))
             {
@@ -238,7 +238,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         public void CanGetTrainingInputsNoTransformationsWithoutFiltersInRandomAllOrder()
         {
             int nbRepetitions = 2;
-            var sensor = new BitmapPictureSensor(Default.AutomaticSize, Default.AutomaticSize, 0, nbRepetitions, TrainingOrder.RandomAll);
+            var sensor = new BitmapPicture2DSensor(Default.AutomaticSize, Default.AutomaticSize, 0, nbRepetitions, TrainingOrder.RandomAll);
             sensor.SetTrainingFolder(TrainingSetPath);
             var nbInputs = 0;
             var categories = new List<string>();
@@ -262,7 +262,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
 
             // Compare with normal order sequence
             var randomCategories = new List<string>();
-            var randomSensor = new BitmapPictureSensor(Default.AutomaticSize, Default.AutomaticSize, 0, nbRepetitions, TrainingOrder.Random);
+            var randomSensor = new BitmapPicture2DSensor(Default.AutomaticSize, Default.AutomaticSize, 0, nbRepetitions, TrainingOrder.Random);
             randomSensor.SetTrainingFolder(sensor.TrainingFolder.FullName);
             foreach (var input in randomSensor.GetTrainingInputs(false))
             {
@@ -286,7 +286,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         public void CanGetTrainingInputsNoTransformationsWithoutFiltersInSameRandomOrderWithSeed()
         {
             int nbRepetitions = 2;
-            var sensor = new BitmapPictureSensor(Default.AutomaticSize, Default.AutomaticSize, Default.RandomizerSeed, nbRepetitions, TrainingOrder.Random);
+            var sensor = new BitmapPicture2DSensor(Default.AutomaticSize, Default.AutomaticSize, Default.RandomizerSeed, nbRepetitions, TrainingOrder.Random);
             sensor.SetTrainingFolder(TrainingSetPath);
             var nbInputs = 0;
             var categories = new List<string>();
@@ -310,7 +310,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
 
             // Compare with normal order sequence
             var controlCategories = new List<string>();
-            var controlSensor = new BitmapPictureSensor(Default.AutomaticSize, Default.AutomaticSize, Default.RandomizerSeed, nbRepetitions, TrainingOrder.Random);
+            var controlSensor = new BitmapPicture2DSensor(Default.AutomaticSize, Default.AutomaticSize, Default.RandomizerSeed, nbRepetitions, TrainingOrder.Random);
             controlSensor.SetTrainingFolder(sensor.TrainingFolder.FullName);
             foreach (var input in controlSensor.GetTrainingInputs(false))
             {
@@ -327,7 +327,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         [TestMethod]
         public void CanGetTrainingInputsWithTransformationsNoFiltersInNormalOrder()
         { 
-            var sensor = new BitmapPictureSensor();
+            var sensor = new BitmapPicture2DSensor();
             sensor.SetTrainingFolder(TrainingSetPath);
 
             var nbInputs = 0;

@@ -11,7 +11,7 @@ using CnrsUniProv.OCodeHtm.Exceptions;
 
 namespace CnrsUniProv.OCodeHtm
 {
-    public class BitmapPictureSensor : Sensor<SparseMatrix>
+    public class BitmapPicture2DSensor : Sensor<SparseMatrix>
     {
         public const double MAX_VALUE = 1.0;
 
@@ -100,7 +100,7 @@ namespace CnrsUniProv.OCodeHtm
 
 
 
-        public BitmapPictureSensor(uint height = Default.AutomaticSize, uint width = Default.AutomaticSize, 
+        public BitmapPicture2DSensor(uint height = Default.AutomaticSize, uint width = Default.AutomaticSize, 
             int randomizerSeed = Default.RandomizerSeed, int presentationsPerInput = Default.SinglePresentation, TrainingOrder trainingOrder = TrainingOrder.Normal,
             uint maxIterations = Default.NoMaxIterations, uint pathSpeed = Default.PathSpeed, bool useRandomOrigin = Default.PathUseRandomOrigin, // TODOlater use enum {Center,Left,RandomOutsideSensor?,Random} for origins
             float rotationAngleMaxDegrees = Default.NoRandomRotationAngle, float rotationSpeed = Default.NoRandomRotationSpeed,

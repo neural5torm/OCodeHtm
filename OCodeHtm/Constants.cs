@@ -83,6 +83,9 @@ namespace CnrsUniProv.OCodeHtm
         public const bool DontUseTransformationsForTesting = false;
 
         public const int GaborOrientations = 4;
+        public const double GaborWaveLength = 2.0;
+        public const double GaborBandwidth = 1.0;
+
         public const double SquareAspectRatio = 1.0;
     }
 }

@@ -53,7 +53,7 @@ namespace CnrsUniProv.OCodeHtm
         {
             //TODO async (see http://stackoverflow.com/questions/803242/understanding-events-and-event-handlers-in-c/803274#803274)
             GetBitmapFrom(e.Output).Save(
-                Path.Combine(OutputFolder.FullName, string.Format("{0}{1:D7}_{2}_{3}.bmp", sender.GetType().Name, FileCounter++, e.Category, this.GetType().Name)), 
+                Path.Combine(OutputFolder.FullName, string.Format("{0}{1:D7}_{2}_{3}.bmp", sender.GetType().Name, FileCounter++, e.Label, this.GetType().Name)), 
                 ImageFormat.Bmp);
         }
 
