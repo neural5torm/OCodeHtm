@@ -180,7 +180,6 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
             sensor.SetTrainingFolder(TrainingSetPath);
             var nbInputs = 0;
 
-
             foreach (var input in sensor.GetTrainingInputs(false))
             {
                 Assert.IsNotNull(input.CurrentFile);
@@ -195,6 +194,32 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
             Assert.AreEqual(nbRepetitions * TrainingSetSize, nbInputs);
         }
 
+
+        [TestMethod]
+        public void CheckTrainingInputsAreInNormalOrder()
+        {
+            int nbRepetitions = 1;
+            var sensor = new BitmapPicture2DSensor(Default.AutomaticSize, Default.AutomaticSize, 0, nbRepetitions, TrainingOrder.Normal);
+            sensor.SetTrainingFolder(TrainingSetPath);
+            var nbInputs = 0;
+            var categories = new List<string>();
+
+            foreach (var input in sensor.GetTrainingInputs(false))
+            {
+                Assert.IsNotNull(input.CurrentFile);
+                Assert.IsFalse(string.IsNullOrWhiteSpace(input.CategoryName));
+
+                categories.Add(input.CategoryName);
+
+                foreach (var iteration in input)
+                {
+                    nbInputs++;
+                }
+            }
+
+            Assert.AreEqual(nbRepetitions * TrainingSetSize, nbInputs);
+            Assert.IsTrue(categories.SequenceEqual(categories.OrderBy(s => s)));
+        }
 
         [TestMethod]
         public void CanGetTrainingInputsNoTransformationsWithoutFiltersInRandomOrder()
@@ -277,9 +302,29 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         }
 
         [TestMethod]
-        public void CanGetTrainingInputsNoTransformationsWithoutFiltersInReverseOrder()
+        public void CheckTrainingInputsAreInReverseOrder()
         {
-            //TODO CanGetTrainingInputsNoTransformationsWithoutFiltersInReverseOrder test
+            int nbRepetitions = 1;
+            var sensor = new BitmapPicture2DSensor(Default.AutomaticSize, Default.AutomaticSize, 0, nbRepetitions, TrainingOrder.Reverse);
+            sensor.SetTrainingFolder(TrainingSetPath);
+            var nbInputs = 0;
+            var categories = new List<string>();
+
+            foreach (var input in sensor.GetTrainingInputs(false))
+            {
+                Assert.IsNotNull(input.CurrentFile);
+                Assert.IsFalse(string.IsNullOrWhiteSpace(input.CategoryName));
+
+                categories.Add(input.CategoryName);
+
+                foreach (var iteration in input)
+                {
+                    nbInputs++;
+                }
+            }
+
+            Assert.AreEqual(nbRepetitions * TrainingSetSize, nbInputs);
+            Assert.IsTrue(categories.SequenceEqual(categories.OrderByDescending(s => s)));
         }
 
         [TestMethod]
@@ -347,7 +392,81 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
             Assert.IsTrue(nbInputs > TrainingSetSize);
         }
 
-        //TODO tests with filters(&transformations)
-        //TODO test IsCurrentInputOutsideField()
+        [TestMethod]
+        public void CanGetTrainingInputsWithTransformationsAndGaborFilterInNormalOrder()
+        {
+            var sensor = new BitmapPicture2DSensor(pathSpeed:1000, useRandomOrigin:true);
+            sensor.SetTrainingFolder(TrainingSetPath);
+            sensor.AddFilter(new Gabor2DFilter());
+            var nbInputs = 0;
+
+
+            foreach (var input in sensor.GetTrainingInputs(true))
+            {
+                Assert.IsNotNull(input.CurrentFile);
+                Assert.IsFalse(string.IsNullOrWhiteSpace(input.CategoryName));
+
+                foreach (var iteration in input)
+                {
+                    nbInputs++;
+                }
+            }
+
+            Assert.IsTrue(nbInputs >= TrainingSetSize);
+        }
+
+        [TestMethod]
+        public void GenerateInputsAlwaysInsideSensor()
+        {
+            var sensor = new BitmapPicture2DSensor();
+            sensor.SetTrainingFolder(TrainingSetPath);
+
+            var nbInputsOutside = 0;
+
+
+            foreach (var input in sensor.GetTrainingInputs(true))
+            {
+                Assert.IsNotNull(input.CurrentFile);
+                Assert.IsFalse(string.IsNullOrWhiteSpace(input.CategoryName));
+
+                foreach (var iteration in input)
+                {
+                    if (sensor.IsCurrentInputOutsideField())
+                        nbInputsOutside++;
+                }
+            }
+
+            Assert.AreEqual(0, nbInputsOutside);
+        }
+
+        [TestMethod]
+        public void SensorGeneratesOneFinalBlankOutputPerInput()
+        {
+            var sensor = new BitmapPicture2DSensor();
+            sensor.SetTrainingFolder(TrainingSetPath);
+
+
+            foreach (var input in sensor.GetTrainingInputs(true))
+            {
+                Assert.IsNotNull(input.CurrentFile);
+                Assert.IsFalse(string.IsNullOrWhiteSpace(input.CategoryName));
+
+                var finalBlankInputDetected = false;
+
+                foreach (var iteration in input)
+                {
+                    Assert.IsFalse(finalBlankInputDetected);
+
+                    if (iteration.IsBlank())
+                        finalBlankInputDetected = true;
+                }
+
+                Assert.IsTrue(finalBlankInputDetected);
+            }
+
+        }
+
+    
+    
     }
 }

@@ -57,9 +57,9 @@ namespace CnrsUniProv.OCodeHtm
             }
             else
             {
-                Parallel.For(0, Height, (row) =>
+                Parallel.For(0, Height, row =>
                 {
-                    Parallel.For(0, Width, (col) =>
+                    Parallel.For(0, Width, col =>
                     {
                         NodeArray[row, col].Learn(GetSubMatrixForNodeAt(row, col, input));
                     });
@@ -78,9 +78,9 @@ namespace CnrsUniProv.OCodeHtm
             // Create inferrence outputs in parallel
             var outputs = new Matrix[Height, Width];
 
-            Parallel.For(0, Height, (row) =>
+            Parallel.For(0, Height, row =>
             {
-                Parallel.For(0, Width, (col) =>
+                Parallel.For(0, Width, col =>
                 {
                     outputs[row, col] = (Matrix)NodeArray[row, col].Infer(GetSubMatrixForNodeAt(row, col, input)).ToRowMatrix();
                 });
@@ -89,9 +89,9 @@ namespace CnrsUniProv.OCodeHtm
             // Concatenate outputs into one big matrix (in parallel)
             var output = new SparseMatrix(Height, Width * MaxNodeOutputSize);
 
-            Parallel.For(0, Height, (row) =>
+            Parallel.For(0, Height, row =>
             {
-                Parallel.For(0, Width, (col) =>
+                Parallel.For(0, Width, col =>
                 {
                     lock (output)
                     {

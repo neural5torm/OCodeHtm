@@ -8,6 +8,7 @@ using D2D = System.Drawing.Drawing2D;
 
 using MathNet.Numerics.LinearAlgebra.Double;
 using CnrsUniProv.OCodeHtm.Exceptions;
+using System.Diagnostics;
 
 namespace CnrsUniProv.OCodeHtm
 {
@@ -75,18 +76,7 @@ namespace CnrsUniProv.OCodeHtm
         public int CurrentPosV { get; private set; }
         public int CurrentPosH { get; private set; }
 
-        /// <summary>
-        /// Determines if the current input is shown outside of the area surrounding the sensor 
-        /// (its top left origin should remain between -Width&lt;=X&lt;=Width and -Height&lt;=Y&lt;=Height)
-        /// </summary>
-        public bool IsCurrentInputOutsideField
-        {
-            get
-            {
-                return CurrentPosH < -Width || CurrentPosH > Width
-                    || CurrentPosV < -Height || CurrentPosV > Height;
-            }
-        }
+        
 
         public int CurrentPathDeltaV { get; private set; }
         public int CurrentPathDeltaH { get; private set; }
@@ -118,14 +108,17 @@ namespace CnrsUniProv.OCodeHtm
             InputFilenameMask = Default.BitmapInputFilenameMask;
 
             if (explorationPaths.Length == 0)
+            {
+                Trace.WriteLine("Warning: " + ExplorationPath.RandomSweep4Axes.GetType().Name + " added to " + GetType().Name + " since none was specified.");
                 ExplorationPaths.Add(ExplorationPath.RandomSweep4Axes);
+            }
         }
 
 
 
         public event OutputEventHandler<Bitmap> OnTransformedBitmapOutput;
         public event OutputEventHandler<Matrix> OnTransformedMatrixOutput;
-        public event OutputEventHandler<Matrix> OnFilteredMatrixOutput;//TODO test and use OnFilteredMatrixOutput
+        public event OutputEventHandler<Matrix> OnFilteredMatrixOutput;
 
         /// <summary>
         /// Set the current input file before starting enumerating exploration iterations
@@ -139,16 +132,21 @@ namespace CnrsUniProv.OCodeHtm
             CurrentInputOriginalImage = new Bitmap(file.FullName);
 
             // Initialize origin (by default, leave the input in the center of the sensor)
-            if (ExplorationPathUseRandomOrigin) 
+            if (ExplorationPathUseRandomOrigin)
             {
                 CurrentPosH = RandomGenerator.Next(-Width / 2, Width / 2 + 1);
                 CurrentPosV = RandomGenerator.Next(-Height / 2, Height / 2 + 1);
-            }        
+            }
+            else
+            {
+                CurrentPosH = 0;
+                CurrentPosV = 0;
+            }
         }
 
        
 
-        protected override IEnumerator<SparseMatrix> GetEnumerator(bool useTransformations)
+        protected override IEnumerator<SparseMatrix> GetIterationsEnumerator(bool useTransformations)
         {
             if (!useTransformations)
             {
@@ -167,7 +165,7 @@ namespace CnrsUniProv.OCodeHtm
 
                     for (int iteration = 0; iteration < ExplorationPathMaxIterations; iteration++)
                     {
-                        if (IsCurrentInputOutsideField || IsInputBlank(input))
+                        if (IsCurrentInputOutsideField() || input.IsBlank())
                             break;
 
                         input = TransformNextInput();
@@ -310,9 +308,15 @@ namespace CnrsUniProv.OCodeHtm
                 CurrentScale += CurrentScaleDelta;
         }
 
-        private bool IsInputBlank(SparseMatrix input)
+
+        /// <summary>
+        /// Determines if the current input is shown outside of the area surrounding the sensor 
+        /// (its top left origin should remain between -Width&lt;=X&lt;=Width and -Height&lt;=Y&lt;=Height)
+        /// </summary>
+        public bool IsCurrentInputOutsideField()
         {
-            return input.FrobeniusNorm() == 0.0;
+            return CurrentPosH < -Width || CurrentPosH > Width
+                    || CurrentPosV < -Height || CurrentPosV > Height;
         }
     }
 }

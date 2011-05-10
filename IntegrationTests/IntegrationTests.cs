@@ -70,23 +70,32 @@ namespace CnrsUniProv.OCodeHtm.IntegrationTests
         [TestMethod]
         public void CanOutputBitmapFilesFromSensorTransformedInputsWithTranslation()
         {
-            //TODO solve bug (stops after first input) + add test
             var sensor = new BitmapPicture2DSensor(presentationsPerInput: 1, pathSpeed: 2, useRandomOrigin: false);
             sensor.SetTrainingFolder(TrainingSetPath);
             var writer = new MatrixToBitmapFileWriter("");
             sensor.OnTransformedMatrixOutput += writer.OutputWriterHandler;
 
+            var realNbInputs = sensor.TrainingFolder.EnumerateFiles("*.bmp", SearchOption.AllDirectories).Count();
+
             var nbIterations = 0;
+            var nbInputs = 0;
 
             foreach (var input in sensor.GetTrainingInputs(true))
             {
+                bool newInput = true;
                 foreach (var iteration in input)
                 {
+                    if (newInput)
+                    {
+                        nbInputs++;
+                        newInput = false;
+                    }
                     nbIterations++;
                 }
             }
 
-            Assert.AreEqual(nbIterations, writer.OutputFolder.GetFiles().Length);
+            Assert.AreEqual(realNbInputs, nbInputs, "nbInputs");
+            Assert.AreEqual(nbIterations, writer.OutputFolder.GetFiles().Length, "nbIterations");
         }
 
         [TestMethod]
@@ -159,13 +168,13 @@ namespace CnrsUniProv.OCodeHtm.IntegrationTests
         [TestMethod]
         public void GaussianSpatialLayerCanLearnAndInferFromPictureSensor()
         {
-            //TODO GaussianSpatialLayerCanLearnAndInferFromPictureSensor
+            //TODOnow GaussianSpatialLayerCanLearnAndInferFromPictureSensor
         }
 
         [TestMethod]
-        public void NetworkCanLearnAndBeTestedAgainstInputs()
+        public void NetworkCanLearnAndBeTestedAgainstInputsTEMP()
         {
-            //TODOlater
+            //TODOlater NetworkCanLearnAndBeTestedAgainstInputs
             /*
             void main()
             {

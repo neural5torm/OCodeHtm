@@ -97,7 +97,7 @@ namespace CnrsUniProv.OCodeHtm
                 return matrix[row, col];
         }
 
-        //TODOlater unit test
+        //TODO unit test Convolve method
         public static Matrix Convolve(this Matrix<double> matrix, Matrix<double> kernel)
         {
             var result = matrix.CreateMatrix(matrix.RowCount, matrix.ColumnCount);
@@ -177,6 +177,11 @@ namespace CnrsUniProv.OCodeHtm
             }
 
             return (Matrix)matrix;
+        }
+
+        public static bool IsBlank(this Matrix<double> matrix)
+        {
+            return matrix.FrobeniusNorm() == 0.0;
         }
     }
 }

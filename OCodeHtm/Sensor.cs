@@ -34,7 +34,7 @@ namespace CnrsUniProv.OCodeHtm
             {
                 Sensor.SetCurrentInputFile(CurrentFile, CategoryName);
 
-                return Sensor.GetEnumerator(UseTransformations);
+                return Sensor.GetIterationsEnumerator(UseTransformations);
             }
             System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
             {
@@ -90,8 +90,8 @@ namespace CnrsUniProv.OCodeHtm
                         // Browsing category folders
                         foreach (var catFolder in testFolder.EnumerateDirectories())
                         {
-                            // Browsing input files in each category
-                            foreach (var file in catFolder.GetFiles(Sensor.InputFilenameMask))
+                            // Browsing input files in each category, ordered by ascending file name
+                            foreach (var file in catFolder.GetFiles(Sensor.InputFilenameMask).OrderBy(file => file.Name))
                                 yield return new ExplorationIterations(Sensor, file, UseTransformations, GetCategoryFromFolder(catFolder));
                         }
                     }
@@ -101,19 +101,19 @@ namespace CnrsUniProv.OCodeHtm
                     if (TrainingFolder == null)
                         throw new HtmException("No training folder set", this);
 
-                    // Ordering category folders in training set
+                    // Ordering cat. folders by category name in training set
                     var orderedCatFolders = TrainingFolder.EnumerateDirectories();
 
                     switch (Sensor.TrainingOrder)
                     {
                         case TrainingOrder.Normal:
-                            orderedCatFolders = orderedCatFolders.OrderBy((dir) => dir.Name);
+                            orderedCatFolders = orderedCatFolders.OrderBy(catFolder => GetCategoryFromFolder(catFolder));
                             break;
                         case TrainingOrder.Random:
-                            orderedCatFolders = orderedCatFolders.OrderBy((dir) => Sensor.RandomGenerator.Next());
+                            orderedCatFolders = orderedCatFolders.OrderBy(catFolder => Sensor.RandomGenerator.Next());
                             break;
                         case TrainingOrder.Reverse:
-                            orderedCatFolders = orderedCatFolders.OrderByDescending((dir) => dir.Name);
+                            orderedCatFolders = orderedCatFolders.OrderByDescending(catFolder => GetCategoryFromFolder(catFolder));
                             break;
                         default:
                             break;
@@ -127,7 +127,7 @@ namespace CnrsUniProv.OCodeHtm
                     }
 
                     if (Sensor.TrainingOrder == TrainingOrder.RandomAll)
-                        catFolders = catFolders.OrderBy((dir) => Sensor.RandomGenerator.Next());
+                        catFolders = catFolders.OrderBy(dir => Sensor.RandomGenerator.Next());
 
 
                     // Browsing ordered category folders
@@ -138,14 +138,14 @@ namespace CnrsUniProv.OCodeHtm
                         switch (Sensor.TrainingOrder)
                         {
                             case TrainingOrder.Normal:
-                                inputFiles = inputFiles.OrderBy((file) => file.Name);
+                                inputFiles = inputFiles.OrderBy(file => file.Name);
                                 break;
                             case TrainingOrder.Reverse:
-                                inputFiles = inputFiles.OrderByDescending((file) => file.Name);
+                                inputFiles = inputFiles.OrderByDescending(file => file.Name);
                                 break;
                             case TrainingOrder.Random:
                             case TrainingOrder.RandomAll:
-                                inputFiles = inputFiles.OrderBy((file) => Sensor.RandomGenerator.Next());
+                                inputFiles = inputFiles.OrderBy(file => Sensor.RandomGenerator.Next());
                                 break;
                             default:
                                 break;
@@ -266,7 +266,7 @@ namespace CnrsUniProv.OCodeHtm
 
         protected abstract void SetCurrentInputFile(FileInfo file, string category);
 
-        protected abstract IEnumerator<TOutput> GetEnumerator(bool useTransformations);
+        protected abstract IEnumerator<TOutput> GetIterationsEnumerator(bool useTransformations);
 
 
 

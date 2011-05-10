@@ -153,7 +153,7 @@
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
-          <operation Id="70c37a81-653c-4d73-8a05-a6f644aa1093" name="GetEnumerator" visibility="Protected" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+          <operation Id="70c37a81-653c-4d73-8a05-a6f644aa1093" name="GetIterationsEnumerator" visibility="Protected" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="49d05212-e2e1-46b0-b493-c157a5b6beef" />
             <ownedParameters>
               <operationHasOwnedParameters>
@@ -325,7 +325,7 @@
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
-      <class Id="e65b6d9a-db4a-402f-842e-d3bade13618b" name="SpatialNode2DProduct" isAbstract="true" isLeaf="false" isActiveClass="false">
+      <class Id="e65b6d9a-db4a-402f-842e-d3bade13618b" name="SpatialNode2DProduct" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="17180c10-cb53-415b-92ec-35ca50923c04" />
         <generalsInternal>
           <generalization Id="25300bb3-cfcd-4285-9db6-b8c66e13017c" isSubstitutable="false">
@@ -1109,7 +1109,7 @@
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
-          <operation Id="5b78134b-888f-488d-bc8f-69154b49255c" name="GetEnumerator" visibility="Protected" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+          <operation Id="5b78134b-888f-488d-bc8f-69154b49255c" name="GetIterationsEnumerator" visibility="Protected" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="d47e4889-9df9-4c68-a2d2-c10e9c21f251" />
             <ownedParameters>
               <operationHasOwnedParameters>
@@ -1583,6 +1583,45 @@
         <elementDefinition Id="fa36060d-d043-4a39-ba73-9595c98404aa" />
       </referencedType>
     </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="a4772cd2-1170-40f9-9c56-7a40c9da60ec" name="SpatialNode2DGabor" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="dead48ae-1493-442f-a181-99e21f288f58" />
+        <generalsInternal>
+          <generalization Id="062d62e8-c5b7-45aa-98d7-6f4803225e23" isSubstitutable="false">
+            <classMoniker Id="bdbcb685-8f53-483f-ad87-40f8b0458cfe" LastKnownName="SpatialNode2D" />
+            <elementDefinition Id="6bc953a5-0a6a-435f-a0e2-c1a748fcaca1" />
+          </generalization>
+        </generalsInternal>
+        <targetEnds>
+          <association Id="b23395f0-1d54-471a-b1de-4440f2a98277" isDerived="false" sourceEndRoleName="" targetEndRoleName="GaborFilters" isLeaf="false" isAbstract="false">
+            <classMoniker Id="074c101c-525c-4d61-b788-5f4210c7697d" LastKnownName="GaborFilter" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="6fff0150-85de-413a-8b3d-3a64526e23ab" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="15e1a27a-1869-40d0-a5be-dfa9216a2604" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="e88d2c4f-2d45-49bd-999f-cd351a0595fe" name="GaborFilters" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString Id="b2b981dd-e802-4a69-914e-c9f11d1fcde9" name="Lower" value="n">
+                      <elementDefinition Id="566068c1-2efc-4ac4-a6d6-8ed44a168e36" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="2571f964-9877-4d85-aac0-705952901212" name="Upper" value="n">
+                      <elementDefinition Id="d1fa4804-cebc-4b66-bc54-8a913aeec7e4" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="cdbb0986-cfbd-4554-bbd1-840eb8f02d53" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="0ab27b05-59de-441f-b3b6-0ff2e844df3c" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
   </packagedElements>
   <package Id="54d2adf7-259b-4605-b4d2-a0d6ade258c8" name="UmlModel">
     <elementDefinition Id="87ba7bd6-cdb0-4a42-bf01-7415032f4c02" />

@@ -419,7 +419,7 @@
           </operation>
           <operation
             Id="49d05212-e2e1-46b0-b493-c157a5b6beef"
-            name="GetEnumerator"
+            name="GetIterationsEnumerator"
             visibility="Protected"
             isLeaf="false"
             isStatic="false"
@@ -967,7 +967,7 @@
       <class
         Id="17180c10-cb53-415b-92ec-35ca50923c04"
         name="SpatialNode2DProduct"
-        isAbstract="true"
+        isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
         <suppliersInternal>
@@ -2932,7 +2932,7 @@
           </operation>
           <operation
             Id="d47e4889-9df9-4c68-a2d2-c10e9c21f251"
-            name="GetEnumerator"
+            name="GetIterationsEnumerator"
             visibility="Protected"
             isLeaf="false"
             isStatic="false"
@@ -3587,6 +3587,79 @@
       <undefinedType
         Id="fa36060d-d043-4a39-ba73-9595c98404aa"
         name="{Concatenated,Interleaved,SuperImposed}" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="dead48ae-1493-442f-a181-99e21f288f58"
+        name="SpatialNode2DGabor"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="6bc953a5-0a6a-435f-a0e2-c1a748fcaca1"
+            isSubstitutable="false">
+            <classMoniker
+              Id="420658b4-09e2-4b8e-964c-b94b9305f8b2"
+              LastKnownName="SpatialNode2D"
+              LastKnownLocation="UmlModel.uml" />
+          </generalization>
+        </generalsInternal>
+        <targetEnds>
+          <association
+            Id="0ab27b05-59de-441f-b3b6-0ff2e844df3c"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName="GaborFilters"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="81a06600-7f15-4809-a878-42670b186c68"
+              LastKnownName="GaborFilter"
+              LastKnownLocation="UmlModel.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="15e1a27a-1869-40d0-a5be-dfa9216a2604"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="cdbb0986-cfbd-4554-bbd1-840eb8f02d53"
+                  name="GaborFilters"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="566068c1-2efc-4ac4-a6d6-8ed44a168e36"
+                      name="Lower"
+                      value="n" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="d1fa4804-cebc-4b66-bc54-8a913aeec7e4"
+                      name="Upper"
+                      value="n" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </class>
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType

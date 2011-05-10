@@ -42,9 +42,9 @@ namespace CnrsUniProv.OCodeHtm
             else
             {
                 NodeArray = new INode<SparseMatrix, Vector>[Height, Width];
-                Parallel.For(0, Height, (row) =>
+                Parallel.For(0, Height, row =>
                 {
-                    Parallel.For(0, Width, (col) =>
+                    Parallel.For(0, Width, col =>
                     {
                         NodeArray[row, col] = CreateNode();
                     });
@@ -67,9 +67,9 @@ namespace CnrsUniProv.OCodeHtm
         protected override void CloneTrainedNodeToArray()
         {
             NodeArray = new INode<SparseMatrix, Vector>[Height, Width];
-            Parallel.For(0, Height, (row) =>
+            Parallel.For(0, Height, row =>
             {
-                Parallel.For(0, Width, (col) =>
+                Parallel.For(0, Width, col =>
                 {
                     NodeArray[row, col] = ClonedNode.Clone();
                 });
