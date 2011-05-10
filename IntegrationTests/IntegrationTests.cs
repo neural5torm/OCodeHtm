@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using CnrsUniProv.OCodeHtm.Interfaces;
 using MathNet.Numerics.LinearAlgebra.Double;
+using System.Diagnostics;
 
 namespace CnrsUniProv.OCodeHtm.IntegrationTests
 {
@@ -126,7 +127,6 @@ namespace CnrsUniProv.OCodeHtm.IntegrationTests
         [TestMethod]
         public void CanOutputFilteredInputsFromGabor2DFilter()
         {
-
             var filter = new Gabor2DFilter();
             var writer = new MatrixToBitmapFileWriter("");
 
@@ -134,8 +134,9 @@ namespace CnrsUniProv.OCodeHtm.IntegrationTests
             sensor.SetTrainingFolder(TrainingSetPath);
             sensor.AddFilter(filter);
             sensor.OnFilteredMatrixOutput += writer.OutputWriterHandler;
-            int maxIterations = 30, nbIterations = 0;
+            int maxIterations = 100, nbIterations = 0;
 
+            var begin = DateTime.Now;
             foreach (var input in sensor.GetTrainingInputs(true))
             {
                 foreach (var iteration in input)
@@ -147,6 +148,10 @@ namespace CnrsUniProv.OCodeHtm.IntegrationTests
                 if (nbIterations >= maxIterations)
                     break;
             }
+            var end = DateTime.Now;
+
+            Debug.WriteLine(begin);
+            Debug.WriteLine("{0} (duration: {1:D} ms)", end, (int)(end - begin).TotalMilliseconds);
 
             Assert.AreEqual(maxIterations, writer.OutputFolder.GetFiles().Length);
         }

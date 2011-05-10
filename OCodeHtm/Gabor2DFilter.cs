@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using MathNet.Numerics.LinearAlgebra.Double;
 using CnrsUniProv.OCodeHtm.Interfaces;
+using MathNet.Numerics.LinearAlgebra.Generic;
 
 namespace CnrsUniProv.OCodeHtm
 {
@@ -108,16 +109,20 @@ namespace CnrsUniProv.OCodeHtm
         
         public SparseMatrix Filter(SparseMatrix input)
         {
-            var outputs = new Matrix[NbOrientations];
+            var outputs = new Matrix<double>[NbOrientations];
 
             for (int i = 0; i < NbOrientations; i++)
-            {//TODOnow add imaginary part + abs
-                outputs[i] = input.Convolve(FilterMatricesReal[i]);
+            {
+                var real = input.Convolve(FilterMatricesReal[i]);
+                var imaginary = input.Convolve(FilterMatricesImaginary[i]);
+
+                outputs[i] = (real.PointwisePower(2.0) + imaginary.PointwisePower(2.0)).PointwisePower(0.5);
+
                 if (OnFilterCreated != null)
-                    OnFilterCreated(this, new OutputEventArgs<Matrix>(outputs[i], "output#" + i));
+                    OnFilterCreated(this, new OutputEventArgs<Matrix>((Matrix)outputs[i], "output#" + i));
             }
 
-            Matrix output = null;
+            var output = outputs[0];
             switch (OutputMode)
             {
                 case MultipleOutputFilterMode.Concatenated:
@@ -128,11 +133,13 @@ namespace CnrsUniProv.OCodeHtm
                     }
                     break;
                 case MultipleOutputFilterMode.Interleaved:
-                    break;
+                    throw new NotImplementedException();
+
                 case MultipleOutputFilterMode.SuperImposed:
-                    break;
+                    throw new NotImplementedException();
+
                 default:
-                    break;
+                    throw new ArgumentException();
             }
             return (SparseMatrix)output;
         }

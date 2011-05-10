@@ -55,31 +55,46 @@ namespace CnrsUniProv.OCodeHtm
         public static double Sum(this Matrix<double> matrix)
         {
             var sum = 0.0;
-            foreach (var el in matrix.RowEnumerator())
+            foreach (var row in matrix.RowEnumerator())
             {
-                sum += el.Item2.Sum();
+                sum += row.Item2.Sum();
             }
 
             return sum;
         }
 
-        //TODOlater unit test
-        public static Matrix SubMatrixAround(this Matrix<double> matrix, int centerRow, int rowLength, int centerCol, int colLength)
+        
+        public static Matrix SubMatrixAround(this Matrix<double> matrix, int centerRow, int rowCount, int centerCol, int colCount)
         {
-            var subMatrix = matrix.CreateMatrix(rowLength, colLength);
+            var subMatrix = new DenseMatrix(rowCount, colCount);
 
-            var topRow = Math.Max(centerRow - rowLength / 2, 0);
-            var topRowPos = topRow - (centerRow - colLength / 2);
+            var topRow = Math.Max(centerRow - rowCount / 2, 0);
+            var topRowPos = topRow - (centerRow - colCount / 2);
+
+            var leftCol = Math.Max(centerCol - rowCount / 2, 0);
+            var leftColPos = leftCol - (centerCol - colCount / 2);
+
+            var actualRowCount = Math.Min(rowCount - topRowPos, matrix.RowCount - topRow);
+            var actualColCount = Math.Min(colCount - leftColPos, matrix.ColumnCount - leftCol);
+
+            subMatrix.SetSubMatrix(topRowPos, actualRowCount, leftColPos, actualColCount, matrix.SubMatrix(topRow, actualRowCount, leftCol, actualColCount));
             
-            var leftCol = Math.Max(centerCol - rowLength / 2, 0);
-            var leftColPos = leftCol - (centerCol - colLength / 2);
+            return subMatrix;
+        }
 
-            var actualRowLength = Math.Min(rowLength - topRowPos, matrix.RowCount - topRow);
-            var actualColLength = Math.Min(colLength - leftColPos, matrix.ColumnCount - leftCol);
-
-            subMatrix.SetSubMatrix(topRowPos, actualRowLength, leftColPos, actualColLength, matrix.SubMatrix(topRow, actualRowLength, leftCol, actualColLength));
-            
-            return (Matrix)subMatrix;
+        
+        public static double ValueInAndAround(this Matrix<double> matrix, int row, int col, bool replicateBorders = false)
+        {
+            if (row < 0 || row >= matrix.RowCount
+                || col < 0 || col >= matrix.ColumnCount)
+            {
+                if (replicateBorders)
+                    return matrix[Math.Min(Math.Max(row, 0), matrix.RowCount - 1), Math.Min(Math.Max(col, 0), matrix.ColumnCount - 1)];
+                else
+                    return 0.0;
+            }
+            else
+                return matrix[row, col];
         }
 
         //TODOlater unit test
@@ -98,6 +113,7 @@ namespace CnrsUniProv.OCodeHtm
             return (Matrix)result;
         }
 
+        
 
         public static Matrix Normalize(this Matrix<double> matrix, double max = 1.0, double min = 0.0)
         {
@@ -116,11 +132,11 @@ namespace CnrsUniProv.OCodeHtm
         }
 
 
-        public static SparseMatrix ShiftAndFilterToZero(this Matrix<double> matrix, double mean, double filterOutAbsValuesSmallerThan)
+        public static SparseMatrix ShiftAndFilterToZero(this Matrix<double> matrix, double shiftToMean, double filterOutAbsValuesSmallerThan)
         {
             var filtered = new SparseMatrix(matrix.RowCount, matrix.ColumnCount);
 
-            var shifted = matrix.Subtract(new DenseMatrix(matrix.RowCount, matrix.ColumnCount, mean));
+            var shifted = matrix.Subtract(new DenseMatrix(matrix.RowCount, matrix.ColumnCount, shiftToMean));
             foreach (var el in shifted.IndexedEnumerator())
             {
                 if (Math.Abs(el.Item3) > filterOutAbsValuesSmallerThan)
@@ -131,6 +147,25 @@ namespace CnrsUniProv.OCodeHtm
         }
 
 
+        public static Matrix PointwisePower(this Matrix<double> matrix, double power)
+        {
+            if (power == 2.0)
+                return (Matrix)(matrix.PointwiseMultiply(matrix));
+
+            foreach (var el in matrix.IndexedEnumerator())
+            {
+                matrix[el.Item1, el.Item2] = Math.Pow(el.Item3, power);
+            }
+
+            return (Matrix)matrix;
+        }
+
+        /// <summary>
+        /// Warning: avoid using PointwiseApply with sparse matrices since each and every element will be re-computed.
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="function"></param>
+        /// <returns></returns>
         public static Matrix PointwiseApply(this Matrix<double> matrix, Func<double, double> function)
         {
             for (int i = 0; i < matrix.RowCount; i++)
