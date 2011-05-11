@@ -1593,7 +1593,7 @@
           </generalization>
         </generalsInternal>
         <targetEnds>
-          <association Id="b23395f0-1d54-471a-b1de-4440f2a98277" isDerived="false" sourceEndRoleName="" targetEndRoleName="GaborFilters" isLeaf="false" isAbstract="false">
+          <association Id="b23395f0-1d54-471a-b1de-4440f2a98277" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
             <classMoniker Id="074c101c-525c-4d61-b788-5f4210c7697d" LastKnownName="GaborFilter" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
@@ -1602,7 +1602,7 @@
                 </memberEnd>
               </associationHasOwnedEnds>
               <associationHasOwnedEnds>
-                <memberEnd Id="e88d2c4f-2d45-49bd-999f-cd351a0595fe" name="GaborFilters" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                <memberEnd Id="e88d2c4f-2d45-49bd-999f-cd351a0595fe" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
                   <lowerValueInternal>
                     <literalString Id="b2b981dd-e802-4a69-914e-c9f11d1fcde9" name="Lower" value="n">
                       <elementDefinition Id="566068c1-2efc-4ac4-a6d6-8ed44a168e36" />
@@ -1627,6 +1627,17 @@
         <elementDefinition Id="eb090254-7698-44e3-bcfe-d374d99d5754" />
       </referencedType>
     </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="362e0c78-d48c-4901-82a3-444d3c4636a0" name="BitmapPictureEyeMovement2DSensor" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="417ddf7b-fa61-4662-baf2-a90f59df1c14" />
+        <generalsInternal>
+          <generalization Id="20a6fd87-97e2-4128-a9a3-5607f444b6b5" isSubstitutable="false">
+            <classMoniker Id="4582dc17-ce86-4fbd-9083-131767b84230" LastKnownName="Sensor" />
+            <elementDefinition Id="079febc4-9758-4ede-8383-0f246986a43d" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
   </packagedElements>
   <package Id="54d2adf7-259b-4605-b4d2-a0d6ade258c8" name="UmlModel">
     <elementDefinition Id="87ba7bd6-cdb0-4a42-bf01-7415032f4c02" />

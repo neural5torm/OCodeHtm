@@ -11,10 +11,10 @@ using System.Diagnostics;
 namespace CnrsUniProv.OCodeHtm.IntegrationTests
 {
     [TestClass]
-    public class IntegrationTests
+    public class InputIntegrationTests
     {
         static readonly string TrainingSetPath = Path.Combine("O:", "clean");
-
+        const int TrainingSetSize = 26;
 
         [TestMethod]
         public void InputFilesCanBeFound()
@@ -66,6 +66,56 @@ namespace CnrsUniProv.OCodeHtm.IntegrationTests
             Assert.AreEqual(nbIterations2, writer2.OutputFolder.GetFiles().Length);
         }
 
+        [TestMethod]
+        public void GenerateInputsAlwaysInsideSensor()
+        {
+            var sensor = new BitmapPicture2DSensor();
+            sensor.SetTrainingFolder(TrainingSetPath);
+
+            var nbInputsOutside = 0;
+
+
+            foreach (var input in sensor.GetTrainingInputs(true))
+            {
+                Assert.IsNotNull(input.CurrentFile);
+                Assert.IsFalse(string.IsNullOrWhiteSpace(input.CategoryName));
+
+                foreach (var iteration in input)
+                {
+                    if (sensor.IsCurrentInputOutsideField())
+                        nbInputsOutside++;
+                }
+            }
+
+            Assert.AreEqual(0, nbInputsOutside);
+        }
+
+        [TestMethod]
+        public void SensorGeneratesOneFinalBlankOutputPerInput()
+        {
+            var sensor = new BitmapPicture2DSensor();
+            sensor.SetTrainingFolder(TrainingSetPath);
+
+
+            foreach (var input in sensor.GetTrainingInputs(true))
+            {
+                Assert.IsNotNull(input.CurrentFile);
+                Assert.IsFalse(string.IsNullOrWhiteSpace(input.CategoryName));
+
+                var finalBlankInputDetected = false;
+
+                foreach (var iteration in input)
+                {
+                    Assert.IsFalse(finalBlankInputDetected);
+
+                    if (iteration.IsBlank())
+                        finalBlankInputDetected = true;
+                }
+
+                Assert.IsTrue(finalBlankInputDetected);
+            }
+
+        }
 
         [TestMethod]
         public void CanOutputBitmapFilesFromSensorTransformedInputsWithTranslation()
@@ -166,6 +216,58 @@ namespace CnrsUniProv.OCodeHtm.IntegrationTests
         }
 
         [TestMethod]
+        public void CanGetTrainingInputsWithTransformationsNoFiltersInNormalOrder()
+        {
+            var sensor = new BitmapPicture2DSensor();
+            sensor.SetTrainingFolder(TrainingSetPath);
+
+            var nbInputs = 0;
+
+
+            foreach (var input in sensor.GetTrainingInputs(true))
+            {
+                Assert.IsNotNull(input.CurrentFile);
+                Assert.IsFalse(string.IsNullOrWhiteSpace(input.CategoryName));
+
+                foreach (var iteration in input)
+                {
+                    nbInputs++;
+                }
+            }
+
+            Assert.IsTrue(nbInputs > TrainingSetSize);
+        }
+
+        [TestMethod]
+        public void CanGetTrainingInputsWithTransformationsAndGaborFilterInNormalOrder()
+        {
+            var sensor = new BitmapPicture2DSensor(pathSpeed: 10, useRandomOrigin: true);
+            sensor.SetTrainingFolder(TrainingSetPath);
+            sensor.AddFilter(new Gabor2DFilter());
+            var nbInputs = 0;
+            var nbIterations = 0;
+
+
+            foreach (var input in sensor.GetTrainingInputs(true))
+            {
+                Assert.IsNotNull(input.CurrentFile);
+                Assert.IsFalse(string.IsNullOrWhiteSpace(input.CategoryName));
+
+                nbInputs++;
+
+                foreach (var iteration in input)
+                {
+                    if (!iteration.IsBlank())
+                        nbIterations++;
+                }
+
+            }
+
+            Assert.AreEqual(TrainingSetSize, nbInputs, "nbInputs");
+            Assert.IsTrue(nbIterations >= TrainingSetSize, "nbIterations");
+        }
+
+        [TestMethod]
         public void SpatialLayer2DGaussianCanLearnAndInferFromBitmapPicture2DSensor()
         {
             var sensor = new BitmapPicture2DSensor(presentationsPerInput: 1, pathSpeed: 2, useRandomOrigin: false);
@@ -182,67 +284,6 @@ namespace CnrsUniProv.OCodeHtm.IntegrationTests
             }
             
             Assert.IsTrue(((SpatialNode2DGaussian)layer.ClonedNode).CoincidencesFrequencies.Keys.Count > 0);
-        }
-
-        [TestMethod]
-        public void NetworkCanLearnAndBeTestedAgainstInputsTEMP()
-        {
-            //TODOlater NetworkCanLearnAndBeTestedAgainstInputs
-            /*
-            void main()
-            {
-                var net = new HtmNetwork();
-
-                net.AddSensor(new BitmapPictureSensor(32, 32, "ocode/clean", "ocode/test"));
-                net.AddLayer(new SpatialLayer<SpatialNodeGaussian>(20, 20, 0.0));
-                net.AddLayer(new TemporalLayer(20, 20, 0.0));
-                net.AddClassifier(new ProductMatchClassifierNode());
-
-                net.Sensor.Exploration = "RandomSweep";
-
-                Train(net);
-
-            }
-
-            void Train(object net)
-            {
-                // Train layers
-                for (int i = 0; i < net.Layers.Count; ++i)
-                {
-                    foreach (var input in net.Sensor.GetTrainingInputs())
-                    {
-                        foreach (var sensorSweepIteration in input.GetIterations())
-                        {
-                            // Get output from all previously trained layers
-                            var output = sensorSweepIteration.GetOutput();
-                            for (int iTrained = 0; j < i; ++j)
-                            {
-                                output = net.Layers[iTrained].Infer(output);
-                            }
-
-                            net.Layers[i].Learn(output);
-                        }
-                    }
-                }
-
-                // Train classifier
-                foreach (var input in net.Sensor.GetTrainingInputs())
-                {
-                    var cat = input.GetCategory();
-
-                    foreach (var sensorSweepIteration in input.GetIterations())
-                    {
-                        var output = sensorSweepIteration.GetOutput();
-                        for (int i = 0; i < net.Layers.Count; ++i)
-                        {
-                            output = net.Layers[i].Infer(output);
-                        }
-
-                        net.Classifier.Learn(output, cat);
-                    }
-                }
-            }*/
-    
         }
 
     } // testc

@@ -3610,7 +3610,7 @@
             Id="0ab27b05-59de-441f-b3b6-0ff2e844df3c"
             isDerived="false"
             sourceEndRoleName=""
-            targetEndRoleName="GaborFilters"
+            targetEndRoleName=""
             isLeaf="false"
             isAbstract="false">
             <classMoniker
@@ -3633,7 +3633,6 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="cdbb0986-cfbd-4554-bbd1-840eb8f02d53"
-                  name="GaborFilters"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -3659,6 +3658,25 @@
             </relationshipOwnedElementsInternal>
           </association>
         </targetEnds>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="417ddf7b-fa61-4662-baf2-a90f59df1c14"
+        name="BitmapPictureEyeMovement2DSensor"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="079febc4-9758-4ede-8383-0f246986a43d"
+            isSubstitutable="false">
+            <classMoniker
+              Id="3042a040-a54f-4a88-a631-4ee37efce031"
+              LastKnownName="Sensor"
+              LastKnownLocation="UmlModel.uml" />
+          </generalization>
+        </generalsInternal>
       </class>
     </packageHasNamedElement>
   </packagedElements>

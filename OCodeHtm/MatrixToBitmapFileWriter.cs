@@ -5,6 +5,7 @@ using System.Text;
 using System.Drawing;
 using System.Drawing.Imaging;
 using MathNet.Numerics.LinearAlgebra.Double;
+using CnrsUniProv.OCodeHtm.Interfaces;
 
 namespace CnrsUniProv.OCodeHtm
 {

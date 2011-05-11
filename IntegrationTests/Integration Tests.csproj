@@ -49,7 +49,8 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IntegrationTests.cs" />
+    <Compile Include="HtmNetworkIntegrationTests.cs" />
+    <Compile Include="InputIntegrationTests.cs" />
     <Compile Include="ThirdPartyComponentsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
