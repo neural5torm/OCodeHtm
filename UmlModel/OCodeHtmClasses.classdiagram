@@ -850,10 +850,10 @@
           </association>
         </targetEnds>
         <ownedAttributesInternal>
-          <property Id="b1db37aa-e0f6-46a7-8d41-80156e050e88" name="InputOverlapRatio" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="b1db37aa-e0f6-46a7-8d41-80156e050e88" name="NodeInputCoverageRatio" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="021cddb6-eac3-49c4-8b65-5c8a5b12e959" />
             <type_NamedElement>
-              <referencedTypeMoniker Id="a7b11454-fcba-4f1a-87d3-55fca9bef6d1" LastKnownName="double" />
+              <referencedTypeMoniker Id="47d9afe5-7353-4bd9-92f7-21f1f9d28170" LastKnownName="double" />
             </type_NamedElement>
           </property>
           <property Id="a614f286-fb4b-4a00-b1f4-9be9d2e69aaa" name="IsTrainedNodeCloned" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
@@ -1622,6 +1622,11 @@
         </targetEnds>
       </class>
     </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="47d9afe5-7353-4bd9-92f7-21f1f9d28170" name="double" isAbstract="false" isLeaf="false" cachedFullName="double">
+        <elementDefinition Id="eb090254-7698-44e3-bcfe-d374d99d5754" />
+      </referencedType>
+    </packageHasNamedElement>
   </packagedElements>
   <package Id="54d2adf7-259b-4605-b4d2-a0d6ade258c8" name="UmlModel">
     <elementDefinition Id="87ba7bd6-cdb0-4a42-bf01-7415032f4c02" />

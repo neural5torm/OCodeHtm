@@ -2326,7 +2326,7 @@
         <ownedAttributesInternal>
           <property
             Id="021cddb6-eac3-49c4-8b65-5c8a5b12e959"
-            name="InputOverlapRatio"
+            name="NodeInputCoverageRatio"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"

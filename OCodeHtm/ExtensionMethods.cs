@@ -77,12 +77,13 @@ namespace CnrsUniProv.OCodeHtm
             var actualRowCount = Math.Min(rowCount - topRowPos, matrix.RowCount - topRow);
             var actualColCount = Math.Min(colCount - leftColPos, matrix.ColumnCount - leftCol);
 
+            // TODO use VirtualMatrix i.of sub-matrix
             subMatrix.SetSubMatrix(topRowPos, actualRowCount, leftColPos, actualColCount, matrix.SubMatrix(topRow, actualRowCount, leftCol, actualColCount));
             
             return subMatrix;
         }
 
-        
+        // TODOlater? remove
         public static double ValueInAndAround(this Matrix<double> matrix, int row, int col, bool replicateBorders = false)
         {
             if (row < 0 || row >= matrix.RowCount
@@ -97,14 +98,16 @@ namespace CnrsUniProv.OCodeHtm
                 return matrix[row, col];
         }
 
-        //TODO unit test Convolve method
+        // TODOlater unit test Convolve method
         public static Matrix Convolve(this Matrix<double> matrix, Matrix<double> kernel)
         {
             var result = matrix.CreateMatrix(matrix.RowCount, matrix.ColumnCount);
 
-            for (int row = 0; row < matrix.RowCount; row++)
+            var rowCount = matrix.RowCount;
+            var columnCount = matrix.ColumnCount;
+            for (int row = 0; row < rowCount; row++)
             {
-                for (int col = 0; col < matrix.ColumnCount; col++)
+                for (int col = 0; col < columnCount; col++)
                 {
                     result[row, col] = matrix.SubMatrixAround(row, kernel.RowCount, col, kernel.ColumnCount).PointwiseMultiply(kernel).Sum();
                 }

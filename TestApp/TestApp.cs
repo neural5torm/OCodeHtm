@@ -8,9 +8,15 @@ using System.IO;
 
 namespace TestApp
 {
-    class Program
+    class TestApp
     {
         static void Main(string[] args)
+        {
+            SensorGaborFilterTest(3);
+
+        }
+
+        static void SensorGaborFilterTest(int maxIterations)
         {
             string TrainingSetPath = Path.Combine("O:", "clean");
 
@@ -23,7 +29,7 @@ namespace TestApp
             sensor.AddFilter(filter);
             sensor.OnFilteredMatrixOutput += writer.OutputWriterHandler;
 
-            int maxIterations = 2, nbIterations = 0;
+            int nbIterations = 0;
             foreach (var input in sensor.GetTrainingInputs(true))
             {
                 foreach (var iteration in input)
@@ -35,7 +41,6 @@ namespace TestApp
                 if (nbIterations >= maxIterations)
                     break;
             }
-
         }
     }
 }

@@ -9,6 +9,7 @@ using D2D = System.Drawing.Drawing2D;
 using MathNet.Numerics.LinearAlgebra.Double;
 using CnrsUniProv.OCodeHtm.Exceptions;
 using System.Diagnostics;
+using CnrsUniProv.OCodeHtm.Interfaces;
 
 namespace CnrsUniProv.OCodeHtm
 {

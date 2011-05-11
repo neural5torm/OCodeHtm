@@ -5,9 +5,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.IO;
 using CnrsUniProv.OCodeHtm.Exceptions;
-using CnrsUniProv.OCodeHtm.Interfaces;
 
-namespace CnrsUniProv.OCodeHtm
+namespace CnrsUniProv.OCodeHtm.Interfaces
 {
     public abstract class Sensor<TOutput> 
     {

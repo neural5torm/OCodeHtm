@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using MathNet.Numerics.LinearAlgebra.Double;
 using CnrsUniProv.OCodeHtm.Exceptions;
+using CnrsUniProv.OCodeHtm.Interfaces;
 
 namespace CnrsUniProv.OCodeHtm
 {

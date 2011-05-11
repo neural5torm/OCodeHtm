@@ -191,9 +191,9 @@
       <associationMoniker Id="4e140629-6ac2-4488-b1b2-59d47bf5c24e" />
       <relativeChildShapes />
       <moveableDecoratorHostShapes>
-        <moveableDecoratorHostShape manuallyPlaced="true" absoluteBounds="2.7222222201526165, 8.02348768789771, 0.125, 0.14800345897674561" shapeFieldName="SourceMultiplicity" />
+        <moveableDecoratorHostShape manuallyPlaced="true" absoluteBounds="2.72916666418314, 8.02348768789771, 0.125, 0.14800345897674561" shapeFieldName="SourceMultiplicity" />
         <moveableDecoratorHostShape manuallySized="true" manuallyPlaced="true" absoluteBounds="2.625, 7.71098768789771, 0.90195685421427108, 0.14800345897674561" shapeFieldName="TargetRoleName" />
-        <moveableDecoratorHostShape manuallyPlaced="true" absoluteBounds="2.9097222201526165, 8.02348768789771, 0.125, 0.14800345897674561" shapeFieldName="TargetMultiplicity" />
+        <moveableDecoratorHostShape manuallyPlaced="true" absoluteBounds="2.91666666418314, 8.02348768789771, 0.125, 0.14800345897674561" shapeFieldName="TargetMultiplicity" />
       </moveableDecoratorHostShapes>
       <nodes>
         <classShapeMoniker Id="ef4ee42e-3da4-4705-a810-a13156902d00" />
@@ -344,9 +344,9 @@
       <associationMoniker Id="37e448b6-ec54-4a36-856f-c763ed64fcb0" />
       <relativeChildShapes />
       <moveableDecoratorHostShapes>
-        <moveableDecoratorHostShape manuallyPlaced="true" absoluteBounds="11.208872933585667, 2.368589036166667, 0.125, 0.1341145783662796" shapeFieldName="SourceRoleName" />
-        <moveableDecoratorHostShape manuallyPlaced="true" absoluteBounds="10.923611108213663, 2.6875, 0.125, 0.14800345897674561" shapeFieldName="SourceMultiplicity" />
-        <moveableDecoratorHostShape manuallyPlaced="true" absoluteBounds="7.45833332836628, 2.375, 0.125, 0.14800345897674561" shapeFieldName="TargetMultiplicity" />
+        <moveableDecoratorHostShape manuallyPlaced="true" absoluteBounds="11.21581737761619, 2.368589036166667, 0.125, 0.1341145783662796" shapeFieldName="SourceRoleName" />
+        <moveableDecoratorHostShape manuallyPlaced="true" absoluteBounds="10.930555552244186, 2.6875, 0.125, 0.14800345897674561" shapeFieldName="SourceMultiplicity" />
+        <moveableDecoratorHostShape manuallyPlaced="true" absoluteBounds="7.4652777723968029, 2.375, 0.125, 0.14800345897674561" shapeFieldName="TargetMultiplicity" />
       </moveableDecoratorHostShapes>
       <nodes>
         <classShapeMoniker Id="f3a7a2c4-81f6-4194-ba68-e06b4c9e32eb" />
@@ -398,7 +398,7 @@
         <OperationElementListCompartment Id="a6740640-1518-4b82-ad23-e35958c014b7" absoluteBounds="2.14, 13.72617186754942, 1.4700000000000002, 0.2011718675494194" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <generalizationConnector edgePoints="[(3.33259217256853 : 13.125); (3.33259217256853 : 12.996687410593); (5.625 : 12.996687410593); (5.625 : 12.804687410593)]" fixedFrom="Caller" fixedTo="NotFixed" customColor="113, 111, 110">
+    <generalizationConnector edgePoints="[(3.33259217256853 : 13.125); (3.33259217256853 : 12.996687410593); (5.625 : 12.996687410593); (5.625 : 12.804687410593)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="113, 111, 110">
       <generalizationMoniker Id="062d62e8-c5b7-45aa-98d7-6f4803225e23" />
       <relativeChildShapes />
       <nodes>
@@ -406,7 +406,7 @@
         <classShapeMoniker Id="08c9a56a-64ba-4dcf-9e01-9daee62f15c9" />
       </nodes>
     </generalizationConnector>
-    <associationConnector edgePoints="[(3.0632671784648 : 13.125); (3.0632671784648 : 11.2382812052965)]" fixedFrom="Algorithm" fixedTo="Caller" customColor="113, 111, 110" sourceMultiplicity="1" targetMultiplicity="n">
+    <associationConnector edgePoints="[(3.0632671784648 : 13.125); (3.0632671784648 : 11.2382812052965)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="113, 111, 110" sourceMultiplicity="1" targetMultiplicity="n">
       <associationMoniker Id="b23395f0-1d54-471a-b1de-4440f2a98277" />
       <relativeChildShapes />
       <moveableDecoratorHostShapes>

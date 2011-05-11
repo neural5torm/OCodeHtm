@@ -166,9 +166,22 @@ namespace CnrsUniProv.OCodeHtm.IntegrationTests
         }
 
         [TestMethod]
-        public void GaussianSpatialLayerCanLearnAndInferFromPictureSensor()
+        public void SpatialLayer2DGaussianCanLearnAndInferFromBitmapPicture2DSensor()
         {
-            //TODOnow GaussianSpatialLayerCanLearnAndInferFromPictureSensor
+            var sensor = new BitmapPicture2DSensor(presentationsPerInput: 1, pathSpeed: 2, useRandomOrigin: false);
+            sensor.SetTrainingFolder(TrainingSetPath);
+
+            var layer = new Spatial2DLayer(SpatialLayerType.Gaussian, 16, 16, 0.1, true);
+
+            foreach (var input in sensor.GetTrainingInputs(true))
+            {
+                foreach (var iteration in input)
+                {
+                    layer.Learn(iteration);
+                }
+            }
+            
+            Assert.IsTrue(((SpatialNode2DGaussian)layer.ClonedNode).CoincidencesFrequencies.Keys.Count > 0);
         }
 
         [TestMethod]

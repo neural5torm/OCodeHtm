@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using MathNet.Numerics.LinearAlgebra.Double;
 using CnrsUniProv.OCodeHtm.Exceptions;
-using System.Threading.Tasks;
-using CnrsUniProv.OCodeHtm.Interfaces;
 
-namespace CnrsUniProv.OCodeHtm
+namespace CnrsUniProv.OCodeHtm.Interfaces
 {
     public abstract class HtmLayer2D : HtmLayer<SparseMatrix, Vector>
     {
@@ -27,13 +26,13 @@ namespace CnrsUniProv.OCodeHtm
 
 
 
-        public HtmLayer2D(uint height, uint width, double overlap, bool clone, uint maxOutputSize)
-            : base(overlap, clone, maxOutputSize)
+        public HtmLayer2D(uint height, uint width, double coverage, bool clone, uint maxOutputSize)
+            : base(coverage, clone, maxOutputSize)
         {
             Height = (int)height;
             Width = (int)width;
 
-            CreateNodes(); // use a void Factory Method to instantiate nodes internally
+            CreateNodes(); // use a void-returning Factory Method to instantiate nodes internally
             State = LayerState.Learning;
             
         }
@@ -105,12 +104,12 @@ namespace CnrsUniProv.OCodeHtm
         // TODOlater? get rid of clone method, use unique "cloned" node as n by m virtual (read-only) inferring nodes
         protected abstract void CloneTrainedNodeToArray();
 
-        // TODOlater get rid of sub matrices and use a virtual sub matrix object inheriting SparseMatrix, and referring to the original matrix but bounded
+        // TODO get rid of sub matrices and use a virtual sub matrix object inheriting SparseMatrix, and referring to the original matrix but bounded
         public SparseMatrix GetSubMatrixForNodeAt(int nodeRow, int nodeColumn, SparseMatrix input)
         {
-            var subInputHeight = (double)input.RowCount / Height + InputOverlapRatio * (input.RowCount - (double)input.RowCount / Height);
+            var subInputHeight = (double)input.RowCount / Height + NodeInputCoverageRatio * (input.RowCount - (double)input.RowCount / Height);
             var deltaHeight = (input.RowCount - subInputHeight) / (Height - 1);
-            var subInputWidth = (double)input.ColumnCount / Width + InputOverlapRatio * (input.ColumnCount - (double)input.ColumnCount / Width);
+            var subInputWidth = (double)input.ColumnCount / Width + NodeInputCoverageRatio * (input.ColumnCount - (double)input.ColumnCount / Width);
             var deltaWidth = (input.ColumnCount - subInputWidth) / (Width - 1);
 
             deltaHeight = deltaHeight.Equals(double.NaN) ? 0 : deltaHeight;

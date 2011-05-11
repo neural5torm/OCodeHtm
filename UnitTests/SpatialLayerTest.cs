@@ -37,12 +37,12 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         }
 
         [TestMethod]
-        public void SeesCorrectSubmatrixWhenCloneTrainingWith0Overlap()
+        public void SeesCorrectSubmatrixWhenCloneTrainingWith0Coverage()
         {
             var inputsize = 10;
             var size = (uint)inputsize / 2;
-            var overlap = 0.0;
-            var layer = new Spatial2DLayer(SpatialLayerType.Gaussian, size, size, overlap, true, 1000);
+            var coverage = 0.0;
+            var layer = new Spatial2DLayer(SpatialLayerType.Gaussian, size, size, coverage, true, 1000);
 
             var list = from i in Enumerable.Range(0, inputsize)
                        select (double)i;
@@ -57,7 +57,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
             var subMatrix = layer.GetSubMatrixForNodeAt(layer.ClonedNodeRow, layer.ClonedNodeCol, matrix);
             
             //
-            var width = inputsize / size + overlap * (inputsize - inputsize / size);
+            var width = inputsize / size + coverage * (inputsize - inputsize / size);
             var delta = (inputsize - width) / (size - 1);
             
             var centerRow = layer.Height / 2;
@@ -73,12 +73,12 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         }
 
         [TestMethod]
-        public void SeesCorrectSubmatrixWhenCloneTrainingWith0_5Overlap()
+        public void SeesCorrectSubmatrixWhenCloneTrainingWith0_5Coverage()
         {
             var inputsize = 10;
             var size = (uint)inputsize / 2;
-            var overlap = 0.5;
-            var layer = new Spatial2DLayer(SpatialLayerType.Gaussian, size, size, overlap, true, 1000);
+            var coverage = 0.5;
+            var layer = new Spatial2DLayer(SpatialLayerType.Gaussian, size, size, coverage, true, 1000);
 
             var list = from i in Enumerable.Range(0, inputsize)
                        select (double)i;
@@ -93,7 +93,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
             var subMatrix = layer.GetSubMatrixForNodeAt(layer.ClonedNodeRow, layer.ClonedNodeCol, matrix);
 
             //
-            var width = inputsize / size + overlap * (inputsize - inputsize / size);
+            var width = inputsize / size + coverage * (inputsize - inputsize / size);
             var delta = (inputsize - width) / (size - 1);
 
             var centerRow = layer.Height / 2;
@@ -109,12 +109,12 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         }
 
         [TestMethod]
-        public void SeesCorrectSubmatrixWhenTrainingWith0Overlap()
+        public void SeesCorrectSubmatrixWhenTrainingWith0Coverage()
         {
             var inputsize = 10;
             var size = (uint)inputsize / 2;
-            var overlap = 0;
-            var layer = new Spatial2DLayer(SpatialLayerType.Gaussian, size, size, overlap, true, 1000);
+            var coverage = 0;
+            var layer = new Spatial2DLayer(SpatialLayerType.Gaussian, size, size, coverage, true, 1000);
 
             var list = from i in Enumerable.Range(0, inputsize)
                        select (double)i;
@@ -135,7 +135,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
                     var subMatrix = layer.GetSubMatrixForNodeAt(nodeRow, nodeCol, matrix);
 
                     // check if its 2D input is ok
-                    var width = inputsize / size + overlap * (inputsize - inputsize / size);
+                    var width = inputsize / size + coverage * (inputsize - inputsize / size);
                     var delta = (inputsize - width) / (size - 1);
 
                     for (int i = 0; i < (int)width; i++)
@@ -151,12 +151,12 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         }
 
         [TestMethod]
-        public void SeesCorrectSubmatrixWhenTrainingWith0_5Overlap()
+        public void SeesCorrectSubmatrixWhenTrainingWith0_5Coverage()
         {
             var inputsize = 10;
             var size = (uint)inputsize / 2;
-            var overlap = 0.5;
-            var layer = new Spatial2DLayer(SpatialLayerType.Gaussian, size, size, overlap, true, 1000);
+            var coverage = 0.5;
+            var layer = new Spatial2DLayer(SpatialLayerType.Gaussian, size, size, coverage, true, 1000);
 
             var list = from i in Enumerable.Range(0, inputsize)
                        select (double)i;
@@ -177,7 +177,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
                     var subMatrix = layer.GetSubMatrixForNodeAt(nodeRow, nodeCol, matrix);
 
                     // check if its 2D input is ok
-                    var width = inputsize / size + overlap * (inputsize - inputsize / size);
+                    var width = inputsize / size + coverage * (inputsize - inputsize / size);
                     var delta = (inputsize - width) / (size - 1);
 
                     for (int i = 0; i < (int)width; i++)
@@ -193,15 +193,15 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         }
 
         [TestMethod]
-        public void CanLearnNewInputs_5By4Layer0Overlap()
+        public void CanLearnNewInputs_5By4Layer0Coverage()
         {
             uint maxoutputsize = 5;
-            var overlap = 0.0;
+            var coverage = 0.0;
             var clone = false;
             uint height = 5;
             uint width = 4;
 
-            var layer = new Spatial2DLayer(SpatialLayerType.Gaussian, height, width, overlap, clone, maxoutputsize);
+            var layer = new Spatial2DLayer(SpatialLayerType.Gaussian, height, width, coverage, clone, maxoutputsize);
             var input1 = (SparseMatrix) SparseMatrix.Identity(8).Stack(new SparseMatrix(2, 8));
             var input2 = 2*input1;
             
@@ -211,27 +211,27 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
 
             //
             for (int i = 0; i < height; i++)
-			{
-			    for (int j = 0; j < width; j++)
-			    {
-			        var node = (SpatialNode2DGaussian)layer.NodeArray[i, j];
+            {
+                for (int j = 0; j < width; j++)
+                {
+                    var node = (SpatialNode2DGaussian)layer.NodeArray[i, j];
                     foreach (var coinc in node.CoincidencesFrequencies)
                         Assert.AreEqual(1, coinc.Value);
                 }
-			}            
+            }            
         }
 
         [TestMethod]
-        public void CanLearnAndInfer1OnRecognizedSubInputs_5By4Layer0Overlap()
+        public void CanLearnAndInfer1OnRecognizedSubInputs_5By4Layer0Coverage()
         {
             uint maxoutputsize = 5;
-            var overlap = 0.0;
+            var coverage = 0.0;
             var clone = false;
             uint layerheight = 5;
             uint layerwidth = 4;
             int inputtolayerratio = 2;
             
-            var layer = new Spatial2DLayer(SpatialLayerType.Gaussian, layerheight, layerwidth, overlap, clone, maxoutputsize);
+            var layer = new Spatial2DLayer(SpatialLayerType.Gaussian, layerheight, layerwidth, coverage, clone, maxoutputsize);
             var input1 = new SparseMatrix((int)layerheight * inputtolayerratio, (int)layerwidth * inputtolayerratio, 1.0);
             var input2 = 2 * input1;
             
@@ -265,16 +265,16 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         }
 
         [TestMethod]
-        public void CanLearnAndInfer1OnRecognizedSubInputs_5By4Layer0_5Overlap()
+        public void CanLearnAndInfer1OnRecognizedSubInputs_5By4Layer0_5Coverage()
         {
             uint maxoutputsize = 5;
-            var overlap = 0.5;
+            var coverage = 0.5;
             var clone = false;
             uint layerheight = 5;
             uint layerwidth = 4;
             int inputtolayerratio = 2;
 
-            var layer = new Spatial2DLayer(SpatialLayerType.Gaussian, layerheight, layerwidth, overlap, clone, maxoutputsize);
+            var layer = new Spatial2DLayer(SpatialLayerType.Gaussian, layerheight, layerwidth, coverage, clone, maxoutputsize);
             var input1 = new SparseMatrix((int)layerheight * inputtolayerratio, (int)layerwidth * inputtolayerratio, 1.0);
             var input2 = 2 * input1;
 
@@ -309,16 +309,16 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
 
 
         [TestMethod]
-        public void CanLearnAndInfer1OnRecognizedSubInput_5By4Layer0OverlapWithCloning()
+        public void CanLearnAndInfer1OnRecognizedSubInput_5By4Layer0coverageWithCloning()
         {
             uint maxoutputsize = 5;
-            var overlap = 0.0;
+            var coverage = 0.0;
             var clone = false;
             uint layerheight = 5;
             uint layerwidth = 4;
             int inputtolayerratio = 2;
 
-            var layer = new Spatial2DLayer(SpatialLayerType.Gaussian, layerheight, layerwidth, overlap, clone, maxoutputsize);
+            var layer = new Spatial2DLayer(SpatialLayerType.Gaussian, layerheight, layerwidth, coverage, clone, maxoutputsize);
             var input1 = new SparseMatrix((int)layerheight * inputtolayerratio, (int)layerwidth * inputtolayerratio, 1.0);
             var input2 = 2 * input1;
 
@@ -352,16 +352,16 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         }
 
         [TestMethod]
-        public void CanLearnAndInfer1OnRecognizedSubInput_5By4Layer0_5OverlapWithCloning()
+        public void CanLearnAndInfer1OnRecognizedSubInput_5By4Layer0_5coverageWithCloning()
         {
             uint maxoutputsize = 5;
-            var overlap = 0.5;
+            var coverage = 0.5;
             var clone = false;
             uint layerheight = 5;
             uint layerwidth = 4;
             int inputtolayerratio = 2;
 
-            var layer = new Spatial2DLayer(SpatialLayerType.Gaussian, layerheight, layerwidth, overlap, clone, maxoutputsize);
+            var layer = new Spatial2DLayer(SpatialLayerType.Gaussian, layerheight, layerwidth, coverage, clone, maxoutputsize);
             var input1 = new SparseMatrix((int)layerheight * inputtolayerratio, (int)layerwidth * inputtolayerratio, 1.0);
             var input2 = 2 * input1;
 

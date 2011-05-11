@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CnrsUniProv.OCodeHtm
 {
-    class ProductMatchClassifierNode
+    public class ProductMatchClassifierNode
     {
     }
 }

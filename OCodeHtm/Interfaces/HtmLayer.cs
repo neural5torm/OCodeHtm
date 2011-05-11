@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using CnrsUniProv.OCodeHtm.Interfaces;
 
-namespace CnrsUniProv.OCodeHtm
+namespace CnrsUniProv.OCodeHtm.Interfaces
 {
     public abstract class HtmLayer<TInput, TOutput> : ILearningInferring<TInput, TInput>
     {
-        public double InputOverlapRatio { get; private set; }
+        public double NodeInputCoverageRatio { get; private set; }
         public bool IsTrainedNodeCloned { get; private set; }
         public int MaxNodeOutputSize { get; private set; }
         public LayerState State { get; protected set; }
@@ -17,9 +16,9 @@ namespace CnrsUniProv.OCodeHtm
         public INode<TInput, TOutput> ClonedNode { get; protected set; }
 
 
-        public HtmLayer(double overlap, bool clone, uint maxOutputSize)
+        public HtmLayer(double coverage, bool clone, uint maxOutputSize)
         {
-            InputOverlapRatio = overlap;
+            NodeInputCoverageRatio = coverage;
             IsTrainedNodeCloned = clone;
             MaxNodeOutputSize = (int)maxOutputSize;
 

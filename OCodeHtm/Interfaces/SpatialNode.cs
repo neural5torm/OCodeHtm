@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CnrsUniProv.OCodeHtm.Exceptions;
-using CnrsUniProv.OCodeHtm.Interfaces;
 
-namespace CnrsUniProv.OCodeHtm
+namespace CnrsUniProv.OCodeHtm.Interfaces
 {
     public abstract class SpatialNode<TInput, TOutput> : INode<TInput, TOutput>
         where TInput : class

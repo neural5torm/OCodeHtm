@@ -50,26 +50,27 @@
     <Compile Include="Exceptions\HtmException.cs" />
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="Gabor2DFilter.cs" />
-    <Compile Include="HtmLayer2D.cs" />
+    <Compile Include="Interfaces\HtmLayer2D.cs" />
     <Compile Include="Interfaces\IFilter.cs" />
     <Compile Include="Interfaces\ICloneable.cs" />
     <Compile Include="Interfaces\ILearningInferring.cs" />
     <Compile Include="Interfaces\INode.cs" />
     <Compile Include="Interfaces\IObservable.cs" />
+    <Compile Include="MatrixToBitmapFileWriter.cs" />
     <Compile Include="OutputEventHandler.cs" />
     <Compile Include="Interfaces\IOutputWriter.cs" />
     <Compile Include="ProductMatchClassifierNode.cs" />
-    <Compile Include="Sensor.cs" />
+    <Compile Include="Interfaces\Sensor.cs" />
     <Compile Include="Spatial2DLayer.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Exceptions\HtmRuleException.cs" />
-    <Compile Include="HtmLayer.cs" />
+    <Compile Include="Interfaces\HtmLayer.cs" />
     <Compile Include="HtmNetwork.cs" />
-    <Compile Include="SpatialNode2D.cs" />
+    <Compile Include="Interfaces\SpatialNode2D.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SpatialNode.cs" />
+    <Compile Include="Interfaces\SpatialNode.cs" />
     <Compile Include="SpatialNode2DGaussian.cs" />
-    <Compile Include="TemporalLayer.cs" />
+    <Compile Include="Temporal2DLayer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -18,16 +18,16 @@ namespace CnrsUniProv.OCodeHtm
 
 
 
-        public Spatial2DLayer(SpatialLayerType type, uint height, uint width, double overlap, bool clone, uint maxOutputSize, 
+        public Spatial2DLayer(SpatialLayerType type, uint height, uint width, double coverage, bool clone, uint maxOutputSize, 
                             double sigma = Default.NoSigma, double maxDistance = Default.MaxDistance)
-            : this(type, height, width, overlap, clone, maxOutputSize)
+            : this(type, height, width, coverage, clone, maxOutputSize)
         {
             MaxDistance = maxDistance;
             Sigma = sigma;
         }
 
-        public Spatial2DLayer(SpatialLayerType type, uint height, uint width, double overlap, bool clone, uint maxOutputSize = Default.MaxNodeOutputSize)
-            : base(height, width, overlap, clone, maxOutputSize)
+        public Spatial2DLayer(SpatialLayerType type, uint height, uint width, double coverage, bool clone, uint maxOutputSize = Default.MaxNodeOutputSize)
+            : base(height, width, coverage, clone, maxOutputSize)
         { 
             Type = type;
         }
@@ -60,7 +60,7 @@ namespace CnrsUniProv.OCodeHtm
                 case SpatialLayerType.Gaussian:
                     return new SpatialNode2DGaussian(MaxDistance, Sigma, MaxNodeOutputSize);
                 default:
-                    return null;
+                    throw new NotImplementedException();
             }
         }
 
