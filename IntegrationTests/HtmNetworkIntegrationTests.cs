@@ -12,11 +12,9 @@ namespace CnrsUniProv.OCodeHtm.IntegrationTests
     [TestClass]
     public class HtmNetworkIntegrationTests
     {
-        [TestMethod]
+        /*[TestMethod]
         public void NetworkCanLearnAndBeTestedAgainstInputsTEMP()
         {
-            //TODOlater NetworkCanLearnAndBeTestedAgainstInputs
-            /*
             void main()
             {
                 var net = new HtmNetwork();
@@ -69,8 +67,8 @@ namespace CnrsUniProv.OCodeHtm.IntegrationTests
                         net.Classifier.Learn(output, cat);
                     }
                 }
-            }*/
+            }
 
-        }
+        }*/
     }
 }

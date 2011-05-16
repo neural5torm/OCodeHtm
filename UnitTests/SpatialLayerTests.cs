@@ -12,7 +12,7 @@ using CnrsUniProv.OCodeHtm.Exceptions;
 namespace CnrsUniProv.OCodeHtm.UnitTests
 {
     [TestClass]
-    public class SpatialLayerTest 
+    public class SpatialLayerTests 
     {
         #region Gaussian Spatial Layer
 

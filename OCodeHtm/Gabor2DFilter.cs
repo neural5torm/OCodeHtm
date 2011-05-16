@@ -68,13 +68,14 @@ namespace CnrsUniProv.OCodeHtm
         /// </summary>
         private Matrix CreateFilter(double angle, double phase, double waveLength, double aspectRatio, double bandwidth)
         {
+            int multiplicator = 3;
 
+            // Sigma's
             var sigmaX = waveLength / Math.PI * Math.Sqrt(Math.Log(2) / 2) * (Math.Pow(2, bandwidth) + 1) / (Math.Pow(2.0, bandwidth) - 1);
             var sigmaY = sigmaX / aspectRatio;
 
-            // Bounding box
-            int n = 4;
-            int halfSize = (int)Math.Ceiling(n * Math.Max(sigmaX, sigmaY));
+            // Bounding box            
+            int halfSize = (int)Math.Ceiling(multiplicator * Math.Max(sigmaX, sigmaY));
             var size = /*symmetrical values:*/2 * halfSize + /*the middle zero:*/1;
 
             // Filter matrix

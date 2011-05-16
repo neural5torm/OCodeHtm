@@ -11,7 +11,7 @@ namespace CnrsUniProv.OCodeHtm
 {
     public class MatrixToBitmapFileWriter : BitmapFileWriter<Matrix>
     {
-        public MatrixToBitmapFileWriter(string folder)
+        public MatrixToBitmapFileWriter(string folder = Default.Folder)
             : base(folder)
         { }
 

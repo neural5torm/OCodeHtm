@@ -27,7 +27,7 @@ namespace CnrsUniProv.OCodeHtm.Interfaces
 
         public void SetFolder(string folder)
         {
-            if (string.IsNullOrEmpty(folder))
+            if (folder == Default.Folder)
                 folder = Directory.GetCurrentDirectory();
             var dir = Directory.Exists(folder) ? new DirectoryInfo(folder) : Directory.CreateDirectory(folder);
 

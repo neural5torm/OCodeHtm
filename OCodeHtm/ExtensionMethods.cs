@@ -10,7 +10,8 @@ namespace CnrsUniProv.OCodeHtm
 {
     public static class ExtensionMethods
     {
-        // Random
+        #region Random
+        
         public static bool NextBool(this Random random)
         {
             return random.Next(2) > 0 ? true : false;
@@ -21,8 +22,10 @@ namespace CnrsUniProv.OCodeHtm
             return random.NextBool() ? -1 : 1;
         }
 
+        #endregion
 
-        // Matrix<double>
+
+        #region Matrix<double>
         public static double Minimum(this Matrix<double> matrix)
         {
             var minValue = double.MaxValue;
@@ -77,13 +80,13 @@ namespace CnrsUniProv.OCodeHtm
             var actualRowCount = Math.Min(rowCount - topRowPos, matrix.RowCount - topRow);
             var actualColCount = Math.Min(colCount - leftColPos, matrix.ColumnCount - leftCol);
 
-            // TODO use VirtualMatrix i.of sub-matrix
+            // TODO use VirtualSubMatrix i.of creating new sub-matrices (compare perf)
             subMatrix.SetSubMatrix(topRowPos, actualRowCount, leftColPos, actualColCount, matrix.SubMatrix(topRow, actualRowCount, leftCol, actualColCount));
             
             return subMatrix;
         }
 
-        // TODOlater? remove
+        // TODOlater use in VirtualSubMatrix?
         public static double ValueInAndAround(this Matrix<double> matrix, int row, int col, bool replicateBorders = false)
         {
             if (row < 0 || row >= matrix.RowCount
@@ -186,5 +189,9 @@ namespace CnrsUniProv.OCodeHtm
         {
             return matrix.FrobeniusNorm() == 0.0;
         }
+
+        //TODO bool IsGrey()
+
+        #endregion
     }
 }

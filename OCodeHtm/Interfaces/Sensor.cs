@@ -50,7 +50,7 @@ namespace CnrsUniProv.OCodeHtm.Interfaces
             private DirectoryInfo TrainingFolder { get; set; }
             private Regex CategoryFolderPattern { get; set; }
 
-            public bool IsTest
+            public bool IsTesting
             {
                 get { return TestFolders != null; }
             }
@@ -78,7 +78,7 @@ namespace CnrsUniProv.OCodeHtm.Interfaces
 
             public IEnumerator<ExplorationIterations> GetEnumerator()
             {
-                if (IsTest)
+                if (IsTesting)
                 {
                     if (TestFolders.Count == 0)
                         throw new HtmException("No test folder set", this);

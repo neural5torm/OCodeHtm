@@ -56,6 +56,7 @@ namespace CnrsUniProv.OCodeHtm
         public const double NoSigma = 0.0;
         public const double SquaredSigma = 0.1;
 
+        public const string Folder = "";
         public const string CategoryFolderPattern = "(?<cat>.*)";
         public const string TrainingFolderString = "clean";
         public const string TestFolderString = "test";
@@ -87,5 +88,7 @@ namespace CnrsUniProv.OCodeHtm
         public const double GaborBandwidth = 1.0;
 
         public const double SquareAspectRatio = 1.0;
+
+        public const string NoName = "no-name";
     }
 }

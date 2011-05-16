@@ -5,7 +5,7 @@ namespace CnrsUniProv.OCodeHtm
 {
     public class BitmapFileWriter : BitmapFileWriter<Bitmap>
     {
-        public BitmapFileWriter(string folder)
+        public BitmapFileWriter(string folder = Default.Folder)
             : base(folder)
         { }
 

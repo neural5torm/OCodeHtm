@@ -13,7 +13,7 @@ using CnrsUniProv.OCodeHtm.Exceptions;
 namespace CnrsUniProv.OCodeHtm.UnitTests
 {
     [TestClass]
-    public class SpatialNodeGaussianTest 
+    public class SpatialNodeGaussianTests 
     {
         
         [TestMethod]

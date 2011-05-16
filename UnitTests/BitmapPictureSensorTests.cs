@@ -12,7 +12,7 @@ using System.Drawing;
 namespace CnrsUniProv.OCodeHtm.UnitTests
 {
     [TestClass]
-    public class BitmapPictureSensorTest
+    public class BitmapPictureSensorTests
     {
         static readonly string TrainingSetPath = Path.Combine("O:", "clean");
         const int TrainingSetSize = 26;
@@ -113,18 +113,20 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
 
 
         [TestMethod]
-        public void CanGetTestInputsWithNormalOrder()
+        public void ShouldGetTestInputsInNormalAlphabeticalOrder()
         {
-            var sensor = new BitmapPicture2DSensor(trainingOrder: TrainingOrder.Normal);
+            var sensor = new BitmapPicture2DSensor();
             sensor.AddTestFolder(TrainingSetPath);
             var nbInputs = 0;
 
+            var prevInput = "";
 
             foreach (var input in sensor.GetTestInputs())
             {
                 Assert.IsNotNull(input.CurrentFile);
-                //Debug.WriteLine(input.CurrentFile);
                 Assert.IsFalse(string.IsNullOrWhiteSpace(input.CategoryName));
+                Assert.IsTrue(input.CurrentFile.Name.CompareTo(prevInput) > 0);
+                prevInput = input.CurrentFile.Name;
 
                 foreach (var iteration in input)
                 {
@@ -136,9 +138,9 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
         }
 
         [TestMethod]
-        public void CanGetTestInputsWithRandomOrderSameAsNormal()
+        public void ShouldGetTestInputsInSameOrderWhenTrainingOrderSetToRandom()
         {
-            var sensor = new BitmapPicture2DSensor(Default.AutomaticSize, Default.AutomaticSize, 0, 1, TrainingOrder.Normal);
+            var sensor = new BitmapPicture2DSensor(Default.AutomaticSize, Default.AutomaticSize, 0, 1, TrainingOrder.Random);
             sensor.AddTestFolder(TrainingSetPath);
             var nbInputs = 0;
             var categories = new List<string>();
@@ -369,7 +371,25 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
             Assert.IsTrue(categories.SequenceEqual(controlCategories));
         }
 
-    
+        [TestMethod]
+        public void SensorGeneratesNoBlankOutput()
+        {
+            var sensor = new BitmapPicture2DSensor(pathSpeed: 1000);
+            sensor.SetTrainingFolder(TrainingSetPath);
+
+
+            foreach (var input in sensor.GetTrainingInputs(true))
+            {
+                Assert.IsNotNull(input.CurrentFile);
+                Assert.IsFalse(string.IsNullOrWhiteSpace(input.CategoryName));
+
+                foreach (var iteration in input)
+                {
+                    Assert.AreEqual(false, iteration.IsBlank());
+                }
+            }
+
+        }
     
     }
 }

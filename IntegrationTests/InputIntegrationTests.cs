@@ -16,6 +16,9 @@ namespace CnrsUniProv.OCodeHtm.IntegrationTests
         static readonly string TrainingSetPath = Path.Combine("O:", "clean");
         const int TrainingSetSize = 26;
 
+
+        #region BitmapPicture2DSensor inputs
+        
         [TestMethod]
         public void InputFilesCanBeFound()
         {
@@ -32,8 +35,8 @@ namespace CnrsUniProv.OCodeHtm.IntegrationTests
         {
             var sensor = new BitmapPicture2DSensor(presentationsPerInput: 1, pathSpeed: 2);
             sensor.SetTrainingFolder(TrainingSetPath);
-            var writer = new BitmapFileWriter("0001");
-            sensor.OnTransformedBitmapOutput += writer.OutputWriterHandler;
+            var writer = new MatrixToBitmapFileWriter("SameFolder");
+            sensor.OnTransformedMatrixOutput += writer.OutputWriterHandler;
 
             var nbIterations = 0;
 
@@ -50,8 +53,8 @@ namespace CnrsUniProv.OCodeHtm.IntegrationTests
 
             var sensor2 = new BitmapPicture2DSensor(presentationsPerInput: 1, pathSpeed: 2);
             sensor2.SetTrainingFolder(TrainingSetPath);
-            var writer2 = new BitmapFileWriter("0001");
-            sensor2.OnTransformedBitmapOutput += writer2.OutputWriterHandler;
+            var writer2 = new MatrixToBitmapFileWriter("sameFolder");
+            sensor2.OnTransformedMatrixOutput += writer2.OutputWriterHandler;
 
             var nbIterations2 = 0;
 
@@ -69,11 +72,11 @@ namespace CnrsUniProv.OCodeHtm.IntegrationTests
         [TestMethod]
         public void GenerateInputsAlwaysInsideSensor()
         {
-            var sensor = new BitmapPicture2DSensor();
+            var sensor = new BitmapPicture2DSensor(pathSpeed: 100);
             sensor.SetTrainingFolder(TrainingSetPath);
-
-            var nbInputsOutside = 0;
-
+            var writer = new MatrixToBitmapFileWriter();
+            sensor.OnTransformedMatrixOutput += writer.OutputWriterHandler;
+            var nbInputIterationsOutside = 0;
 
             foreach (var input in sensor.GetTrainingInputs(true))
             {
@@ -83,38 +86,11 @@ namespace CnrsUniProv.OCodeHtm.IntegrationTests
                 foreach (var iteration in input)
                 {
                     if (sensor.IsCurrentInputOutsideField())
-                        nbInputsOutside++;
+                        nbInputIterationsOutside++;
                 }
             }
 
-            Assert.AreEqual(0, nbInputsOutside);
-        }
-
-        [TestMethod]
-        public void SensorGeneratesOneFinalBlankOutputPerInput()
-        {
-            var sensor = new BitmapPicture2DSensor();
-            sensor.SetTrainingFolder(TrainingSetPath);
-
-
-            foreach (var input in sensor.GetTrainingInputs(true))
-            {
-                Assert.IsNotNull(input.CurrentFile);
-                Assert.IsFalse(string.IsNullOrWhiteSpace(input.CategoryName));
-
-                var finalBlankInputDetected = false;
-
-                foreach (var iteration in input)
-                {
-                    Assert.IsFalse(finalBlankInputDetected);
-
-                    if (iteration.IsBlank())
-                        finalBlankInputDetected = true;
-                }
-
-                Assert.IsTrue(finalBlankInputDetected);
-            }
-
+            Assert.AreEqual(0, nbInputIterationsOutside);
         }
 
         [TestMethod]
@@ -286,5 +262,6 @@ namespace CnrsUniProv.OCodeHtm.IntegrationTests
             Assert.IsTrue(((SpatialNode2DGaussian)layer.ClonedNode).CoincidencesFrequencies.Keys.Count > 0);
         }
 
+        #endregion
     } // testc
 }

@@ -27,7 +27,7 @@ namespace CnrsUniProv.OCodeHtm
                     try
                     {
                         if (CurrentInputFile == null || CurrentInputOriginalImage == null)
-                            throw new Exception("No current input file");
+                            throw new HtmException("No current input file: wait for the first input to be loaded");
 
                         height = CurrentInputOriginalImage.Height;
                         width = CurrentInputOriginalImage.Width;
@@ -116,7 +116,9 @@ namespace CnrsUniProv.OCodeHtm
         }
 
 
-
+        /// <summary>
+        /// Warning: This is a low-level event that is fired even for blank outputs that get ignored further in the sensor logic
+        /// </summary>
         public event OutputEventHandler<Bitmap> OnTransformedBitmapOutput;
         public event OutputEventHandler<Matrix> OnTransformedMatrixOutput;
         public event OutputEventHandler<Matrix> OnFilteredMatrixOutput;
@@ -151,7 +153,7 @@ namespace CnrsUniProv.OCodeHtm
         {
             if (!useTransformations)
             {
-                yield return FilterInput(TransformNextInput());
+                yield return Filter(TransformNextInput());
             }
             else
                 foreach (var path in ExplorationPaths)
@@ -161,16 +163,26 @@ namespace CnrsUniProv.OCodeHtm
                     InitPathTranslation();
                     InitRotation();
                     InitScaling();
-
-                    var input = new SparseMatrix(1, 1, 1);
+                    
+                    var output = SparseMatrix.Identity(2); // initialize with non-"grey" output
 
                     for (int iteration = 0; iteration < ExplorationPathMaxIterations; iteration++)
                     {
-                        if (IsCurrentInputOutsideField() || input.IsBlank())
+                        output = TransformNextInput();
+                        if (output.IsBlank())
                             break;
+                        // notify observers about the matrix output
+                        if (OnTransformedMatrixOutput != null)
+                            OnTransformedMatrixOutput(this, new OutputEventArgs<Matrix>(output, CurrentCategory));
 
-                        input = TransformNextInput();
-                        yield return FilterInput(input);
+
+                        output = Filter(output);
+                        // notify observers about the filtered output
+                        if (OnFilteredMatrixOutput != null)
+                            OnFilteredMatrixOutput(this, new OutputEventArgs<Matrix>(output, CurrentCategory));
+
+                        yield return output;
+                        IncrementTransformationParameters();
                     }
                 }
         }
@@ -208,18 +220,12 @@ namespace CnrsUniProv.OCodeHtm
                 }
             }
 
-            IncrementTransformationParameters();
-
-            // notify observers about the matrix output
-            if (OnTransformedMatrixOutput != null)
-                OnTransformedMatrixOutput(this, new OutputEventArgs<Matrix>(output, CurrentCategory));
-
             return output;
         }
 
         
 
-        private SparseMatrix FilterInput(SparseMatrix input)
+        private SparseMatrix Filter(SparseMatrix input)
         {
             var output = input;
 
@@ -227,10 +233,6 @@ namespace CnrsUniProv.OCodeHtm
             {
                 output = filter.Filter(output);
             }
-
-            // notify observers about the filtered output
-            if (OnFilteredMatrixOutput != null)
-                OnFilteredMatrixOutput(this, new OutputEventArgs<Matrix>(output, CurrentCategory));
 
             return output;
         }
@@ -312,7 +314,8 @@ namespace CnrsUniProv.OCodeHtm
 
         /// <summary>
         /// Determines if the current input is shown outside of the area surrounding the sensor 
-        /// (its top left origin should remain between -Width&lt;=X&lt;=Width and -Height&lt;=Y&lt;=Height)
+        /// (its top left origin coordinates CurrentPosH/V should remain between: 
+        /// -Width&lt;=x&lt;=Width and -Height&lt;=y&lt;=Height)
         /// </summary>
         public bool IsCurrentInputOutsideField()
         {

@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using MathNet.Numerics.LinearAlgebra.Double;
 
-namespace CnrsUniProv.OCodeHtm.IntegrationTests
+namespace CnrsUniProv.OCodeHtm.UnitTests
 {
     [TestClass]
     public class OtherComponentsTests

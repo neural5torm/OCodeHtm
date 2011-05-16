@@ -598,6 +598,15 @@
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
+        <suppliersInternal>
+          <interfaceRealization
+            Id="3d75dda1-e99d-4781-b766-7046400075f4">
+            <interfaceMoniker
+              Id="dab59342-e736-4d18-9272-e1d317d21643"
+              LastKnownName="IClearable"
+              LastKnownLocation="UmlModel.uml" />
+          </interfaceRealization>
+        </suppliersInternal>
         <ownedAttributesInternal>
           <property
             Id="5533b068-d441-447f-80f9-b5f186b1f23a"
@@ -652,6 +661,31 @@
             isAbstract="false"
             concurrency="Sequential"
             isQuery="false" />
+          <operation
+            Id="595f4d44-cc84-4f6c-bcc4-895da8a5ff11"
+            name="ClearMemory"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="52d2681f-e695-4416-9ff6-b0792ee1ba19"
+                  name="newInput"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="a67507ca-f4e3-4ccf-bacd-e5f9d2b592e6"
+                  name="newCategory"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
         </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
@@ -815,8 +849,8 @@
     <packageHasNamedElement>
       <class
         Id="bdd35d1d-afae-4718-9d97-88c2e8ef3785"
-        name="TemporalNode"
-        isAbstract="false"
+        name="TemporalNode2D"
+        isAbstract="true"
         isLeaf="false"
         isActiveClass="false">
         <suppliersInternal>
@@ -835,26 +869,6 @@
               LastKnownLocation="UmlModel.uml" />
           </interfaceRealization>
         </suppliersInternal>
-        <ownedAttributesInternal>
-          <property
-            Id="5822e8f6-a513-44be-9b40-c7797eedc74b"
-            name="_ForLater_DetectBlanks"
-            isLeaf="false"
-            isStatic="false"
-            isReadOnly="false"
-            isUnique="false"
-            isDerived="false"
-            isDerivedUnion="false"
-            aggregation="None"
-            isComposite="false">
-            <type_NamedElement>
-              <undefinedTypeMoniker
-                Id="1e54acf1-0d02-4896-a606-2e388056f9d4"
-                LastKnownName="bool"
-                LastKnownLocation="UmlModel.uml" />
-            </type_NamedElement>
-          </property>
-        </ownedAttributesInternal>
         <ownedOperationsInternal>
           <operation
             Id="6e7b71b2-2d6f-4797-9682-10dbe99ff954"
@@ -893,6 +907,31 @@
                       LastKnownLocation="UmlModel.uml" />
                   </type_NamedElement>
                 </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="35f51d91-6aad-4fbd-9fe6-01876c278d7d"
+            name="ClearMemory"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="e0616272-52a0-4d7a-a8ff-536f4762855f"
+                  name="newInput"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="2d283745-9016-46b1-a710-4aa7fedf607e"
+                  name="newCategory"
+                  direction="In"
+                  isUnique="false" />
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
@@ -947,14 +986,6 @@
             isAbstract="false"
             concurrency="Sequential"
             isQuery="false" />
-          <operation
-            Id="94e62194-9294-40dc-8eb5-75949b4c9e86"
-            name="_ForLater_TimeInfer"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="false"
-            concurrency="Sequential"
-            isQuery="false" />
         </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
@@ -993,14 +1024,6 @@
           <operation
             Id="9699c319-7389-4ea1-9365-85c812b08122"
             name="FindClosestCoincidence"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="false"
-            concurrency="Sequential"
-            isQuery="false" />
-          <operation
-            Id="2899fbb1-007e-4878-b60f-00aeedf43f03"
-            name="_ForLater_TimeInfer"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -1094,7 +1117,7 @@
             isAbstract="false">
             <classMoniker
               Id="bdd35d1d-afae-4718-9d97-88c2e8ef3785"
-              LastKnownName="TemporalNode"
+              LastKnownName="TemporalNode2D"
               LastKnownLocation="UmlModel.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
@@ -1379,8 +1402,8 @@
           <association
             Id="d5cac5fc-e232-4aef-9e7f-030f3eaaf9ef"
             isDerived="false"
-            sourceEndRoleName="SpatialNode"
-            targetEndRoleName="SpatialLayer"
+            sourceEndRoleName=""
+            targetEndRoleName=""
             isLeaf="false"
             isAbstract="false">
             <classMoniker
@@ -1391,7 +1414,6 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="5ee30b13-7064-4dca-b189-567fce031b83"
-                  name="SpatialNode"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -1417,7 +1439,6 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="c19f38da-fa0a-4479-9145-e78a9fab4dce"
-                  name="SpatialLayer"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -1523,42 +1544,6 @@
             aggregation="None"
             isComposite="false" />
           <property
-            Id="1bc8d462-af93-4327-ae06-379836d7b936"
-            name="_ForLater_DetectBlanks"
-            isLeaf="false"
-            isStatic="false"
-            isReadOnly="false"
-            isUnique="false"
-            isDerived="false"
-            isDerivedUnion="false"
-            aggregation="None"
-            isComposite="false">
-            <type_NamedElement>
-              <undefinedTypeMoniker
-                Id="1e54acf1-0d02-4896-a606-2e388056f9d4"
-                LastKnownName="bool"
-                LastKnownLocation="UmlModel.uml" />
-            </type_NamedElement>
-          </property>
-          <property
-            Id="ed706538-ce92-4b7e-ab59-62ea52bd00ce"
-            name="_ForLater_DetectBlanksMode"
-            isLeaf="false"
-            isStatic="false"
-            isReadOnly="false"
-            isUnique="false"
-            isDerived="false"
-            isDerivedUnion="false"
-            aggregation="None"
-            isComposite="false">
-            <type_NamedElement>
-              <undefinedTypeMoniker
-                Id="94e70e2a-dd5f-4537-bf68-45a093a20dbb"
-                LastKnownName="{ None, Zero, SameValues }"
-                LastKnownLocation="UmlModel.uml" />
-            </type_NamedElement>
-          </property>
-          <property
             Id="dfdd61da-587c-48bf-8244-5cfaceb3dee4"
             name="_ForLater_PruningThreshold"
             isLeaf="false"
@@ -1574,14 +1559,6 @@
           <operation
             Id="79ddf238-f4d5-4073-8952-b4f6059f22cc"
             name="FindClosestCoincidence"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="true"
-            concurrency="Sequential"
-            isQuery="false" />
-          <operation
-            Id="537ab225-7363-4ab8-834c-6bdd79475d7c"
-            name="TimeInfer"
             isLeaf="false"
             isStatic="false"
             isAbstract="true"
@@ -1624,6 +1601,31 @@
                       LastKnownLocation="UmlModel.uml" />
                   </type_NamedElement>
                 </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="8399d1f2-f092-4ac9-9c21-9cc9e24e0e43"
+            name="ClearMemory"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="677f42c5-2226-4f82-bd9e-3836df605ca5"
+                  name="newInput"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="75c041d2-ddd0-4be7-a8e1-fc971c116e99"
+                  name="newCategory"
+                  direction="In"
+                  isUnique="false" />
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
@@ -2027,6 +2029,14 @@
               LastKnownName="ICloneable&lt;T&gt;"
               LastKnownLocation="UmlModel.uml" />
           </generalization>
+          <generalization
+            Id="174cb83e-5429-4d77-87a4-e2e36bda6d09"
+            isSubstitutable="false">
+            <interfaceMoniker
+              Id="dab59342-e736-4d18-9272-e1d317d21643"
+              LastKnownName="IClearable"
+              LastKnownLocation="UmlModel.uml" />
+          </generalization>
         </generalsInternal>
       </Interface>
     </packageHasNamedElement>
@@ -2268,6 +2278,13 @@
               LastKnownName="ILearningInferring&lt;TInput, TOutput&gt;"
               LastKnownLocation="UmlModel.uml" />
           </interfaceRealization>
+          <interfaceRealization
+            Id="239aab1c-aa38-4b8b-aeab-2e42a2f3de46">
+            <interfaceMoniker
+              Id="dab59342-e736-4d18-9272-e1d317d21643"
+              LastKnownName="IClearable"
+              LastKnownLocation="UmlModel.uml" />
+          </interfaceRealization>
         </suppliersInternal>
         <targetEnds>
           <association
@@ -2432,6 +2449,31 @@
             isAbstract="true"
             concurrency="Sequential"
             isQuery="false" />
+          <operation
+            Id="b39aefc7-ff92-4379-baa1-332b945ac296"
+            name="ClearMemory"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="f3fd0afe-874b-4707-b9b4-26639f82bf29"
+                  name="newInput"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="2abbcfbb-35f0-43ee-949e-dd04ae3bafb5"
+                  name="newCategory"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
         </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
@@ -3353,6 +3395,31 @@
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
+          <operation
+            Id="30c3db15-767c-482b-b19c-f0f84c8d4436"
+            name="ClearMemory"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="cb7ddea5-1209-4c2b-926f-e11eb8794a71"
+                  name="newInput"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="e32555e4-ea20-425a-a52b-efb40b932d49"
+                  name="newCategory"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
         </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
@@ -3674,6 +3741,103 @@
             <classMoniker
               Id="3042a040-a54f-4a88-a631-4ee37efce031"
               LastKnownName="Sensor"
+              LastKnownLocation="UmlModel.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="dab59342-e736-4d18-9272-e1d317d21643"
+        name="IClearable"
+        isAbstract="false"
+        isLeaf="false">
+        <ownedAttributes>
+          <property
+            Id="0afc1cd3-8e52-4a8e-90cb-c7f07ba42d2f"
+            name="CurrentInputName"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="d0e42bf1-f2a1-4d1b-ac25-82b5ae3af6ae"
+            name="CurrentCategoryName"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributes>
+        <ownedOperations>
+          <operation
+            Id="576f6876-5423-47f1-9d3d-9b05017d60ab"
+            name="ClearMemory"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="01b97b99-c852-423a-8185-b18a108659f5"
+                  name="newInput"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="bbfe2d19-7114-487f-901c-a8a22192d9ed"
+                  name="newCategory"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="636078af-deba-47bb-9054-faaaea6ed667"
+        name="TemporalNode2DFirstOrder"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="d7603602-b00a-487b-9f11-a0e6f23a3045"
+            isSubstitutable="false">
+            <classMoniker
+              Id="bdd35d1d-afae-4718-9d97-88c2e8ef3785"
+              LastKnownName="TemporalNode2D"
+              LastKnownLocation="UmlModel.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="3b1235c2-9ab6-4ebc-a05c-53c386fda658"
+        name="TemporalNode2DHigherOrder"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="ff9383fa-bf00-4968-88c4-d9dd34d89e54"
+            isSubstitutable="false">
+            <classMoniker
+              Id="bdd35d1d-afae-4718-9d97-88c2e8ef3785"
+              LastKnownName="TemporalNode2D"
               LastKnownLocation="UmlModel.uml" />
           </generalization>
         </generalsInternal>

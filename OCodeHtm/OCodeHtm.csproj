@@ -57,6 +57,7 @@
     <Compile Include="Interfaces\ILearningInferring.cs" />
     <Compile Include="Interfaces\INode.cs" />
     <Compile Include="Interfaces\IObservable.cs" />
+    <Compile Include="Interfaces\IClearable.cs" />
     <Compile Include="MatrixToBitmapFileWriter.cs" />
     <Compile Include="OutputEventHandler.cs" />
     <Compile Include="Interfaces\IOutputWriter.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Interfaces\SpatialNode.cs" />
     <Compile Include="SpatialNode2DGaussian.cs" />
     <Compile Include="Temporal2DLayer.cs" />
+    <Compile Include="TemporalNode2D.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

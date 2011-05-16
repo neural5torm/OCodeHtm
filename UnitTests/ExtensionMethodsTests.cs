@@ -12,7 +12,7 @@ namespace CnrsUniProv.OCodeHtm.UnitTests
     ///to contain all ExtensionMethodsTest Unit Tests
     ///</summary>
     [TestClass()]
-    public class ExtensionMethodsTest
+    public class ExtensionMethodsTests
     {
 
 
